@@ -20,7 +20,7 @@
 #    Modifications:
 #
 ##########################################################################
-from odoo import api, models, _
+from odoo import models, _
 from odoo.exceptions import UserError
 
 
@@ -30,7 +30,7 @@ class account_move(models.Model):
     def unlink(self):
         for move in self:
             
-            if move.name != '/' and not self._context.get('force_delete') and move.state == "posted"):                
+            if move.name != '/' and not self._context.get('force_delete') and move.state == "posted":                
                 raise UserError(_("You cannot delete an entry which has been posted."))
             move.line_ids.unlink()
 #       Prisme : call grandparent method class, otherwise with "super" the commented exception is called from super class            
