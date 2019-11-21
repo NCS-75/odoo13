@@ -27,24 +27,16 @@
 ##############################################################################
 
 from odoo import api, fields, models, _
-from odoo.addons import decimal_precision as dp
+
 
 LAYOUTS_LIST = [
     ('article', 'Product'),
-    ('title', 'Title'),
-    ('text', 'Note'),
     ('subtotal', 'Sub Total'),
-    ('line', 'Separator Line'),
-    ('break', 'Page Break'),
 ]
 
 def layout_val_2_text(layout_type):
     val = _( 'Product' )
-    if layout_type == 'title':
-        val = _( 'Title' )
-    elif layout_type == 'text':
-        val = _( 'Note' )
-    elif layout_type == 'subtotal':
+    if layout_type == 'subtotal':
         val = _( 'Sub Total' )
     elif layout_type == 'line':
         val = _( 'Separator Line' )
@@ -57,7 +49,7 @@ class sale_order_line(models.Model):
     _inherit = 'sale.order.line'
     
     layout_type = fields.Selection(LAYOUTS_LIST, 'Layout type', required=True, index=True, default=lambda *a: 'article')
-    rel_subtotal = fields.Float(compute='_sub_total', string='Rel. Sub-total', digits= dp.get_precision('Account'))
+    rel_subtotal = fields.Float(compute='_sub_total', string='Rel. Sub-total', digits='Account')
 
     # ------------------------- Fields management
     def _is_number(self,s):
@@ -67,8 +59,7 @@ class sale_order_line(models.Model):
         except:
             return False
         
-    @api.multi
-#     @api.depends('rel_subtotal')
+    
     def _sub_total(self):
         for sol in self:
 
@@ -107,7 +98,7 @@ class sale_order_line(models.Model):
                 record.product_id = False
                 record.quantity = 1
                 record.discount = 0.0
-                record.invoice_line_tax_ids = False
+                record.move_line_tax_ids = False
                 record.name = layout_val_2_text(record.layout_type)
                 
         record._sub_total()
@@ -126,7 +117,7 @@ class sale_order_line(models.Model):
             'price_subtotal': 0.0,
             'quantity': 0,
             'discount': 0.0,
-            'invoice_line_tax_id': False,
+            'move_line_tax_id': False,
             'account_analytic_id': False,
             'product_uom_qty': 0.0,
         }
@@ -142,20 +133,9 @@ class sale_order_line(models.Model):
 
         return { 'value': vals }
 
-    # ------------------------- Utilities
-#     def invoice_line_create(self, invoice_id, qty):
-#         ret = super(sale_order_line, self).invoice_line_create(invoice_id, qty)
-#         invl_obj = self.env['account.invoice.line']
-# 
-#         for sol in self:
-#             invl_ids = [x.id for x in sol.invoice_lines]
-#             if invl_ids:
-#                 invl_obj.write(invl_ids, {'layout_type': sol.layout_type})
-#         
-#         return ret
 
-class account_invoice_line(models.Model):
-    _inherit = 'account.invoice.line'
+class account_move_line(models.Model):
+    _inherit = 'account.move.line'
 
     # ------------------------- Fields management
     def _is_number(self,s):
@@ -166,12 +146,11 @@ class account_invoice_line(models.Model):
             return False
         
     layout_type = fields.Selection(LAYOUTS_LIST, 'Layout type', required=True, index=True, default=lambda *a: 'article')
-    rel_subtotal = fields.Float(compute='_sub_total', string='Rel. Sub-total', digits= dp.get_precision('Account'))
+    rel_subtotal = fields.Float(compute='_sub_total', string='Rel. Sub-total', digits='Account')
     
-    _order = 'invoice_id desc, sequence asc , id'
+    _order = 'move_id desc, sequence asc , id'
         
-    @api.multi
-#     @api.depends('rel_subtotal')
+    
     def _sub_total(self):            
             
         for invl in self:
@@ -179,8 +158,8 @@ class account_invoice_line(models.Model):
 
             
             sub_total = 0.0
-            if invl.layout_type == 'subtotal' and self._is_number(invl.invoice_id.id):
-                sub_invls = self.env['account.invoice.line'].search([('invoice_id','=',invl.invoice_id.id),('sequence','<=',invl.sequence),('id','!=',invl.id)], order='sequence desc,id desc')
+            if invl.layout_type == 'subtotal' and self._is_number(invl.move_id.id):
+                sub_invls = self.env['account.move.line'].search([('move_id','=',invl.move_id.id),('sequence','<=',invl.sequence),('id','!=',invl.id)], order='sequence desc,id desc')
                 for sub_invl in sub_invls:
                     if invl.sequence > sub_invl.sequence or (invl.sequence == sub_invl.sequence and invl.id > sub_invl.id ):
                         if sub_invl.layout_type == 'subtotal':                             
@@ -207,7 +186,7 @@ class account_invoice_line(models.Model):
             layout_type = vals_list.get('layout_type', 'article')
             if not vals_list.get('name'):
                 vals_list['name'] = layout_val_2_text(layout_type)
-        return super(account_invoice_line, self).create(vals_list)
+        return super(account_move_line, self).create(vals_list)
     
     # ------------------------- Interface related
     @api.onchange('layout_type')
@@ -218,5 +197,5 @@ class account_invoice_line(models.Model):
                 record.product_id = False
                 record.quantity = 1
                 record.discount = 0.0
-                record.invoice_line_tax_ids = False
+                record.move_line_tax_ids = False
                 record.name = layout_val_2_text(record.layout_type)

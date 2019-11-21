@@ -20,13 +20,13 @@
             <field name="priority" eval="15"/>
             <field name="arch" type="xml">
                 <data>
-                    <xpath expr="//field[@name='order_line']/form/group[1]/group[1]/field[@name='product_id']" position="before">
+                    <xpath expr="//field[@name='order_line']/form/group[1]/group[1]/field[@name='product_id' and not(@invisible)]" position="before">
                         <field name="layout_type" on_change="layout_type_change(layout_type)"/>
                     </xpath>
-                    <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
+                    <xpath expr="//field[@name='order_line']/tree/field[@name='product_id' and not(@invisible)]" position="before">
                         <field name="layout_type"/>
                     </xpath>
-                    <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="after">
+                    <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal' and not(@invisible)]" position="after">
                         <field name="rel_subtotal" attrs="{'invisible':[('layout_type', '!=', 'subtotal')]}"/>
                     </xpath>
                 </data>
@@ -34,21 +34,21 @@
         </record>
 
         <!--
-            Complements to invoice line's form
+            Complements to move line's form
         -->
-        <record model="ir.ui.view" id="ons_view_invoice_line_inh01">
-            <field name="name">ons.view.invoice.line.inh01</field>
-            <field name="model">account.invoice</field>
-            <field name="inherit_id" ref="account.invoice_form"/>
+        <record model="ir.ui.view" id="ons_view_move_line_inh01">
+            <field name="name">ons.view.move.line.inh01</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
             <field name="priority" eval="17"/>
             <field name="arch" type="xml">
                 <data>
-                    <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="before">
+                    <xpath expr="//field[@name='line_ids']/tree/field[@name='product_id']" position="before">
 <!--                         <field name="sequence"/> -->
-                        <field name="layout_type" on_change="layout_type_change(layout_type)"/>
+                        <field name="layout_type" on_change="layout_type_change(layout_type)" attrs="{'invisible':[('layout_type', '!=', 'subtotal'), ('company_id', '=', 'parent.company_id')]}"/>
                     </xpath>
-                    <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='price_subtotal']" position="after">
-                        <field name="rel_subtotal" attrs="{'invisible':[('layout_type', '!=', 'subtotal')]}"/>
+                    <xpath expr="//field[@name='line_ids']/tree/field[@name='price_subtotal']" position="after">
+                        <field name="rel_subtotal" attrs="{'invisible':[('layout_type', '!=', 'subtotal'), ('company_id', '=', 'parent.company_id')]}"/>
                     </xpath>
                 </data>
             </field>
