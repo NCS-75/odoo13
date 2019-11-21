@@ -35,10 +35,10 @@
                     <xpath expr="//field[@name='line_ids']/tree/field[@name='product_id']" position="before">
                     <field name="move_id"/>
 <!--                         <field name="sequence"/> -->
-                        <field name="layout_type" on_change="layout_type_change(layout_type)" attrs="{'invisible':[('move_id.type', '==', 'entry')]}"/>
+                        <field name="layout_type" on_change="layout_type_change(layout_type)" attrs="{'column_invisible':[('move_id.type', '==', 'entry')]}"/>
                     </xpath>
                     <xpath expr="//field[@name='line_ids']/tree/field[@name='price_subtotal']" position="after">
-                        <field name="rel_subtotal" attrs="{'invisible':[('layout_type', '!=', 'subtotal'), ('move_id.type', '==', 'entry')]}"/>
+                        <field name="rel_subtotal" attrs="{'invisible':[('layout_type', '!=', 'subtotal')], 'column_invisible':[('move_id.type', '==', 'entry')]}"/>
                     </xpath>
                 </data>
             </field>
