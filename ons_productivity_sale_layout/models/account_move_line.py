@@ -74,7 +74,7 @@ class account_move_line(models.Model):
             layout_type = vals_list.get('layout_type', 'article')
             if not vals_list.get('name'):
                 vals_list['name'] = layout.layout_val_2_text(layout_type)
-        return result
+        return super(self, account_move_line).create(vals_list)
       
 #     # ------------------------- Interface related
 
