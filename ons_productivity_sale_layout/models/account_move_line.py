@@ -63,18 +63,18 @@ class account_move_line(models.Model):
   
   
 #     # ------------------------- Instance management
-    @api.model_create_multi
-    def create(self, vals_list):
-        if isinstance(vals_list, list):       
-            for vals in vals_list:
-                layout_type = vals.get('layout_type', 'article')
-                if not vals.get('name'):
-                    vals['name'] = layout.layout_val_2_text(layout_type)
-        else:
-            layout_type = vals_list.get('layout_type', 'article')
-            if not vals_list.get('name'):
-                vals_list['name'] = layout.layout_val_2_text(layout_type)
-        return super(account_move_line, self).create(vals_list)
+#     @api.model_create_multi
+#     def create(self, vals_list):
+#         if isinstance(vals_list, list):       
+#             for vals in vals_list:
+#                 layout_type = vals.get('layout_type', 'article')
+#                 if not vals.get('name'):
+#                     vals['name'] = layout.layout_val_2_text(layout_type)
+#         else:
+#             layout_type = vals_list.get('layout_type', 'article')
+#             if not vals_list.get('name'):
+#                 vals_list['name'] = layout.layout_val_2_text(layout_type)
+#         return super(account_move_line, self).create(vals_list)
       
 #     # ------------------------- Interface related
 
