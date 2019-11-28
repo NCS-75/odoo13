@@ -15,23 +15,29 @@
 #    You should have received a copy of the GNU Affero General Public Lic
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#    Project ID:    OERP-004-02
+#    Project ID:    OERP-004-02 - T508
 #
 #    Modifications:
 #
 ##########################################################################
-from odoo import models, _
-from odoo.exceptions import UserError
+from odoo import models
 
 
 class account_move(models.Model):
     _inherit = "account.move"
 
-    def unlink(self):
+
+# Override function of Odoo, when pressing draft button in invoice view
+    def button_draft(self):
+        AccountMoveLine = self.env['account.move.line']
+        excluded_move_ids = []
+
+        if self._context.get('suspense_moves_mode'):
+            excluded_move_ids = AccountMoveLine.search(AccountMoveLine._get_suspense_moves_domain() + [('move_id', 'in', self.ids)]).mapped('move_id').ids
+        
         for move in self:
-            
-            if move.name != '/' and not self._context.get('force_delete') and move.state == "posted":                
-                raise UserError(_("You cannot delete an entry which has been posted."))
-            move.line_ids.unlink()
-#       Prisme : call grandparent method class, otherwise with "super" the commented exception is called from super class            
-        return models.Model.unlink(self)
+            # Verification if the invoice is allowed to be draft. A error message is sended in the original odoo function
+            if not (move in move.line_ids.mapped('full_reconcile_id.exchange_move_id') and move.tax_cash_basis_rec_id and  move.restrict_mode_hash_table and move.state == 'posted' and move.id not in excluded_move_ids):
+                move.name = '/'
+
+        return super(account_move, self).button_draft()
