@@ -52,10 +52,10 @@ class account_move_line(models.Model):
                     id = id.origin
                 sub_invls = self.env['account.move.line'].search([('move_id','=',invl.move_id.id),('sequence','<=',invl.sequence),('id','!=',id)], order='sequence desc,id desc')
                 for sub_invl in sub_invls:
-                    if invl.sequence > sub_invl.sequence or (invl.sequence == sub_invl.sequence and invl.id > sub_invl.id ):
+                    if invl.sequence > sub_invl.sequence or (invl.sequence == sub_invl.sequence and id > sub_invl.id ):
                         if sub_invl.layout_type == 'subtotal':                             
                             break
-                        if sub_invl.sequence == invl.sequence and sub_invl.id > invl.id:                            
+                        if sub_invl.sequence == invl.sequence and sub_invl.id > id:                            
                             break
                         if sub_invl.layout_type == 'article':
                             sub_total += sub_invl.price_subtotal
