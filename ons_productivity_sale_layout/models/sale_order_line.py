@@ -18,7 +18,7 @@
 #    Project ID:    NEX001-010-001 - T257
 #
 ##########################################################################
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 from . import layout
 
 class sale_order_line(models.Model):
@@ -93,7 +93,7 @@ class sale_order_line(models.Model):
             'price_subtotal': 0.0,
             'quantity': 0,
             'discount': 0.0,
-            'move_line_tax_id': False,
+            'invoice_line_tax_id': False,
             'account_analytic_id': False,
             'product_uom_qty': 0.0,
         }
