@@ -71,7 +71,7 @@ class sale_order_line(models.Model):
     def _layout_type_change(self):
         for record in self:
             if not(record.layout_type == 'article'):
-                record.product_id = False
+                
                 record.quantity = 1
                 record.discount = 0.0
                 record.move_line_tax_ids = False
@@ -86,7 +86,7 @@ class sale_order_line(models.Model):
 
         vals = {
             'name': '',
-            'product_id': False,
+            
             'uos_id': False,
             'account_id': False,
             'price_unit': 0.0,
