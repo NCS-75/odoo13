@@ -86,7 +86,6 @@ class sale_order_line(models.Model):
 
         vals = {
             'name': '',
-            'product_id': False,
             'uos_id': False,
             'account_id': False,
             'price_unit': 0.0,
