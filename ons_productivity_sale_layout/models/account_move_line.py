@@ -31,20 +31,20 @@ class account_move_line(models.Model):
             return True
         except:
             return False
-        
+
     layout_type = fields.Selection(layout.LAYOUTS_LIST, 'Layout type', required=True, index=True, default=lambda *a: 'article')
     rel_subtotal = fields.Float(compute='_sub_total', string='Rel. Sub-total', digits='Account')
-    
+
 #     _order = 'move_id desc, sequence asc , id'
-         
+
     def _sub_total(self):
         for invl in self:
 
             invl.rel_subtotal = 0
             invl.sequence_number_next = 2
-            
+
             sub_total = 0.0
-            
+
             if invl.layout_type == 'subtotal' and self._is_number(invl.move_id.id):
                 id = invl.id
                 if not isinstance(id, int):
@@ -57,9 +57,7 @@ class account_move_line(models.Model):
                         if sub_invl.layout_type == 'article' and not sub_invl.account_internal_type == 'receivable' and not sub_invl.tax_group_id:
                             sub_total += sub_invl.price_subtotal
             invl.rel_subtotal = sub_total
-            
-    
-    
+
 #     # ------------------------- Instance management
     @api.model_create_multi
     def create(self, vals_list):    
