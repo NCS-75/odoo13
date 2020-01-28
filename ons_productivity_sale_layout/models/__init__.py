@@ -18,5 +18,5 @@
 #    Project ID:    NEX001-010-001 - T257
 #
 ##########################################################################
-#from . import account_move_line
+from . import account_move_line
 from . import sale_order_line
