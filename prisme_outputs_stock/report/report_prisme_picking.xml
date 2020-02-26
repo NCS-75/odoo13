@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+#    Prisme Solutions Informatique SA
+#    Copyright (c) 2020 Prisme Solutions Informatique SA <http://prisme.ch>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#    You should have received a copy of the GNU Affero General Public Lic
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+#    Project ID:    OERP-006-03
+#    Phabricator:   T516
+#
+##########################################################################
+-->
+<odoo>
+	<data>
+		<!-- Adding the report to the print menu -->
+		<report id="report_prisme_picking_paper" model="stock.picking"
+			string="Prisme Picking List for paper"
+			name="prisme_outputs_stock.stock_picking_paper_prisme"
+			report_type="qweb-pdf"
+			print_report_name = "object.name+' - Prisme Picking List for paper'"/>
+
+		<report id="report_prisme_picking_email" model="stock.picking"
+			string="Prisme Picking List for e-mail"
+			name="prisme_outputs_stock.stock_picking_email_prisme"
+			report_type="qweb-pdf"
+			print_report_name = "object.name+' - Prisme Picking List for e-mail'"/>
+
+		<!-- Template for the prisme picking report. It contains only the content, no template call (internal_layout/external_layout) or header/footer -->
+		<template id="stock_picking_prisme">
+			<div class="page">
+				<!-- setting the report's context to print the document in the partner's language -->
+				<t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+				<t t-set="picking_type_code" t-value="o.picking_type_code" />
+				<div class="row" name="customer_address"
+					style="padding-top: 2em; margin-bottom: 6em;">
+					<div class="col-8">
+						<t t-set="partner"
+							t-value="(o.sale_id and o.sale_id.partner_id) or o.partner_id or (o.move_lines and o.move_lines[0].partner_id) or False" />
+						<t t-if="partner" name="partner_header">
+							<b>
+								<!-- Defining if the partner is a customer, supplier, or internal -->
+								<t t-if="picking_type_code == 'outgoing'">
+									<span>Customer Address:</span>
+								</t>
+								<t t-if="picking_type_code == 'incoming'">
+									<span>Supplier Address:</span>
+								</t>
+								<t t-if="picking_type_code == 'internal'">
+									<span>Warehouse Address:</span>
+								</t>
+							</b>
+							<!-- Displaying the partner's address, name and phone -->
+							<div t-esc="partner"
+								t-options='{"widget": "contact", "fields": ["address", "name", "phone"], "no_marker": True,"phone_icons": True}' />
+						</t>
+					</div>
+					
+					<!-- Displaying the partner's address and name to the top right of the page for mailing -->
+					<div class="col-4">
+						<!-- Checking if there is a delivery address set. We print this delivery address if so, or we print the customer's address otherwise -->
+						<t t-if="o.partner_id or (o.sale_id and o.sale_id.partner_shipping_id)">
+							<t t-set="partner" t-value="o.partner_id or o.sale_id.partner_shipping_id"/>
+						</t>
+						<t t-if="partner" name="partner_address">
+							<!-- Printing the customer's company if there is one -->
+							<t t-if="partner.parent_id">
+								<t t-esc="partner.parent_id.display_name"/>
+								<br/>
+							</t>
+							<!-- If there is a company for the customer, we need to print his title and his name on the same line. 
+								 If it's a private customer, we print his title and his name on two separate lines -->
+							 <t t-if="partner.title">
+							 	<t t-esc="partner.title.name"/><br t-if="not partner.parent_id"/>
+							 </t>
+							<!-- Then we print the customer's name and it's address -->
+							<t t-esc="partner.name"/>
+							<div t-esc="partner"
+								t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}' />
+						</t>
+					</div>
+				</div>
+	
+				<div name="delivery_slip" style="margin-bottom: 2em;">
+					<h2>
+						Delivery Slip :
+						<span t-field="o.name" />
+					</h2>
+				</div>
+	
+	
+				<div>
+					<!-- General informations of the delivery slip. Informations are displayed in a table with two combined lines of header and values -->
+					<table class="table table-bordered table-sm text-center"
+						style="margin-bottom: 2em;">
+						<!-- First information line header -->
+						<tr>
+							<th class="align-middle">
+								<b>Order (Origin)</b>
+							</th>
+							<th>
+								<b>Order Date (Origin)</b>
+							</th>
+							<th>
+								<b>Shipping Date</b>
+							</th>
+							<th>
+								<b>Weight</b>
+							</th>
+						</tr>
+						<!-- First information line values -->
+						<tr>
+							<!-- Order (origin) cell -->
+							<td>
+								<t t-if="'origin' in o.fields_get()">
+									<span t-field="o.origin" />
+								</t>
+								<t t-if="'not origin' in o.fields_get()">
+									<span name="whitespace">
+									</span>
+								</t>
+							</td>
+	
+							<!-- Order date (origin) cell -->
+							<td>
+								<t t-set="origin_date" t-value="None" />
+	
+								<!-- getting the order date from sale order or purchase order -->
+								<t t-if="picking_type_code == 'outgoing'">
+									<t
+										t-if="('sale_id' in o.fields_get()) and ('date_order' in o.sale_id.fields_get())">
+										<t t-set="origin_date" t-value="o.sale_id.date_order" />
+									</t>
+								</t>
+								<t t-if="picking_type_code == 'incoming'">
+									<t
+										t-if="('purchase_id' in o.fields_get()) and ('date_order' in o.purchase_id.fields_get())">
+										<t t-set="origin_date" t-value="o.purchase_id.date_order" />
+									</t>
+								</t>
+	
+								<!-- displaying the formatted date if it exists -->
+								<t t-if="origin_date">
+									<span t-esc="origin_date.strftime('%d/%m/%Y')" />
+								</t>
+							</td>
+	
+							<!-- Shipping date cell -->
+							<td>
+								<t t-set="shipping_date" t-value="None" />
+	
+								<!-- getting the shipping date in the move lines -->
+								<t t-foreach="o.move_line_ids" t-as="line">
+									<t t-if="line.date">
+										<t t-set="shipping_date" t-value="line.date" />
+									</t>
+								</t>
+	
+								<!-- displaying the formatted date if it exists -->
+								<t t-if="shipping_date">
+									<span t-esc="shipping_date.strftime('%d/%m/%Y')" />
+								</t>
+							</td>
+	
+							<!-- Weight cell -->
+							<td>
+								<t t-if="'weight' in o.fields_get()">
+									<span t-field="o.weight" />
+								</t>
+							</td>
+						</tr>
+						
+						<!-- Second information line header -->
+						<tr>
+							<th>
+								<b>Transporter</b>
+							</th>
+							<th>
+								<b>Delivery Method</b>
+							</th>
+							<th>
+								<b>Your Reference</b>
+							</th>
+							<th>
+								<b>Our Reference</b>
+							</th>
+						</tr>
+						
+						<!-- Second information line values -->
+						<tr>
+							<!-- Tranporter cell -->
+							<td>
+								<t t-if="'psi_transporter' in o.fields_get()">
+									<span t-field="o.psi_transporter" />
+								</t>
+								<t t-if="'not psi_transporter' in o.fields_get()">
+									<span name="whitespace">
+									</span>
+								</t>
+							</td>
+	
+							<!-- next three cells depend on picking_type_code -->
+	
+							<!-- checking if it's a sale -->
+							<t t-if="picking_type_code == 'outgoing'">
+	
+								<!-- Value of delivery method cell -->
+								<td>
+									<t
+										t-if="('sale_id' in o.fields_get()) and ('incoterm' in o.sale_id.fields_get())">
+										<span t-field="o.sale_id.incoterm.name" />
+									</t>
+								</td>
+	
+								<!-- Your reference cell -->
+								<td>
+									<t
+										t-if="('sale_id' in o.fields_get()) and ('client_order_ref' in o.sale_id.fields_get())">
+										<span t-field="o.sale_id.client_order_ref" />
+									</t>
+								</td>
+	
+								<!-- Our reference cell -->
+								<td>
+									<t
+										t-if="('sale_id' in o.fields_get()) and ('user_id' in o.sale_id.fields_get()) and ('name' in o.sale_id.user_id.fields_get())">
+										<span t-esc="o.sale_id.user_id.name" />
+									</t>
+								</td>
+							</t>
+							<!-- end of sale check -->
+	
+							<!-- checking if it's a purchase -->
+							<t t-if="picking_type_code == 'incoming'">
+	
+								<!-- Delivery method cell -->
+								<td>
+									<t
+										t-if="('purchase_id' in o.fields_get()) and ('incoterm_id' in o.purchase_id.fields_get())">
+										<span t-field="o.purchase_id.incoterm_id.name" />
+									</t>
+								</td>
+	
+								<!-- Your reference cell -->
+								<td>
+									<t
+										t-if="('purchase_id' in o.fields_get()) and ('partner_ref' in o.purchase_id.fields_get())">
+										<span t-field="o.purchase_id.partner_ref" />
+									</t>
+								</td>
+	
+								<!-- Our reference cell -->
+								<td>
+									<t
+										t-if="('purchase_id' in o.fields_get()) and ('user_id' in o.purchase_id.fields_get()) and ('name' in o.purchase_id.user_id.fields_get())">
+										<span t-esc="o.purchase_id.user_id.name" />
+									</t>
+								</td>
+							</t>
+							<!-- end of purchase check -->
+						</tr>
+					</table>
+	
+					<!-- table for ordered products -->
+					<table class="table table-sm">
+						<thead class="table-borderless">
+							<tr style="border-bottom: 2px solid black;">
+								<th>
+									<b>Description</b>
+								</th>
+								<th>
+									<b>S/N</b>
+								</th>
+								<th class="text-center">
+									<b>Shipped Quantity</b>
+								</th>
+								<th class="text-center">
+									<b>Back Order</b>
+								</th>
+							</tr>
+						</thead>
+						<tbody>
+							<!-- Looping through each move line of the stock picking -->
+							<tr t-foreach="o.move_ids_without_package" t-as="move">
+								
+								<!-- Product cell -->
+								<td>
+									<t t-call="prisme_outputs_stock.product_description"/>
+								</td>
+					
+								<!-- S/N cell -->
+								<td>
+									<t t-foreach="o.get_move_sn(move)" t-as="sn">
+										<p t-esc="sn"/>
+									</t>
+								</td>
+					
+								<!-- Shipped quantity cell -->
+								<td class="text-center">
+									<span t-field="move.quantity_done"/>
+								</td>
+					
+								<!-- Back order cell -->
+								<td class="text-center">
+									<span t-esc="o.get_backorder_quantity(o, move)"/>
+								</td>
+							</tr>
+							
+							<!-- Looping through backorder lines not already in the stock move lines -->
+							<t t-set="backorder" t-value="o.get_backorder_picking(o)"/>
+							<t t-if="backorder">
+								<tr t-foreach="backorder.move_ids_without_package" t-as="move"  t-if="not o.is_in_origin_picking(o, move)">
+									
+								<!-- Product cell -->
+								<td>
+									<t t-call="prisme_outputs_stock.product_description"/>
+								</td>
+					
+								<!-- S/N cell -->
+								<td>
+									<!-- This cell will always be empty as there are no products shipped already in this loop -->
+								</td>
+					
+								<!-- Shipped quantity cell -->
+								<td class="text-center">
+									<!-- The quantity will always be 0.0 in this loop block. Partially shipped products were already printed in the previous loop block -->
+									<span>0.0</span>
+								</td>
+					
+								<!-- Back order cell -->
+								<td class="text-center">
+									<!-- Since the quantity shipped is always 0.0, the backorder quantity for the backorder lines is always the demanded quantity -->
+									<span t-esc="move.product_uom_qty"/>
+								</td>
+								</tr>
+							</t>
+						</tbody>
+					</table>
+	
+					<!-- Internal notes -->
+					<p t-if="o.note">
+						<span t-field="o.note" />
+					</p>
+				</div>
+			</div>
+		</template>
+		
+		<!-- This templates creates the content of the products table -->
+		<template id="product_description">
+			<span t-field="move.product_id" />
+			<p t-if="o.picking_type_code == 'outgoing'">
+				<span
+					t-field="move.product_id.sudo(True).description_pickingout" />
+			</p>
+			<p t-if="o.picking_type_code == 'incoming'">
+				<span
+					t-field="move.product_id.sudo(True).description_pickingin" />
+			</p>
+			<p t-if="o.picking_type_code == 'internal'">
+				<span
+					t-field="move.product_id.sudo(True).description_picking" />
+			</p>
+		</template>
+
+		<!-- Template for the prisme picking report for paper. Prints the content without header and footer -->
+		<template id="stock_picking_paper_prisme">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="web.basic_layout">
+						<t t-call="prisme_outputs_stock.stock_picking_prisme"
+							t-lang="o.partner_id.lang" />
+					</t>
+				</t>
+			</t>
+		</template>
+		
+		<!-- Template for the prisme picking report for email. Prints the content with the external header and footer -->
+		<template id="stock_picking_email_prisme">
+			<t t-call="web.html_container">
+				<t t-foreach="docs" t-as="o">
+					<t t-call="web.external_layout">
+						<t t-call="prisme_outputs_stock.stock_picking_prisme"
+							t-lang="o.partner_id.lang" />
+					</t>
+				</t>
+			</t>
+		</template>
+	</data>
+</odoo>

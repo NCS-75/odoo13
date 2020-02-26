@@ -1,0 +1,116 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* prisme_outputs_stock
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e-20191113\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-02-20 09:30+0000\n"
+"PO-Revision-Date: 2020-02-20 09:30+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "<b>Back Order</b>"
+msgstr "<b>Retour</b>"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "<b>Delivery Method</b>"
+msgstr "<b>Méthode de livraison</b>"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "<b>Description</b>"
+msgstr "<b>Description</b>"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "<b>Order (Origin)</b>"
+msgstr "<b>Commande (Origine)</b>"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "<b>Order Date (Origin)</b>"
+msgstr "<b>Date de commande (Origine)</b>"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "<b>Our Reference</b>"
+msgstr "<b>Notre Référence</b>"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "<b>S/N</b>"
+msgstr "<b>S/N</b>"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "<b>Shipped Quantity</b>"
+msgstr "<b>Quantité livrée</b>"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "<b>Shipping Date</b>"
+msgstr "<b>Date de livraison</b>"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "<b>Transporter</b>"
+msgstr "<b>Transporteur</b>"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "<b>Weight</b>"
+msgstr "<b>Poids</b>"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "<b>Your Reference</b>"
+msgstr "<b>Votre Référence</b>"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "<span>Customer Address:</span>"
+msgstr "<span>Adresse Client:</span>"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "<span>Supplier Address:</span>"
+msgstr "<span>Adresse Fournisseur:</span>"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "<span>Warehouse Address:</span>"
+msgstr "<span>Adresse Entrepôt:</span>"
+
+#. module: prisme_outputs_stock
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_stock.stock_picking_prisme
+msgid "Delivery Slip :"
+msgstr "Bon de livraison :"
+
+#. module: prisme_outputs_stock
+#: model:ir.actions.report,name:prisme_outputs_stock.report_prisme_picking_email
+msgid "Prisme Picking for email"
+msgstr "Prisme Picking for email"
+
+#. module: prisme_outputs_stock
+#: model:ir.actions.report,name:prisme_outputs_stock.report_prisme_picking_paper
+msgid "Prisme Picking for paper"
+msgstr "Prisme Picking for paper"
+
+#. module: prisme_outputs_stock
+#: model:ir.model,name:prisme_outputs_stock.model_stock_picking
+msgid "Transfer"
+msgstr "Transfert"
+
+#. module: prisme_outputs_stock
+#: model:ir.model.fields,field_description:prisme_outputs_stock.field_stock_picking__psi_transporter
+msgid "Transporter"
+msgstr "Transporteur"
