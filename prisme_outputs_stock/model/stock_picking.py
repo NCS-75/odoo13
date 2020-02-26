@@ -20,7 +20,6 @@
 #
 ##########################################################################
 from odoo import models, fields, api, _
-from test.test_binop import SN
 
 class stock_picking(models.Model):
     _inherit = "stock.picking"
