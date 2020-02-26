@@ -14,7 +14,7 @@
 #    You should have received a copy of the GNU Affero General Public Lic
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#    Project ID:    
+#    Project ID:    OERP-003-06 - T506
 #
 ##########################################################################
 
@@ -23,4 +23,4 @@ from odoo import models, fields
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
     
-    product_image = fields.Binary('Product Image', related="product_id.image", store=False, readonly=False)
+    product_image = fields.Image('Product Image', related="product_id.image_1024", store=False, readonly=False)
