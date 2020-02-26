@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ###########################################################################
 #
 #    Prisme Solutions Informatique SA
@@ -17,8 +16,6 @@
 #
 #    Project ID:    OERP-003-06 - T506
 #
-#    Modifications:
-#
 ##########################################################################
 
-from . import models
+from . import sale

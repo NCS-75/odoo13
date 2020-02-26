@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ###########################################################################
 #
 #    Prisme Solutions Informatique SA
@@ -15,10 +14,13 @@
 #    You should have received a copy of the GNU Affero General Public Lic
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#    Project ID:    OERP-003-06 - T506
-#
-#    Modifications:
+#    Project ID:    
 #
 ##########################################################################
 
-from . import models
+from odoo import models, fields
+
+class SaleOrderLine(models.Model):
+    _inherit = 'sale.order.line'
+    
+    product_image = fields.Binary('Product Image', related="product_id.image", store=False, readonly=False)
