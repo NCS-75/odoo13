@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+#    Prisme Solutions Informatique SA
+#    Copyright (c) 2020 Prisme Solutions Informatique SA <http://prisme.ch>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#    You should have received a copy of the GNU Affero General Public Lic
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+#    Project ID:    OERP-004-05
+#    Phabricator :  T594
+#
+##########################################################################
+-->
+
+<odoo>
+
+	<!-- Making the odometer field in the vehicle view read-only -->
+	<record id='fleet_vehicle_view_form' model='ir.ui.view'>
+		<field name="name">fleet.vehicle.form</field>
+		<field name="model">fleet.vehicle</field>
+		<field name="inherit_id" ref="fleet.fleet_vehicle_view_form" />
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='odometer']" position="replace">
+				<field name="odometer" readonly="1" />
+			</xpath>
+		</field>
+	</record>
+
+	<!-- Adding new fields to the vehicle contract view -->
+	<record id='fleet_vehicle_log_contract_view_form'
+		model='ir.ui.view'>
+		<field name="name">fleet.vehicle.log_contract.form</field>
+		<field name="model">fleet.vehicle.log.contract</field>
+		<field name="inherit_id"
+			ref="fleet.fleet_vehicle_log_contract_view_form" />
+		<field name="arch" type="xml">
+			
+			<!-- Adding the odometer date and value -->
+			<xpath expr="//div[@class='o_row']" position="after">
+				<field name="odometer_last_value" />
+				<field name="odometer_last_date" />
+			</xpath>
+			
+			<!-- Adding the km plans -->
+			<xpath expr="//field[@name='user_id']" position="after">
+				<field name="km_plan_yearly" />
+				<field name="km_plan_monthly" />
+				<field name="cur_contract_km" invisible='1'/>
+			</xpath>
+
+			<!-- Adding the contract duration field -->
+			<xpath expr="//field[@name='expiration_date']" position="after">
+				<label for="contract_duration" />
+				<div class="o_row">
+					<field name="contract_duration" />
+					<field name="contract_duration_unit" />
+				</div>
+			</xpath>
+
+			<!-- Adding the progress bars of the currently performed kilometers -->
+			<xpath expr="//notebook" position="before">
+				<group string="Kilometers Currently Performed">
+					<div>
+						<table style="width:100%">
+							<tr>
+								<th>
+									<b>Kilometers currently performed during this contract</b>
+								</th>
+								<th>
+									<field name="km_cur_perf" />
+								</th>
+								<th>
+									<field name="km_cur_perf_percent" widget="progressbar" />
+								</th>
+							</tr>
+							<tr>
+								<th>
+									<b>Kilometers currently performed this year </b>
+								</th>
+								<th>
+									<field name="km_cur_perf_year" />
+								</th>
+								<th>
+									<field name="km_cur_perf_year_percent"
+										widget="progressbar" />
+								</th>
+							</tr>
+							<tr>
+								<th>
+									<b>Kilometers currently performed this month </b>
+								</th>
+								<th>
+									<field name="km_cur_perf_month" />
+								</th>
+								<th>
+									<field name="km_cur_perf_month_percent"
+										widget="progressbar" />
+								</th>
+							</tr>
+						</table>
+					</div>
+				</group>
+			</xpath>
+		</field>
+	</record>
+</odoo>
