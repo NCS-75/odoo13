@@ -253,7 +253,7 @@ class sale_order_line(models.Model):
     #Make field 'customer_lead' a optional
     customer_lead = fields.Float(
         'Delivery Lead Time', required=False, default=0.0,
-        help="Number of days between the order confirmation and the shipping of the products to the customer", oldname="delay")
+        help="Number of days between the order confirmation and the shipping of the products to the customer")
     
     product_id = fields.Many2one('product.product', string='Product', domain=[('sale_ok', '=', True)], change_default=True, ondelete='restrict', required=False)
     

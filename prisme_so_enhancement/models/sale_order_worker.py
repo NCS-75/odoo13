@@ -118,7 +118,7 @@ class sale_order_prisme(models.Model):
                     states={'draft': [('readonly', False)], 'sent': [('readonly', False)], 'manual': [('readonly', False)]}, copy=True)
     
     # Redefine field confirmation_date to disable copy when duplicating sale.order
-    confirmation_date = fields.Datetime(string='Confirmation Date', readonly=True, index=True, help="Date on which the sale order is confirmed.", oldname="date_confirm", copy=False)
+    confirmation_date = fields.Datetime(string='Confirmation Date', readonly=True, index=True, help="Date on which the sale order is confirmed.", copy=False)
 
     def action_cancel(self):
         result = super(sale_order_prisme, self).action_cancel()
