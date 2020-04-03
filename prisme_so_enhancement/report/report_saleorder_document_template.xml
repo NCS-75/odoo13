@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!-- 
+###########################################################################
+#
+#    Prisme Solutions Informatique SA
+#    Copyright (c) 2016 Prisme Solutions Informatique SA <http://prisme.ch>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#    You should have received a copy of the GNU Affero General Public Lic
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+#    Project ID:    OERP-003-03 - T503
+#
+#    Modifications:
+#
+##########################################################################
+ -->
+ <odoo>
+	<template id="prisme_report_saleorder_document"
+		inherit_id="sale.report_saleorder_document">
+		<xpath expr="//th[text()='Unit Price']" position="after">
+			<t t-if="any([line.discount for line in doc.order_line])">
+				<th class="text-right">Discount (%)</th>
+			</t>
+				<t t-if="any([line.discount_amount for line in doc.order_line])">
+					<th class="text-right">Discount Amount</th>
+				</t>
+		</xpath>
+
+		<xpath expr="//td[./span[@t-field='line.price_unit']]"
+			position="after">
+			<t t-if="any([line.discount for line in doc.order_line])">
+				<td class="text-right">
+					<span t-field="line.discount" />
+				</td>
+			</t>
+			
+			<t t-if="any([line.discount_amount for line in doc.order_line])">
+				<td class="text-right">
+					<span t-field="line.discount_amount" />
+				</td>
+			</t>
+		</xpath>
+	</template>
+</odoo>
