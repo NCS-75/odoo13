@@ -40,7 +40,6 @@
 					<field name="account_id"/>
 					<field name="quantity"/>
 					<field name="price_unit" widget="monetary"/>
-					<field name="amount_currency" string="Amount in foreign currency" widget="monetary" optional="show"/>
 					<field name="invoice_currency"/>
 					<field name="debit" widget="monetary"/>
 					<field name="credit" widget="monetary"/>
