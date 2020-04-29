@@ -46,7 +46,7 @@
 		<field name="arch" type="xml">
 			
 			<!-- Adding the odometer date and value -->
-			<xpath expr="//div[@class='o_row']" position="after">
+			<xpath expr="//div[hasclass('o_row')]" position="after">
 				<field name="odometer_last_value" />
 				<field name="odometer_last_date" />
 			</xpath>
