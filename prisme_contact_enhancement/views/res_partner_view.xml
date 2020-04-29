@@ -31,11 +31,13 @@
 			<field name="type">form</field>
 			<field name="priority">18</field>
 			<field name="arch" type="xml" >
-
-				<field name="company_id" position="after">
+			
+				<xpath
+					expr="//group[@name='misc']/field[@name='company_id']"
+					position="after">
 					<field name="prescriber"></field>
-
-			</field>
+				</xpath>
+				
 			</field>
 		</record>		
 	</data>
