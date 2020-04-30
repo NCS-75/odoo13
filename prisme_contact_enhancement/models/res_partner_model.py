@@ -26,5 +26,5 @@ class res_partner(models.Model):
     _name = 'res.partner'
     _inherit = 'res.partner'
 
-    prescriber = fields.Many2one('res.partner', 'Prescriber', store=True)
+    prescriber = fields.Many2one('res.partner', 'Prescriber')
 
