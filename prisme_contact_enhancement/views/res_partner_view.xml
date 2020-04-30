@@ -35,7 +35,7 @@
 				<xpath
 					expr="//group[@name='misc']/field[@name='company_id']"
 					position="after">
-					<field name="prescriber"></field>
+					<field name="prescriber"/>
 				</xpath>
 				
 			</field>
