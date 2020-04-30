@@ -39,7 +39,6 @@
 'test': [],
 'installable': True,
 'active': False,
-'images':[
-          'images/address.jpg',
-          ],
+    'images': ['images/icon.png','images/banner.png'],
+    'license': 'LGPL-3',
 }
