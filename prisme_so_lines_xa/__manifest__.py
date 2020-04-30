@@ -20,7 +20,7 @@
 ##########################################################################
 {
     "name": "Prisme SO Lines",
-    "version": "2020-04-29 11:00",
+    "version": "2020-04-30 12:30",
     "author": "Prisme Solutions Informatique SA",
     "category": "Generic Modules/Accounting",
     "summary": "sale orders lines list",

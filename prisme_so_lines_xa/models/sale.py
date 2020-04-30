@@ -18,9 +18,24 @@
 #
 ##########################################################################
 
-from odoo import models, fields
+from odoo import models, fields, api
 
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
     
     product_image = fields.Image('Product Image', related="product_id.image_1024", store=False, readonly=False)
+    amount_local_currency = fields.Monetary(string='Amount in local currency', store=True, readonly=True, compute='_amount_local')
+    local_currency = fields.Many2one(string="Local Currency", related='company_id.currency_id',store=True)
+    
+    @api.depends('price_subtotal')
+    def _amount_local(self):
+        for record in self:
+            company_currency = record.company_id.currency_id.id
+            amount_local_currency = record.price_subtotal
+            
+            if record.currency_id.id != company_currency:
+                rate = record.currency_id.rate
+                if rate and rate != 0.0:
+                    amount_local_currency = record.price_subtotal / rate 
+                
+            record.amount_local_currency = amount_local_currency
