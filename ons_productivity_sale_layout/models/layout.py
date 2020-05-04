@@ -30,11 +30,11 @@ LAYOUTS_LIST = [
 def layout_val_2_text(layout_type):
     val = _( 'Product' )
     if layout_type == 'subtotal':
-        val = _( 'Sub Total' )
+		val = _( 'Sub Total' )
 	elif layout_type == 'line':
-        val = _( 'Separator Line' )
+		val = _( 'Separator Line' )
     elif layout_type == 'break':
-        val = _( 'Page Break' )
+		val = _( 'Page Break' )
 		
     return val
 
