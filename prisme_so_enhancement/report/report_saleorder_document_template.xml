@@ -25,22 +25,14 @@
  <odoo>
 	<template id="prisme_report_saleorder_document"
 		inherit_id="sale.report_saleorder_document">
-		<xpath expr="//th[text()='Unit Price']" position="after">
-			<t t-if="any([line.discount for line in doc.order_line])">
-				<th class="text-right">Discount (%)</th>
+		<xpath expr="//th[@name='th_priceunit']" position="after">
+			<t t-if="any([line.discount_amount for line in doc.order_line])">
+				<th class="text-right">Disc. Amount</th>
 			</t>
-				<t t-if="any([line.discount_amount for line in doc.order_line])">
-					<th class="text-right">Discount Amount</th>
-				</t>
 		</xpath>
 
 		<xpath expr="//td[./span[@t-field='line.price_unit']]"
 			position="after">
-			<t t-if="any([line.discount for line in doc.order_line])">
-				<td class="text-right">
-					<span t-field="line.discount" />
-				</td>
-			</t>
 			
 			<t t-if="any([line.discount_amount for line in doc.order_line])">
 				<td class="text-right">

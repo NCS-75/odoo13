@@ -17,8 +17,6 @@
 #
 #    Project ID:    OERP-003-03 - T503
 #
-#    Modifications:
-#
 ##########################################################################
 from datetime  import datetime, timedelta, date
 from odoo import api, fields, models, _
@@ -34,6 +32,42 @@ class sale_order_line(models.Model):
     #New field for discount in amount
     discount_amount = fields.Float(string='Discount (amount)', digits=(16, 2), default=0.0)
     
+    price_subtotal = fields.Monetary(compute='_compute_amount_prisme', string='Subtotal', readonly=True, store=True)
+    price_tax = fields.Monetary(compute='_compute_amount_prisme', string='Price Taxes', readonly=True, store=True)
+    price_total = fields.Monetary(compute='_compute_amount_prisme', string='Total', readonly=True, store=True)
+    
+    price_reduce = fields.Monetary(compute='_get_price_reduce_prisme', string='Price Reduce', readonly=True, store=True)
+    
+    date_delivery = fields.Date('Delivery Date')
+                              
+    refused = fields.Boolean('Refused', readonly=True,
+            states={'draft': [('readonly', False)],
+                    'confirmed': [('readonly',False)],
+                    'done': [('readonly',False)]})
+    
+    refusal_reason = fields.Char('Refusal Reason', readonly=True,
+            states={'draft': [('readonly', False)],
+                    'confirmed': [('readonly', False)],
+                    'done': [('readonly',False)]})
+                
+    cancellation_reason = fields.Char("Cancellation Reason",
+            readonly=True,
+            states={'draft': [('readonly', False)],
+                      'manual': [('readonly', False)],
+                      'progress': [('readonly', False)],
+                      'shipping_except': [('readonly', False)],
+                      'invoice_except': [('readonly', False)]})
+              
+    # Method overriden to use the method in this class     
+    shipped = fields.Boolean('Shipped')
+        
+    #Make field 'customer_lead' optional
+    customer_lead = fields.Float(
+        'Delivery Lead Time', required=False, default=0.0,
+        help="Number of days between the order confirmation and the shipping of the products to the customer")
+    
+    product_id = fields.Many2one('product.product', string='Product', domain=[('sale_ok', '=', True)], change_default=True, ondelete='restrict', required=False)
+    
     #Deprecated, tried to delete but stuck with a "discount_type doest not exist" error
     #Seems to work when uninstalling then installing the module but then the data is lost...
 #     discount_type = fields.Selection([('amount', 'Amount'),
@@ -46,17 +80,18 @@ class sale_order_line(models.Model):
     def check_discount_percent(self, discount_value):
         error = ""
         if (discount_value < 0.0):
-            error = _("A discount in percent cannot be negative !")
+            error = _("A discount in percent cannot be negative.")
         elif (discount_value > 100.0):
-            error = _("A discount in percent cannot be bigger than 100 !")
+            error = _("A discount in percent cannot be bigger than 100.")
         return error
+ 
  
     def check_discount_amount(self, discount_amount_value, price_unit_value):
         error = ""
         if (discount_amount_value < 0.0):
-            error = _("A discount in amount cannot be negative !")
+            error = _("A discount in amount cannot be negative.")
         elif ((discount_amount_value > price_unit_value) and (discount_amount_value > 0)):
-            error = _("A discount in amount cannot be bigger than the price !")
+            error = _("A discount in amount cannot be bigger than the price.")
         return error
      
      
@@ -78,6 +113,7 @@ class sale_order_line(models.Model):
             raise ValidationError(final_error)    
         return super(sale_order_line, self).create(values)
  
+ 
     @api.model
     def write(self, values):
         # Do your custom logic here
@@ -93,6 +129,7 @@ class sale_order_line(models.Model):
         if final_error:
             raise ValidationError(final_error)
         return super(sale_order_line, self).write(values)
+
 
     def _action_procurement_create(self):
         """
@@ -151,11 +188,6 @@ class sale_order_line(models.Model):
             'sale_line_id': self.id
         }
 
-    price_subtotal = fields.Monetary(compute='_compute_amount_prisme', string='Subtotal', readonly=True, store=True)
-    price_tax = fields.Monetary(compute='_compute_amount_prisme', string='Price Taxes', readonly=True, store=True)
-    price_total = fields.Monetary(compute='_compute_amount_prisme', string='Total', readonly=True, store=True)
-    
-    price_reduce = fields.Monetary(compute='_get_price_reduce_prisme', string='Price Reduce', readonly=True, store=True)
     
     @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id', 'discount_amount','order_id.rounding_on_subtotal')
     def _compute_amount_prisme(self):
@@ -201,7 +233,7 @@ class sale_order_line(models.Model):
         for line in self:
             #Prisme Modification start: compute the reduced price with amount and/or percent discount
             if line.refused or line.layout_type != 'article':
-                continue           
+                price = 0
             
             price = line.price_unit
             if (line.discount_amount):
@@ -214,6 +246,7 @@ class sale_order_line(models.Model):
             line.price_reduce = price
             #Prisme modification end
             
+            
     @api.depends('product_id', 'purchase_price', 'product_uom_qty', 'price_unit')
     def _product_margin(self):
         for line in self:
@@ -222,40 +255,9 @@ class sale_order_line(models.Model):
                 continue
             
             currency = line.order_id.pricelist_id.currency_id
-            margin = currency.round(line.price_subtotal - ((line.purchase_price or line.product_id.standard_price) * line.product_uom_qty))
+            margin = line.price_subtotal - ((line.purchase_price) * line.product_uom_qty)
             line.margin = margin
     
-    
-    date_delivery = fields.Date('Delivery Date')
-                              
-    refused = fields.Boolean('Refused', readonly=True,
-            states={'draft': [('readonly', False)],
-                    'confirmed': [('readonly',False)],
-                    'done': [('readonly',False)]})
-    
-    refusal_reason = fields.Char('Refusal Reason', readonly=True,
-            states={'draft': [('readonly', False)],
-                    'confirmed': [('readonly', False)],
-                    'done': [('readonly',False)]})
-                
-    cancellation_reason = fields.Char("Cancellation Reason",
-            readonly=True,
-            states={'draft': [('readonly', False)],
-                      'manual': [('readonly', False)],
-                      'progress': [('readonly', False)],
-                      'shipping_except': [('readonly', False)],
-                      'invoice_except': [('readonly', False)]})
-              
-    
-    # Method overriden to use the method in this class     
-    shipped = fields.Boolean('Shipped')
-        
-    #Make field 'customer_lead' a optional
-    customer_lead = fields.Float(
-        'Delivery Lead Time', required=False, default=0.0,
-        help="Number of days between the order confirmation and the shipping of the products to the customer")
-    
-    product_id = fields.Many2one('product.product', string='Product', domain=[('sale_ok', '=', True)], change_default=True, ondelete='restrict', required=False)
     
     @api.constrains('refused')
     def _check_refusal_reason(self):
@@ -265,6 +267,7 @@ class sale_order_line(models.Model):
                 if not line.refusal_reason:
                     raise ValidationError('You must give a reason for each line you refuse')
         return ok
+    
     
     def invoice_line_create(self, invoice_id, qty):    
         
@@ -280,7 +283,7 @@ class sale_order_line(models.Model):
             # Si la ligne a ete refusee ou n'est pas de type article
             if line.refused or line.layout_type != 'article':
                 # ne pas facturer cette ligne
-                continue       
+                continue
               
             if not float_is_zero(qty, precision_digits=precision):
                 vals = line._prepare_invoice_line(qty=qty)
@@ -294,7 +297,7 @@ class sale_order_line(models.Model):
         for record in self:
             
             
-            """Returns a float equals to the timedelta between two dates given as string."""
+            # Returns a float equals to the timedelta between two dates given as string.
      
             DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
             
@@ -319,6 +322,7 @@ class sale_order_line(models.Model):
             # if record.customer_lead and not record.date_delivery:
             record.date_delivery = date_from + timedelta(days=record.customer_lead)
     
+    
     def _sub_total(self):
         for sol in self:
 
@@ -333,11 +337,25 @@ class sale_order_line(models.Model):
             
             sol.rel_subtotal = sub_total
     
+    
     @api.depends('state', 'product_uom_qty', 'qty_delivered', 'qty_to_invoice', 'qty_invoiced')
     def _compute_invoice_status(self):
         super(sale_order_line, self)._compute_invoice_status()        
         for line in self:
-            # Si la ligne a ete refusee ou n'est pas de type article
             if line.refused or line.layout_type != 'article':
-                # mettre la ligne en etat facture
+                # Set line in 'invoiced' state
                 line.invoice_status = 'invoiced'
+                
+    @api.onchange('product_id')
+    def _get_prices_and_costs(self):
+        for record in self:
+            product = record.product_id
+            record.price_unit = product.list_price
+            record.purchase_price = product.standard_price
+            
+    def _action_launch_stock_rule(self, previous_product_uom_qty=False):
+        """
+        Excluding the refused lines on stock moves / stock picking creation.
+        """
+        other_lines = self.filtered(lambda sol: not sol.refused)
+        super(sale_order_line, other_lines)._action_launch_stock_rule(previous_product_uom_qty)

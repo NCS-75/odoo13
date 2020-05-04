@@ -1,14 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* prisme_so_enhancement
+# 	* prisme_so_enhancement
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0+e-20190830\n"
+"Project-Id-Version: Odoo Server 13.0+e-20191113\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-15 07:51+0000\n"
-"PO-Revision-Date: 2019-10-15 07:51+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2020-05-04 13:30+0000\n"
+"PO-Revision-Date: 2020-05-04 13:30+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -16,28 +16,28 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: prisme_so_enhancement
-#: code:addons/prisme_so_enhancement/models/sale_order_line_worker.py:60
+#: code:addons/prisme_so_enhancement/models/sale_order_line_worker.py:0
 #, python-format
-msgid "A discount in amount cannot be bigger than the price !"
-msgstr ""
+msgid "A discount in amount cannot be bigger than the price."
+msgstr "Une remise en montant ne peut pas être plus élevée que le prix du produit."
 
 #. module: prisme_so_enhancement
-#: code:addons/prisme_so_enhancement/models/sale_order_line_worker.py:58
+#: code:addons/prisme_so_enhancement/models/sale_order_line_worker.py:0
 #, python-format
-msgid "A discount in amount cannot be negative !"
-msgstr ""
+msgid "A discount in amount cannot be negative."
+msgstr "Une remise en montant ne peut pas être négative."
 
 #. module: prisme_so_enhancement
-#: code:addons/prisme_so_enhancement/models/sale_order_line_worker.py:52
+#: code:addons/prisme_so_enhancement/models/sale_order_line_worker.py:0
 #, python-format
-msgid "A discount in percent cannot be bigger than 100 !"
-msgstr ""
+msgid "A discount in percent cannot be bigger than 100."
+msgstr "Une remise en pourcent ne peut pas être plus élevée que 100."
 
 #. module: prisme_so_enhancement
-#: code:addons/prisme_so_enhancement/models/sale_order_line_worker.py:50
+#: code:addons/prisme_so_enhancement/models/sale_order_line_worker.py:0
 #, python-format
-msgid "A discount in percent cannot be negative !"
-msgstr ""
+msgid "A discount in percent cannot be negative."
+msgstr "Une remise en pourcent ne peut pas être négative."
 
 #. module: prisme_so_enhancement
 #: model_terms:ir.ui.view,arch_db:prisme_so_enhancement.sale_order_form_sale_prisme
@@ -48,7 +48,7 @@ msgstr "Annulation"
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order__cancellation_reason
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order_line__cancellation_reason
 msgid "Cancellation Reason"
-msgstr "Raison de l'annulation"
+msgstr "Raison d'annulation"
 
 #. module: prisme_so_enhancement
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order__confirmation_date
@@ -58,7 +58,7 @@ msgstr "Date de confirmation"
 #. module: prisme_so_enhancement
 #: model:ir.model.fields,help:prisme_so_enhancement.field_sale_order__confirmation_date
 msgid "Date on which the sale order is confirmed."
-msgstr "Date à laquelle le devis a été confirmé"
+msgstr "La date à laquelle le devis a été confirmé."
 
 #. module: prisme_so_enhancement
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order_line__date_delivery
@@ -71,9 +71,14 @@ msgid "Delivery Lead Time"
 msgstr "Délai de livraison"
 
 #. module: prisme_so_enhancement
+#: model_terms:ir.ui.view,arch_db:prisme_so_enhancement.sale_order_form_sale_prisme
+msgid "Disc. (amount)"
+msgstr "Rem. (montant)"
+
+#. module: prisme_so_enhancement
 #: model_terms:ir.ui.view,arch_db:prisme_so_enhancement.prisme_report_saleorder_document
-msgid "Discount (%)"
-msgstr "Remise (%)"
+msgid "Disc. Amount"
+msgstr "Rem. Montant"
 
 #. module: prisme_so_enhancement
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order_line__discount_amount
@@ -86,44 +91,48 @@ msgid "Discount (percent)"
 msgstr "Remise (%)"
 
 #. module: prisme_so_enhancement
-#: model_terms:ir.ui.view,arch_db:prisme_so_enhancement.prisme_report_saleorder_document
-msgid "Discount Amount"
-msgstr "Remise en montant"
-
-#. module: prisme_so_enhancement
 #: model_terms:ir.ui.view,arch_db:prisme_so_enhancement.sale_order_form_sale_prisme
 msgid "Notes"
-msgstr ""
+msgstr "Notes"
 
 #. module: prisme_so_enhancement
 #: model:ir.model.fields,help:prisme_so_enhancement.field_sale_order_line__customer_lead
-msgid "Number of days between the order confirmation and the shipping of the products to the customer"
-msgstr "Nombre de jours entre la confirmation de la commande et l'expédition des articles au client."
+msgid ""
+"Number of days between the order confirmation and the shipping of the "
+"products to the customer"
+msgstr ""
+"Nombre de jours entre la confirmation du devis et la livraison "
+"des produits au client."
 
 #. module: prisme_so_enhancement
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order__order_line
 msgid "Order Lines"
-msgstr "Lignes de la commande"
+msgstr "Lignes de commande"
 
 #. module: prisme_so_enhancement
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order_line__price_reduce
 msgid "Price Reduce"
-msgstr "Réduction de Prix"
+msgstr "Prix réduit"
+
+#. module: prisme_so_enhancement
+#: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order_line__price_tax
+msgid "Price Taxes"
+msgstr "Montant taxes"
 
 #. module: prisme_so_enhancement
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order_line__product_id
 msgid "Product"
-msgstr "Article"
+msgstr "Produit"
 
 #. module: prisme_so_enhancement
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order__quotation_comment
 msgid "Quotation Comment"
-msgstr "Commentaire du devis"
+msgstr "Commentaire devis"
 
 #. module: prisme_so_enhancement
 #: model_terms:ir.ui.view,arch_db:prisme_so_enhancement.sale_order_form_sale_prisme
 msgid "Quotation Validity"
-msgstr "Validité du devis"
+msgstr "Validité devis"
 
 #. module: prisme_so_enhancement
 #: model_terms:ir.ui.view,arch_db:prisme_so_enhancement.sale_order_form_sale_prisme
@@ -143,29 +152,33 @@ msgstr "Refusé"
 #. module: prisme_so_enhancement
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order__rounding_on_subtotal
 msgid "Rounding on Subtotal"
-msgstr "Arrondie du sous-total"
+msgstr "Arrondi"
 
 #. module: prisme_so_enhancement
-#: model:ir.model,name:prisme_so_enhancement.model_sale_order
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_report__so_name
 msgid "Sale Order"
-msgstr "Bon de commande"
+msgstr "Devis / Commande"
 
 #. module: prisme_so_enhancement
 #: model:ir.model,name:prisme_so_enhancement.model_sale_report
 msgid "Sales Analysis Report"
-msgstr "Rapport d'analyse de vente"
+msgstr "Rapport d'analyse des ventes"
+
+#. module: prisme_so_enhancement
+#: model:ir.model,name:prisme_so_enhancement.model_sale_order
+msgid "Sales Order"
+msgstr "Devis / Commandes"
 
 #. module: prisme_so_enhancement
 #: model:ir.model,name:prisme_so_enhancement.model_sale_order_line
 msgid "Sales Order Line"
-msgstr "Ligne de Commande"
+msgstr "Lignes de commande"
 
 #. module: prisme_so_enhancement
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order__shipped
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order_line__shipped
 msgid "Shipped"
-msgstr "Expédié"
+msgstr "Livré"
 
 #. module: prisme_so_enhancement
 #: model_terms:ir.ui.view,arch_db:prisme_so_enhancement.sale_order_form_sale_prisme
@@ -179,35 +192,14 @@ msgstr "Sous-total"
 
 #. module: prisme_so_enhancement
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order__amount_tax
-#: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order_line__price_tax
-msgid "Price Taxes"
+msgid "Taxes"
 msgstr "Taxes"
 
 #. module: prisme_so_enhancement
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order__amount_total
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order_line__price_total
 msgid "Total"
-msgstr ""
-
-#. module: prisme_so_enhancement
-#: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_report__discount_total
-msgid "Total Discount"
-msgstr "Remise totale"
-
-#. module: prisme_so_enhancement
-#: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_report__margin_total
-msgid "Total Margin"
-msgstr "Marge totale"
-
-#. module: prisme_so_enhancement
-#: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_report__net_price_total
-msgid "Total Price (Net)"
-msgstr "Prix total (net)"
-
-#. module: prisme_so_enhancement
-#: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_report__purchase_total
-msgid "Total Purchase"
-msgstr "Total d'achat"
+msgstr "Total"
 
 #. module: prisme_so_enhancement
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order__amount_untaxed
@@ -215,13 +207,16 @@ msgid "Untaxed Amount"
 msgstr "Montant HT"
 
 #. module: prisme_so_enhancement
-#: code:addons/prisme_so_enhancement/models/sale_order_worker.py:129
+#: code:addons/prisme_so_enhancement/models/sale_order_worker.py:0
 #, python-format
-msgid "You must specify a cancellation reason in the Other Information tab before cancelling this sale order"
-msgstr "Vous devez spécifier une raison d'annulation dans l'onglet Autres informations avant d'annuler ce devis."
+msgid ""
+"You must specify a cancellation reason in the Other Information tab before "
+"cancelling this sale order"
+msgstr ""
+"Vous devez spécifier une raison d'annulation dans l'onglet Autres informations "
+"avant de pouvoir annuler ce devis / commande"
 
 #. module: prisme_so_enhancement
 #: model:ir.model.fields,field_description:prisme_so_enhancement.field_sale_order__refused
 msgid "refused"
-msgstr "refusé"
-
+msgstr "Refusé"

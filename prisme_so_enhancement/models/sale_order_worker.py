@@ -20,13 +20,41 @@
 #    Modifications:
 #
 ##########################################################################
-from odoo import api, fields, models, _
+from odoo import api, fields, models, tools, _
 from odoo.exceptions import  ValidationError
+from datetime import datetime
 
 class sale_order_prisme(models.Model):
     _name = 'sale.order'
     _inherit = 'sale.order'
     
+    
+    refused = fields.Text('refused')
+
+    rounding_on_subtotal = fields.Float('Rounding on Subtotal', default=lambda *a: 0.05)
+                    
+    quotation_comment = fields.Char('Quotation Comment', translate=True, readonly=False, states={'draft': [('readonly', False)]})
+                                               
+    cancellation_reason = fields.Char("Cancellation Reason", readonly=True, states={'draft': [('readonly', False)],
+                            'sent': [('readonly', False)],
+                              'manual': [('readonly', False)],
+                              'progress': [('readonly', False)],
+                              'shipping_except': [('readonly', False)],
+                              'invoice_except': [('readonly', False)],
+                              'sale': [('readonly', False)]})
+                              
+    # Columns overriden to use the Prisme's methode (see _amount_all_prisme)
+    amount_untaxed = fields.Monetary(string='Untaxed Amount', store=True, readonly=True, compute='_amount_all_prisme', track_visibility='always')
+    amount_tax = fields.Monetary(string='Taxes', store=True, readonly=True, compute='_amount_all_prisme', track_visibility='always')
+    amount_total = fields.Monetary(string='Total', store=True, readonly=True, compute='_amount_all_prisme', track_visibility='always')
+                    
+    shipped = fields.Boolean("Shipped")
+    order_line = fields.One2many('sale.order.line', 'order_id', 'Order Lines', readonly=True, 
+                    states={'draft': [('readonly', False)], 'sent': [('readonly', False)], 'manual': [('readonly', False)]}, copy=True)
+    
+    # Redefine field confirmation_date to disable copy when duplicating sale.order
+    confirmation_date = fields.Datetime(string='Confirmation Date', readonly=True, index=True, help="Date on which the sale order is confirmed.", copy=False)
+
         # Method copied from sale/sale.py (sale_order._amount_line_tax the 22.09.2011
     # modified the 22.09.2011 by Damien Raemy to compute the subtotal by line 
     # using the discount type (percent, amount or null).
@@ -63,7 +91,8 @@ class sale_order_prisme(models.Model):
         """
         for order in self:
             amount_untaxed = amount_tax = 0.0
-            for line in order.order_line:              
+            amount_tax = 0.0
+            for line in order.order_line:
                 # Prisme Modification begin
                 # But: Manage the refused boolean in the lines
            
@@ -86,40 +115,23 @@ class sale_order_prisme(models.Model):
                     amount_tax += sum(t.get('amount', 0.0) for t in taxes.get('taxes', []))
                 else:
                     amount_tax += line.price_tax
+            
+            """# We need to update the order amount_tax and amount_untaxed separately in v13, otherwise a singleton error is thrown.
+            if amount_untaxed:
+                order.update({'amount_untaxed': order.pricelist_id.currency_id.round(amount_untaxed)})
+            if amount_tax:
+                order.update({'amount_tax': order.pricelist_id.currency_id.round(amount_tax)})
+            order.update({'amount_total': amount_untaxed + amount_tax})"""
+            
+            untaxed_rounded = self._prisme_round(amount_untaxed, order.rounding_on_subtotal)
+            taxes_rounded = self._prisme_round(amount_tax, order.rounding_on_subtotal)
+            
             order.update({
-                'amount_untaxed': order.pricelist_id.currency_id.round(amount_untaxed),
-                'amount_tax': order.pricelist_id.currency_id.round(amount_tax),
-                'amount_total': amount_untaxed + amount_tax,
+                'amount_untaxed': untaxed_rounded,
+                'amount_tax': taxes_rounded,
+                'amount_total': untaxed_rounded + taxes_rounded,
             })
     
-    
-    refused = fields.Text('refused')
-
-    rounding_on_subtotal = fields.Float('Rounding on Subtotal', default=lambda *a: 0.05)
-                    
-    quotation_comment = fields.Char('Quotation Comment', translate=True, readonly=False, states={'draft': [('readonly', False)]})
-                                               
-    cancellation_reason = fields.Char("Cancellation Reason", readonly=True, states={'draft': [('readonly', False)],
-                            'sent': [('readonly', False)],
-                              'manual': [('readonly', False)],
-                              'progress': [('readonly', False)],
-                              'shipping_except': [('readonly', False)],
-                              'invoice_except': [('readonly', False)],
-                              'sale': [('readonly', False)]})
-                              
-    # Columns overriden to use the Prisme's methode (see _amount_all_prisme)
-    amount_untaxed = fields.Monetary(string='Untaxed Amount', store=True, readonly=True, compute='_amount_all_prisme', track_visibility='always')
-    amount_tax = fields.Monetary(string='Taxes', store=True, readonly=True, compute='_amount_all_prisme', track_visibility='always')
-    amount_total = fields.Monetary(string='Total', store=True, readonly=True, compute='_amount_all_prisme', track_visibility='always')
-                    
-                    
-    shipped = fields.Boolean("Shipped")
-    order_line = fields.One2many('sale.order.line', 'order_id', 'Order Lines', readonly=True, 
-                    states={'draft': [('readonly', False)], 'sent': [('readonly', False)], 'manual': [('readonly', False)]}, copy=True)
-    
-    # Redefine field confirmation_date to disable copy when duplicating sale.order
-    confirmation_date = fields.Datetime(string='Confirmation Date', readonly=True, index=True, help="Date on which the sale order is confirmed.", copy=False)
-
     def action_cancel(self):
         result = super(sale_order_prisme, self).action_cancel()
         reason = self.cancellation_reason
@@ -128,3 +140,14 @@ class sale_order_prisme(models.Model):
                      'Other Information tab before cancelling this ' + 
                      'sale order'))
         return result
+    
+    def action_confirm(self):
+        self.confirmation_date = datetime.now()
+        return super(sale_order_prisme,self).action_confirm()
+    
+    # Rounds the given to the given precision coinage. Added this method here because the native currency.round() method doesn't seem to work and throws errors with our lines.
+    def _prisme_round(self, amount, precision):
+        value_rouned = amount
+        if precision and precision > 0 :
+            value_rouned = tools.float_round(amount, precision_rounding=precision)
+        return value_rouned

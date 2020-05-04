@@ -3,7 +3,7 @@
 ###########################################################################
 #
 #    Prisme Solutions Informatique SA
-#    Copyright (c) 2016 Prisme Solutions Informatique SA <http://prisme.ch>
+#    Copyright (c) 2020 Prisme Solutions Informatique SA <http://prisme.ch>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -17,8 +17,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 #    Project ID:    OERP-003-03 - T503
-#
-#    Modifications:
 #
 ##########################################################################
  -->
@@ -37,7 +35,7 @@
 				<xpath
 					expr="//div[@name='lead']"
 					position="after">
-					<field name="date_delivery" />
+						<field name="date_delivery" />
 				</xpath>
 
 				<xpath expr="/form/sheet/notebook/page/field/form/div"
@@ -53,22 +51,21 @@
 						<field name="state" />
 					</group>
 				</xpath>
-
+				
 				<xpath
-					expr="/form/sheet/notebook/page[1]/field/form/group/group/field[@name='purchase_price']"
+					expr="//field[@name='order_line']/form//div[@name='discount']"
 					position="after">
-					<field name="discount" />
-					<field name="discount_amount" />
+					<field name="discount_amount" groups="product.group_discount_per_so_line"/>
 				</xpath>
+				
 				<xpath
-					expr="/form/sheet/notebook/page[1]/field/tree/field[@name='purchase_price']"
+					expr="/form/sheet/notebook/page[1]/field/tree/field[@name='discount']"
 					position="after">
-					<field name="discount" />
-					<field name="discount_amount" />
+					<field name="discount_amount" groups="product.group_discount_per_so_line" optional="show" string="Disc. (amount)"/>
 				</xpath>
 
 
-				<xpath expr="/form/sheet/notebook/page[last()]/group[last()]"
+				<xpath expr="/form/sheet/notebook/page[@name='other_information']/group[last()]"
 					position="after">
 					<group>
 
