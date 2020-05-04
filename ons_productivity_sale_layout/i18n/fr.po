@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0+e-20191114\n"
+"Project-Id-Version: Odoo Server 13.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-01-20 13:52+0000\n"
-"PO-Revision-Date: 2020-01-20 13:52+0000\n"
+"POT-Creation-Date: 2020-05-04 14:07+0000\n"
+"PO-Revision-Date: 2020-05-04 14:07+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -28,6 +28,14 @@ msgstr "Catégorie"
 
 #. module: ons_productivity_sale_layout
 #: code:addons/ons_productivity_sale_layout/models/layout.py:0
+#: model:ir.model.fields.selection,name:ons_productivity_sale_layout.selection__account_move_line__layout_type__break
+#: model:ir.model.fields.selection,name:ons_productivity_sale_layout.selection__sale_order_line__layout_type__break
+#, python-format
+msgid "Page Break"
+msgstr "Saut de page"
+
+#. module: ons_productivity_sale_layout
+#: code:addons/ons_productivity_sale_layout/models/layout.py:0
 #: model:ir.model.fields.selection,name:ons_productivity_sale_layout.selection__account_move_line__layout_type__article
 #: model:ir.model.fields.selection,name:ons_productivity_sale_layout.selection__sale_order_line__layout_type__article
 #, python-format
@@ -43,7 +51,15 @@ msgstr "Sous-total relatif"
 #. module: ons_productivity_sale_layout
 #: model:ir.model,name:ons_productivity_sale_layout.model_sale_order_line
 msgid "Sales Order Line"
-msgstr "Ligne de Commande"
+msgstr "Ligne de bons de commande"
+
+#. module: ons_productivity_sale_layout
+#: code:addons/ons_productivity_sale_layout/models/layout.py:0
+#: model:ir.model.fields.selection,name:ons_productivity_sale_layout.selection__account_move_line__layout_type__line
+#: model:ir.model.fields.selection,name:ons_productivity_sale_layout.selection__sale_order_line__layout_type__line
+#, python-format
+msgid "Separator Line"
+msgstr "Ligne de séparation"
 
 #. module: ons_productivity_sale_layout
 #: code:addons/ons_productivity_sale_layout/models/layout.py:0
