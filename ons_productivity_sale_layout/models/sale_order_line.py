@@ -26,10 +26,6 @@ class sale_order_line(models.Model):
     
     layout_type = fields.Selection(layout.LAYOUTS_LIST, 'Layout type', required=True, index=True, default=lambda *a: 'article')
     rel_subtotal = fields.Float(compute='_sub_total', string='Rel. Sub-total', digits='Account')
-    name = fields.Text(string='Description', required=True, default='Sale Order Line')
-    product_id = fields.Many2one('product.product', string='Product', domain=[('sale_ok', '=', True)], change_default=True, ondelete='restrict', required=False)
-    product_uom_qty = fields.Float(string='Quantity', digits=dp.get_precision('Product Unit of Measure'), required=False, default=1.0)
-    product_uom = fields.Many2one('product.uom', string='Unit of Measure', required=False)
 
     # ------------------------- Fields management
     def _is_number(self,s):
@@ -76,6 +72,7 @@ class sale_order_line(models.Model):
         for record in self:
             if not(record.layout_type == 'article'):
                 
+                record.display_type = 'line_note'
                 record.quantity = 1
                 record.discount = 0.0
                 record.move_line_tax_ids = False
@@ -90,7 +87,7 @@ class sale_order_line(models.Model):
 
         vals = {
             'name': '',
-            
+            'display_type': False,
             'uos_id': False,
             'account_id': False,
             'price_unit': 0.0,
