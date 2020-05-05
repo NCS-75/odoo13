@@ -58,23 +58,23 @@ class account_move_line(models.Model):
                             sub_total += sub_invl.price_subtotal
             invl.rel_subtotal = sub_total
  
-#     # ------------------------- Instance management
-#     @api.model_create_multi
-#     def create(self, vals_list):    
-#         for vals in vals_list:
-#             layout_type = vals.get('layout_type')
-#             if not vals.get('name'):
-#                 vals['name'] = layout.layout_val_2_text(layout_type)                
-#         return super(account_move_line, self).create(vals_list)
-#  
-#     # ------------------------- Interface related
-#     @api.onchange('layout_type')
-#     def _layout_type_change(self):
-#         for record in self:
-#             if not(record.layout_type == 'article'):
-#                 record.product_id = False
-#                 record.quantity = 1
-#                 record.discount = 0.0
-#                 record.move_line_tax_ids = False
-#                 record.name = layout.layout_val_2_text(record.layout_type)
-#              
+    # ------------------------- Instance management
+    @api.model_create_multi
+    def create(self, vals_list):    
+        for vals in vals_list:
+            layout_type = vals.get('layout_type')
+            if not vals.get('name'):
+                vals['name'] = layout.layout_val_2_text(layout_type)                
+        return super(account_move_line, self).create(vals_list)
+  
+    # ------------------------- Interface related
+    @api.onchange('layout_type')
+    def _layout_type_change(self):
+        for record in self:
+            if not(record.layout_type == 'article'):
+                record.product_id = False
+                record.quantity = 1
+                record.discount = 0.0
+                record.move_line_tax_ids = False
+                record.name = layout.layout_val_2_text(record.layout_type)
+              
