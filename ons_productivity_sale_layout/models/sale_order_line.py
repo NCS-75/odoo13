@@ -26,6 +26,7 @@ class sale_order_line(models.Model):
     
     layout_type = fields.Selection(layout.LAYOUTS_LIST, 'Layout type', required=True, index=True, default=lambda *a: 'article')
     rel_subtotal = fields.Float(compute='_sub_total', string='Rel. Sub-total', digits='Account')
+    
 
     # ------------------------- Fields management
     def _is_number(self,s):
@@ -72,7 +73,6 @@ class sale_order_line(models.Model):
         for record in self:
             if not(record.layout_type == 'article'):
                 
-                record.display_type = 'line_note'
                 record.quantity = 1
                 record.discount = 0.0
                 record.move_line_tax_ids = False
@@ -87,7 +87,6 @@ class sale_order_line(models.Model):
 
         vals = {
             'name': '',
-            'display_type': False,
             'uos_id': False,
             'account_id': False,
             'price_unit': 0.0,
