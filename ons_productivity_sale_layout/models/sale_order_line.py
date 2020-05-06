@@ -27,6 +27,13 @@ class sale_order_line(models.Model):
     layout_type = fields.Selection(layout.LAYOUTS_LIST, 'Layout type', required=True, index=True, default=lambda *a: 'article')
     rel_subtotal = fields.Float(compute='_sub_total', string='Rel. Sub-total', digits='Account')
     
+    _sql_constraints = [
+        ('accountable_required_fields',
+            "CHECK(display_type IS NOT NULL OR layout_type IS NOT 'article' OR (product_id IS NOT NULL AND product_uom IS NOT NULL))",
+            "Missing required fields on accountable sale order line."),
+    ]
+
+
 
     # ------------------------- Fields management
     def _is_number(self,s):
