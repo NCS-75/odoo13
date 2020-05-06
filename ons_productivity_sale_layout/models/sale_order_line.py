@@ -29,7 +29,7 @@ class sale_order_line(models.Model):
     
     _sql_constraints = [
         ('accountable_required_fields',
-            "CHECK(display_type IS NOT NULL OR layout_type IS NOT 'article' OR (product_id IS NOT NULL AND product_uom IS NOT NULL))",
+            "CHECK(display_type IS NOT NULL OR (layout_type <> 'article' OR (product_id IS NOT NULL AND product_uom IS NOT NULL)))",
             "Missing required fields on accountable sale order line."),
     ]
 
