@@ -56,7 +56,7 @@ class FleetVehicleLogContract(models.Model):
             # Rounding the contract's duration up by one week.
             exp_date_rounded = exp_date + timedelta(days=7)
             delta_date = relativedelta(exp_date_rounded, start_date)
-            duration = delta_date.years + delta_date.months / 12 + delta_date.days / 365.25
+            duration = delta_date.years + delta_date.months / 12
             
             record.contract_duration = duration
 
