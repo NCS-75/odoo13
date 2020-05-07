@@ -28,7 +28,7 @@ from odoo.exceptions import ValidationError
 class FleetVehicleLogContract(models.Model):
     _inherit = 'fleet.vehicle.log.contract'
    
-    contract_duration = fields.Integer(compute='_onchange_contract_duration', string='Contract duration', default=0, readonly=True, digits=(12,2))
+    contract_duration = fields.Float(compute='_onchange_contract_duration', string='Contract duration', default=0, readonly=True, digits=(12,2))
     contract_duration_unit = fields.Text(readonly=True, compute='_set_contract_duration_unit')
     odometer_last_date = fields.Date('Odometer Last Date', compute='_get_last_odometer')
     odometer_last_value = fields.Integer('Odometer Value', compute='_get_last_odometer')
