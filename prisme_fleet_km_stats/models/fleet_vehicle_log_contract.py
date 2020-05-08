@@ -175,7 +175,14 @@ class FleetVehicleLogContract(models.Model):
             if not record.km_plan_yearly:
                 record.km_cur_perf_year_percent = 0
             else:
-                record.km_cur_perf_year_percent = 100 * record.km_cur_perf_year / record.km_plan_yearly + 0.5
+                if record.contract_duration % 1 == 0:
+                    record.km_cur_perf_year_percent = 100 * record.km_cur_perf_year / record.km_plan_yearly + 0.5
+                else:
+                    today = date.today()
+                    if record.start_date.month != 1 & today.year == record.start_date.year:
+                        record.km_cur_perf_year_percent = 100 * record.km_cur_perf_year / (record.km_plan_yearly/12*record.start_date.month) + 0.5
+                    elif record.expiration_date.month != 1 & today.year == record.expiration_date.year:
+                        record.km_cur_perf_year_percent = 100 * record.km_cur_perf_year / (record.km_plan_yearly/12*record.expiration_date.month) + 0.5
     
     # Sets the kilometers performed this month for the actual contract
     @api.depends('vehicle_id')
