@@ -169,18 +169,18 @@ class FleetVehicleLogContract(models.Model):
                 record.km_cur_perf_year = 0
             
     # Sets the kilometers performed this year for the actual contract as a percentage of the planned kilometers
-    @api.depends('km_cur_perf_year', 'km_plan_yearly')
+    @api.depends('km_cur_perf_year', 'km_plan_yearly', 'km_plan_monthly')
     def _compute_km_cur_perf_year_percent(self):
         for record in self:
             if not record.km_plan_yearly:
                 record.km_cur_perf_year_percent = 0
-            else:
-                if record.contract_duration % 1 != 0:                    
-                    today = date.today()
-                    if record.start_date.month != 1 & today.year == record.start_date.year:
-                        record.km_cur_perf_year_percent = 100 * record.km_cur_perf_year / (record.km_plan_yearly/12*record.start_date.month) + 0.5
-                    elif record.expiration_date.month != 1 & today.year == record.expiration_date.year:
-                        record.km_cur_perf_year_percent = 100 * record.km_cur_perf_year / (record.km_plan_yearly/12*record.expiration_date.month) + 0.5
+            else:                 
+                today = date.today()
+
+                if record.start_date.month != 1 and today.year == record.start_date.year:
+                    record.km_cur_perf_year_percent = 100 * record.km_cur_perf_year / (record.km_plan_yearly/12*record.start_date.month) + 0.5
+                elif record.expiration_date.month != 12 and today.year == record.expiration_date.year:
+                    record.km_cur_perf_year_percent = 100 * record.km_cur_perf_year / (record.km_plan_yearly/12*record.expiration_date.month) + 0.5
                 else:
                     record.km_cur_perf_year_percent = 100 * record.km_cur_perf_year / record.km_plan_yearly + 0.5
                     
