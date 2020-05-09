@@ -21,7 +21,8 @@
     'website': 'https://www.prisme.ch',
     'depends': [
       'project',
-      'account'
+      'account',
+	  'account_accountant'
     ],
     'data': [
         'views/views.xml'
