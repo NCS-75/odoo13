@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+#######################################
+# Prisme Solutions Informatique SA    #
+#######################################
+# Author: Hugo Buchs                  #
+# Email:  hugo.buchs@prisme.ch        #
+# Web:    www.prisme.ch               #
+# Date:   09.05.2020                  #
+#######################################
+ -->
+<odoo>
+	<record id="prisme_view_task_search_form" model="ir.ui.view">
+		<field name="name">prisme.project.task.search.form</field>
+		<field name="inherit_id" ref="project.view_task_search_form" />
+		<field name="model">project.task</field>
+		<field name="arch" type="xml">
+			<field name="stage_id" position="after">
+				<field name="ammount" />
+				<field name="account_id" />
+				<field name="balance_previous_command"/>
+			</field>
+		</field>
+	</record>
+
+	<record id="prisme_view_task_form2" model="ir.ui.view">
+		<field name="name">prisme.project.task.form</field>
+		<field name="inherit_id" ref="project.view_task_form2" />
+		<field name="model">project.task</field>
+		<field name="arch" type="xml">
+			<field name="user_id" position="after">
+				<field name="ammount" />
+				<field name="balance_previous_command"/>
+			</field>
+			<field name="tag_ids" position="after">
+				<field name="account_id" />
+			</field>
+		</field>
+	</record>
+
+
+	<record id="prisme_view_task_kanban" model="ir.ui.view">
+		<field name="name">prisme.project.task.kanban</field>
+		<field name="inherit_id" ref="project.view_task_kanban" />
+		<field name="model">project.task</field>
+		<field name="arch" type="xml">
+			<field name="tag_ids" position="after">
+				<field name="ammount" />
+				<field name="account_id" />
+				<field name="balance_previous_command"/>
+			</field>
+		</field>
+	</record>
+
+	<record id="prisme_view_task_tree2" model="ir.ui.view">
+		<field name="name">prisme.project.task.tree</field>
+		<field name="inherit_id" ref="project.view_task_tree2" />
+		<field name="model">project.task</field>
+		<field name="arch" type="xml">
+			<field name="stage_id" position="after">
+				<field name="ammount" />
+				<field name="account_id" />
+				<field name="balance_previous_command"/>
+			</field>
+		</field>
+	</record>
+	
+	<record id="prisme_invoice_form" model="ir.ui.view">
+		<field name="name">prisme.account.invoice.form</field>
+		<field name="inherit_id" ref="account.view_move_form"></field>
+		<field name="model">account.move</field>
+		<field name="arch" type="xml">
+			<xpath expr="//page[@name='other_info']/group//field[@name='invoice_user_id']" position="before">
+				<field name="project_id" />
+			</xpath>
+		</field>
+	</record>
+</odoo>
