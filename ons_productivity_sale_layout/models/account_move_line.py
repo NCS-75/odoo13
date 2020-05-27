@@ -54,7 +54,7 @@ class account_move_line(models.Model):
                     if invl.sequence > sub_invl.sequence or (invl.sequence == sub_invl.sequence and id > sub_invl.id ):
                         if (sub_invl.layout_type == 'subtotal') or (sub_invl.sequence == invl.sequence and sub_invl.id > id):                             
                             break
-                        if sub_invl.layout_type == 'article' and not sub_invl.account_internal_type == 'receivable' and not sub_invl.tax_group_id:
+                        if sub_invl.layout_type == 'article' and not sub_invl.account_internal_type == 'receivable' and not sub_invl.tax_group_id and not sub_invl.move_id.account_internal_type == 'payable'.:
                             sub_total += sub_invl.price_subtotal
             invl.rel_subtotal = sub_total
  
@@ -77,4 +77,3 @@ class account_move_line(models.Model):
                 record.discount = 0.0
                 record.move_line_tax_ids = False
                 record.name = layout.layout_val_2_text(record.layout_type)
-              
