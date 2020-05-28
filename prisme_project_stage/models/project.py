@@ -18,9 +18,18 @@
 #
 ##########################################################################
 
-from odoo import models, fields
+from odoo import models, fields, api
 
 class PurchaseOrderLine(models.Model):
     _inherit = 'project.project'
+    
+    @api.model
+    def stage_groups(self, present_ids, domain, **kwargs):
+        stages = self.env['prisme.project.stage'].search([]).name_get()
+        return stages, None
+
+    _group_by_full = {
+        'stage_id': stage_groups,
+    }
     
     stage_id = fields.Many2one('prisme.project.stage', string="Stage")
