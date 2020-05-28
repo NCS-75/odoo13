@@ -23,4 +23,4 @@ from odoo import models, fields
 class PurchaseOrderLine(models.Model):
     _inherit = 'project.project'
     
-    stage_id = fields.Many2one('project.stage', string="Stage")
+    stage_id = fields.Many2one('prisme.project.stage', string="Stage")

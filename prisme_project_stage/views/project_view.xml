@@ -29,8 +29,10 @@
             <field name="inherit_id" ref="project.view_project_kanban"/>
             <field name="arch" type="xml">
                	<xpath expr="//kanban" position="attributes">
-    <attribute name="default_group_by">stage_id</attribute>
-</xpath>
+				    <attribute name="default_group_by">stage_id</attribute>
+				    <attribute name="group_create">true</attribute>
+				    
+				</xpath>
             </field>
         </record>
 </odoo>

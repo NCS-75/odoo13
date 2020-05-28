@@ -35,6 +35,7 @@
     ],
     'data': [
         'views/project_view.xml',
+        'security/ir.model.access.csv',
     ],
 
     'installable': True,
