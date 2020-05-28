@@ -18,18 +18,17 @@
 #
 ##########################################################################
 
-from odoo import models, fields, api
+from odoo import models, fields, api, SUPERUSER_ID
 
 class PurchaseOrderLine(models.Model):
     _inherit = 'project.project'
     
     @api.model
-    def stage_groups(self, present_ids, domain, **kwargs):
-        stages = self.env['prisme.project.stage'].search([]).name_get()
-        return stages, None
+    def stage_groups(self, stages, domain, order):
 
-    _group_by_full = {
-        'stage_id': stage_groups,
-    }
+        stage_ids = stages._search(domain, order=order, access_rights_uid=SUPERUSER_ID)
+        return stages.browse(stage_ids)
+
+
     
-    stage_id = fields.Many2one('prisme.project.stage', string="Stage")
+    stage_id = fields.Many2one('prisme.project.stage', string="Stage", group_expand='stage_groups')
