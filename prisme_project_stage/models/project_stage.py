@@ -23,7 +23,10 @@ from odoo import models, fields
 class project_stage(models.Model):
     _name = 'prisme.project.stage'
     _description = "Project Stage"
+    _order = 'sequence, id'
+    
 
     
     name = fields.Char(string="Project Stage", required=True)
     project_ids = fields.One2many('project.project', 'stage_id', string='Projects')
+    sequence = fields.Integer(default=1)
