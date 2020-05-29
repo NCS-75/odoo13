@@ -6,7 +6,8 @@
     "summary": "client on project kanban view",
     "website": "https://www.prisme.ch",
     "depends": [
-        "project"
+        "project",
+        "invoice"
     ],
     "demo": [],
     "data": [
