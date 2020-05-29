@@ -10,7 +10,7 @@
     ],
     "demo": [],
     "data": [
-		"view/kanban_project_client.xml"
+		'view/kanban_project_client.xml',
 	],
     "test": [],
     "js": [],
