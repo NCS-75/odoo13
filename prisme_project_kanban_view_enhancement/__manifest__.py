@@ -7,7 +7,7 @@
     "website": "https://www.prisme.ch",
     "depends": [
         "project",
-        "invoice"
+        "account"
     ],
     "demo": [],
     "data": [
