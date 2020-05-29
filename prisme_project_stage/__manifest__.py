@@ -15,9 +15,7 @@
 #    You should have received a copy of the GNU Affero General Public Lic
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#    Project ID:    OERP-004-05
-#
-#    Modifications:
+#    Project ID:    OERP-005-03 - T730
 #
 #
 ##########################################################################
@@ -40,4 +38,6 @@
 
     'installable': True,
     'application': True,
+    'images': ['images/icon.png','images/banner.png'],
+    'license': 'LGPL-3',
 }

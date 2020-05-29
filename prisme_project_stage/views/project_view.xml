@@ -16,8 +16,7 @@
 #    You should have received a copy of the GNU Affero General Public Lic
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#    Project ID:    OERP-004-05
-#    Phabricator :  T594
+#    Project ID:    OERP-005-03 - T730
 #
 ##########################################################################
 -->
@@ -32,6 +31,17 @@
 				    <attribute name="default_group_by">stage_id</attribute>
 				    <attribute name="group_create">true</attribute>
 				    
+				</xpath>
+            </field>
+        </record>
+        
+        <record model="ir.ui.view" id="view_project_form_stage">
+            <field name="name">view.project.frorm.stage</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.edit_project"/>
+            <field name="arch" type="xml">
+               	<xpath expr="//header" position="inside">
+				    <field name="stage_id" widget="statusbar" options="{'clickable': '1'}"/>				    
 				</xpath>
             </field>
         </record>
