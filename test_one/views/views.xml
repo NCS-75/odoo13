@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+#######################################
+# Prisme Solutions Informatique SA    #
+#######################################
+# Author: Hugo Buchs                  #
+# Email:  hugo.buchs@prisme.ch        #
+# Web:    www.prisme.ch               #
+# Date:   09.05.2020                  #
+#######################################
+ -->
+<odoo>
+	<record id="prisme_invoice_form" model="ir.ui.view">
+		<field name="name">prisme.account.invoice.form</field>
+		<field name="inherit_id" ref="account.view_move_form"></field>
+		<field name="model">account.move</field>
+		<field name="arch" type="xml">
+			<xpath expr="//page[@name='other_info']/group//field[@name='invoice_user_id']" position="before">
+				<field name="project_id" />
+			</xpath>
+		</field>
+	</record>
+</odoo>
