@@ -11,7 +11,8 @@
     ],
     "demo": [],
     "data": [
-		'view/kanban_project_client.xml',
+        'data/ir_sequence_data.xml',
+		'view/project_view.xml',
 	],
     "test": [],
     "js": [],

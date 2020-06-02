@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+###########################################################################
+#
+#    Prisme Solutions Informatique SA
+#    Copyright (c) 2016 Prisme Solutions Informatique SA <http://prisme.ch>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#    You should have received a copy of the GNU Affero General Public Lic
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+#    Project ID:    
+#
+##########################################################################
+-->
+<odoo>
+	<data>
+		<record model="ir.ui.view" id="view_project_kanban_client_name">
+			<field name="name">project.project.kanban</field>
+			<field name="model">project.project</field>
+			<field name="inherit_id" ref="project.view_project_kanban" />
+			<field name="arch" type="xml">
+				<xpath expr="//kanban/*[1]" position="after">
+					<field name="prisme_sequence" />
+				</xpath>
+				<xpath expr="//div[@class='o_primary']" position="after">
+					<div t-if="record.prisme_sequence.value">
+						<div t-if="record.prisme_sequence.value != 0">
+							<span>
+								Project Code :
+								<t t-esc="record.prisme_sequence.value" />
+							</span>
+						</div>
+					</div>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>
