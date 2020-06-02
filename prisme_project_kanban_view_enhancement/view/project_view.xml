@@ -30,7 +30,7 @@
 				<xpath expr="//kanban/*[1]" position="after">
 					<field name="prisme_sequence" />
 				</xpath>
-				<xpath expr="//div[@class='o_primary']" position="after">
+				<xpath expr="//div[hasclass('o_primary')]" position="after">
 					<div t-if="record.prisme_sequence.value">
 						<div t-if="record.prisme_sequence.value != 0">
 							<span>
