@@ -23,7 +23,7 @@ from odoo import models, api, fields, _
 class Project(models.Model):
     _inherit = 'project.project'
     
-    prisme_sequence = fields.Integer('Sequence')
+    prisme_sequence = fields.Integer('Prisme Project Sequence')
     
     
     @api.model

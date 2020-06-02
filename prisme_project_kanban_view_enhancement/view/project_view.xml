@@ -34,7 +34,7 @@
 					<div t-if="record.prisme_sequence.value">
 						<div t-if="record.prisme_sequence.value != 0">
 							<span>
-								Project Code :
+								<b>Project Code :</b>
 								<t t-esc="record.prisme_sequence.value" />
 							</span>
 						</div>
