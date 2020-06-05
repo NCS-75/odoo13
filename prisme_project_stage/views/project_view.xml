@@ -36,7 +36,7 @@
         </record>
         
         <record model="ir.ui.view" id="view_project_form_stage">
-            <field name="name">view.project.frorm.stage</field>
+            <field name="name">view.project.form.stage</field>
             <field name="model">project.project</field>
             <field name="inherit_id" ref="project.edit_project"/>
             <field name="arch" type="xml">

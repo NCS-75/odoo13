@@ -20,13 +20,13 @@
 
 from odoo import models, fields, api, SUPERUSER_ID
 
-class PurchaseOrderLine(models.Model):
+class Project(models.Model):
     _inherit = 'project.project'
     
     @api.model
     def stage_groups(self, stages, domain, order):
 
-        stage_ids = stages._search(domain, order=order, access_rights_uid=SUPERUSER_ID)
+        stage_ids = stages._search([], order=order, access_rights_uid=SUPERUSER_ID)
         return stages.browse(stage_ids)
 
 

@@ -20,13 +20,16 @@
 
 from odoo import models, fields
 
-class project_stage(models.Model):
+class ProjectStage(models.Model):
     _name = 'prisme.project.stage'
     _description = "Project Stage"
     _order = 'sequence, id'
+    _fold_name = 'fold'
     
 
     
     name = fields.Char(string="Project Stage", required=True)
     project_ids = fields.One2many('project.project', 'stage_id', string='Projects')
     sequence = fields.Integer(default=1)
+    fold = fields.Boolean(string='Folded in Kanban',
+        help='This stage is folded in the kanban view when there are no records in that stage to display.')
