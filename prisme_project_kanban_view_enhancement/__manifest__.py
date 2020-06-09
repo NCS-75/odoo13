@@ -7,7 +7,7 @@
     "website": "https://www.prisme.ch",
     "depends": [
         "project",
-        "account"
+        "account_accountant"
     ],
     "demo": [],
     "data": [

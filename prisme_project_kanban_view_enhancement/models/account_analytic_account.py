@@ -18,16 +18,9 @@
 #
 ##########################################################################
 
-from odoo import models, api, fields, _
+from odoo import models, fields
 
-class Project(models.Model):
-    _inherit = 'project.project'
-    prisme_sequence = fields.Char('Prisme Analytic Account Sequence', related='analytic_account_id.prisme_sequence')
-
-    @api.model
-    def create(self, vals):
-        vals_account = {'name': vals.get("name"),
-                        'prisme_sequence': (self.env['ir.sequence'].next_by_code('prisme.analytic.account.sequence') or 0)}
-        analytic_account= self.env['account.analytic.account']
-        vals['analytic_account_id'] = analytic_account.create(vals_account).id
-        return super(Project, self).create(vals)
+class AccountAnalyticAccount(models.Model):
+    _inherit = 'account.analytic.account'
+    
+    prisme_sequence = fields.Char('Prisme Analytic Account Sequence')
