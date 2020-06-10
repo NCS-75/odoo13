@@ -15,13 +15,11 @@
 #    You should have received a copy of the GNU Affero General Public Lic
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#    Project ID:    OERP-009-01
+#    Project ID:    OERP-005-03 - T730
 #
-#    Modifications:
 #
 ##########################################################################
-
 from . import postit
-from . import postit_tag
 from . import postit_day
-
+from . import postit_tag
+from . import postit_team

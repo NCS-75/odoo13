@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<odoo>
 <!-- 
 ###########################################################################
 #
@@ -17,12 +16,13 @@
 #    You should have received a copy of the GNU Affero General Public Lic
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#    Project ID:    OERP-009-01
+#    Project ID:    OERP-009-01 - T527
 #
 #    Modifications:
 #
 ##########################################################################
  -->
+<odoo>
 	<data>
 		<!-- prisme postit Form View -->
 		<record model="ir.ui.view" id="view_prisme_postit_form">
@@ -47,6 +47,7 @@
 						<field name="state" widget="statusbar" type="object" />
 					</header>
 					<group>
+						<field name="team"/>
 						<field name="name" />
 						<field name="tags" widget="many2many_tags"
 							placeholder="Tags..." />
@@ -87,6 +88,7 @@
 			<field name="type">tree</field>
 			<field name="arch" type="xml">
 				<tree string="Postit">
+					<field name="team"/>
 					<field name="names_users" />
 					<field name="priority" />
 					<field name="state" />
@@ -105,6 +107,7 @@
 			<field name="model">prisme.postit</field>
 			<field name="arch" type="xml">
 				<search string="Postit">
+					<field name="team"/>
 					<field name="assigned_to" />
 					<field name="assigned_by" />
 					<field name="name" />
@@ -130,6 +133,7 @@
 			<field name="arch" type="xml">
 				<kanban default_group_by="state"
 					class="o_kanban_small_column" default_order="state">
+					<field name="team"/>
 					<field name="name" />
 					<field name="state" />
 					<templates>
@@ -177,6 +181,7 @@
 			<field name="arch" type="xml">
 				<calendar string="Postit Calendar" date_start="date_start"
 					date_stop="recall_date" color="state">
+					<field name="team"/>
 					<field name="name" />
 					<field name="names_users" />
 				</calendar>
@@ -238,6 +243,39 @@
 			<field name="search_view_id"
 				ref="view_prisme_postit_tag_search" />
 		</record>
+		<!-- prisme postit Team Form View -->
+    <record model="ir.ui.view" id="view_prisme_postit_team_form">
+      <field name="name">prisme.postit.team.form</field>
+      <field name="model">prisme.postit.team</field>
+      <field name="type">form</field>
+      <field name="arch" type="xml">
+        <form string="Postit Team">
+          <group>
+            <field name="name"/>
+          </group>
+        </form>
+      </field>
+    </record>
+
+        <!-- prisme postit Team Tree View -->
+    <record model="ir.ui.view" id="view_prisme_postit_team_tree">
+      <field name="name">prisme.postit.team.tree</field>
+      <field name="model">prisme.postit.team</field>
+      <field name="field_parent"></field>
+      <field name="type">tree</field>
+      <field name="arch" type="xml">
+        <tree string="Postit Team">
+            <field name="name"/>
+        </tree>
+      </field>
+    </record>
+	
+        <!-- Prisme postit Team -->
+    <record model="ir.actions.act_window" id="action_prisme_postit_team">
+        <field name="name">Postit Team</field>
+        <field name="res_model">prisme.postit.team</field>
+        <field name="view_mode">tree,form</field>
+    </record>
 
 		<menuitem name="Postit" id="menu_prisme_postit_base"
 			sequence="150" />
@@ -247,6 +285,7 @@
 		<menuitem name="PostIt Tag" id="menu_prisme_postit_tag"
 			parent="menu_prisme_postit_base" sequence="23"
 			action="action_prisme_postit_tag" />
+			    <menuitem name="PostIt Team" id="menu_prisme_postit_team" parent="menu_prisme_postit_base" sequence="24" action="action_prisme_postit_team"/>
 
 
 		<record model="prisme.postit.day" id="0">

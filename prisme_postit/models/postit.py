@@ -15,7 +15,7 @@
 #    You should have received a copy of the GNU Affero General Public Lic
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#    Project ID:    OERP-009-01
+#    Project ID:    OERP-009-01 - T527
 #
 #    Modifications:
 #
@@ -28,7 +28,9 @@ class prisme_postit(models.Model):
     _name = 'prisme.postit'
     _description = 'Prisme postit'
     _inherit = ['mail.thread']
+    _order = 'assigned_to, priority'
     
+    team = fields.Many2one('prisme.postit.team', string="Team") 
     name= fields.Char(string="Name", required=True)
     names_users = fields.Char(string="Users Assigned")
     description = fields.Text()
@@ -84,10 +86,10 @@ class prisme_postit(models.Model):
     def _check_postit_dates(self):
         #postits_ids = self.search([("state", "!=", "closed")])
         
-        postits = self.search([('state', '!=', 'closed')])
+        postits = self.search([('state', '!=', 'closed'),('state', '!=', 'active')])
         for p in postits:
 
-            if p.state != "closed":
+            if p.state != "closed" and p.state != "active":
                 if p.recall_date:
                     recall_date = datetime.strptime(str(p.recall_date), "%Y-%m-%d")
                     
@@ -146,6 +148,8 @@ class prisme_postit(models.Model):
             
         body = body + _("Task")+": "+ self.name +"\n"
 
+        if self.team:
+            body = body + _("Team")+": " + self.team + "\n"
         if self.assigned_by:
             body = body + _("Assigned by")+": " + self.assigned_by.name + "\n"
         if self.partner_id:
