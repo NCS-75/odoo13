@@ -34,7 +34,7 @@ class Project(models.Model):
         if not 'analytic_account_id' in vals:
             vals_account = {'name': vals.get("name"),
                             'prisme_sequence': (self.env['ir.sequence'].next_by_code('prisme.analytic.account.sequence') or 0),
-                            'customer_id': vals['customer_id']}
+                            'customer_id': vals.get('customer_id')}
             analytic_account= self.env['account.analytic.account']
             vals['analytic_account_id'] = analytic_account.create(vals_account).id
         return super(Project, self).create(vals)
