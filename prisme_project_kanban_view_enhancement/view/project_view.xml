@@ -16,7 +16,7 @@
 #    You should have received a copy of the GNU Affero General Public Lic
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#    Project ID:    
+#    Project ID:    OERP-005-03 - T730
 #
 ##########################################################################
 -->
@@ -43,4 +43,17 @@
 			</field>
 		</record>
 	</data>
+	
+	        <record id="project_project_view_form_simplified_footer" model="ir.ui.view">
+            <field name="name">project.project.view.form.simplified</field>
+            <field name="model">project.project</field>
+            <field name="inherit_id" ref="project.project_project_view_form_simplified"/>
+            <field name="mode">primary</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name=name]" position="after">
+                   <field name="partner_id"/>
+                </xpath>
+            </field>
+        </record>
+	
 </odoo>
