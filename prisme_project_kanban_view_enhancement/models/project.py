@@ -27,14 +27,14 @@ class Project(models.Model):
 
     @api.onchange('customer_id')
     def _check_change(self):
-        self.analytic_account_id.customer_id=self.customer_id
+        self.analytic_account_id.partner_id = self.partner_id
 
     @api.model
     def create(self, vals):
         if not 'analytic_account_id' in vals:
             vals_account = {'name': vals.get("name"),
                             'prisme_sequence': (self.env['ir.sequence'].next_by_code('prisme.analytic.account.sequence') or 0),
-                            'customer_id': vals.get('customer_id')}
+                            'partner_id': vals.get('partner_id')}
             analytic_account= self.env['account.analytic.account']
             vals['analytic_account_id'] = analytic_account.create(vals_account).id
         return super(Project, self).create(vals)
