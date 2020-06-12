@@ -31,7 +31,7 @@ class Project(models.Model):
 
     @api.model
     def create(self, vals):
-        if not vals['analytic_account_id']:
+        if not 'analytic_account_id' in vals:
             vals_account = {'name': vals.get("name"),
                             'prisme_sequence': (self.env['ir.sequence'].next_by_code('prisme.analytic.account.sequence') or 0),
                             'customer_id': vals['customer_id']}
