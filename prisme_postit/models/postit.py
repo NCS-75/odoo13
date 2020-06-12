@@ -149,7 +149,7 @@ class prisme_postit(models.Model):
         body = body + _("Task")+": "+ self.name +"\n"
 
         if self.team:
-            body = body + _("Team")+": " + self.team + "\n"
+            body = body + _("Team")+": " + self.team.name + "\n"
         if self.assigned_by:
             body = body + _("Assigned by")+": " + self.assigned_by.name + "\n"
         if self.partner_id:

@@ -346,7 +346,7 @@ msgstr "Postit Étiquettes"
 #: model_terms:ir.ui.view,arch_db:prisme_postit.view_prisme_postit_team_form
 #: model_terms:ir.ui.view,arch_db:prisme_postit.view_prisme_postit_team_tree
 msgid "Postit Team"
-msgstr "Posti Equipe"
+msgstr "Postit Equipe"
 
 #. module: prisme_postit
 #: model_terms:ir.ui.view,arch_db:prisme_postit.view_prisme_postit_tag_form
