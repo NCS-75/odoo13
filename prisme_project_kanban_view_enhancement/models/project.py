@@ -25,7 +25,7 @@ class Project(models.Model):
     prisme_sequence = fields.Char('Prisme Analytic Account Sequence', related='analytic_account_id.prisme_sequence')
 
 
-    @api.onchange('customer_id')
+    @api.onchange('partner_id')
     def _check_change(self):
         self.analytic_account_id.partner_id = self.partner_id
 
