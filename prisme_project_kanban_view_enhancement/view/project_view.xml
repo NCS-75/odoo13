@@ -44,13 +44,12 @@
 		</record>
 	</data>
 	
-	        <record id="project_project_view_form_simplified_footer" model="ir.ui.view">
-            <field name="name">project.project.view.form.simplified</field>
+	        <record id="view_project_wizard" model="ir.ui.view">
+            <field name="name">view.project.wizard</field>
             <field name="model">project.project</field>
             <field name="inherit_id" ref="project.project_project_view_form_simplified"/>
-            <field name="mode">primary</field>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name=name]" position="after">
+                <xpath expr="//field[@name='name']" position="after">
                    <field name="partner_id"/>
                 </xpath>
             </field>
