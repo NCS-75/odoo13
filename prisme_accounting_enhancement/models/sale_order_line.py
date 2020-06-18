@@ -2,7 +2,6 @@ from odoo import api, fields, models, _
 
 
 class sale_order_line(models.Model):
-    _name = 'sale.order.line' 
     _inherit = 'sale.order.line'
     
     def _prepare_invoice_line(self):
@@ -11,5 +10,5 @@ class sale_order_line(models.Model):
         res = super(sale_order_line, self)._prepare_invoice_line()
         
         res['discount_amount'] = self.discount_amount
-
+        res['origin_price_unit'] = self.price_unit
         return res

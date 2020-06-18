@@ -1,7 +1,9 @@
-from odoo import api, fields, models, _
+from odoo import api, fields, models
 
 class account_move(models.Model):
     _inherit = 'account.move'
+    
+    rounding_on_subtotal = fields.Float('Rounding on Subtotal', default=lambda *a: 0.05)
     
     # Copy of the original method located in account module to support the discount_amount
     def _recompute_tax_lines(self, recompute_tax_base_amount=False):
@@ -37,7 +39,7 @@ class account_move(models.Model):
                 quantity = base_line.quantity
                 if base_line.currency_id:
                     price_unit_foreign_curr = sign * (base_line.price_unit * (1 - (base_line.discount / 100.0)) - base_line.discount_amount) ### PSI modification : added_discount amount in calculation
-                    price_unit_comp_curr = base_line.currency_id._convert(price_unit_foreign_curr, move.company_id.currency_id, move.company_id, move.date) ### PSI modification : added_discount amount in calculation
+                    price_unit_comp_curr = base_line.currency_id._convert(price_unit_foreign_curr, move.company_id.currency_id, move.company_id, move.date)
                 else:
                     price_unit_foreign_curr = 0.0
                     price_unit_comp_curr = sign * (base_line.price_unit * (1 - (base_line.discount / 100.0)) - base_line.discount_amount) ### PSI modification : added_discount amount in calculation
@@ -59,6 +61,7 @@ class account_move(models.Model):
                 partner=base_line.partner_id,
                 is_refund=self.type in ('out_refund', 'in_refund'),
                 handle_price_include=handle_price_include,
+                prisme_rounding=self.rounding_on_subtotal
             )
 
             if base_line.currency_id:
@@ -70,6 +73,7 @@ class account_move(models.Model):
                     product=base_line.product_id,
                     partner=base_line.partner_id,
                     is_refund=self.type in ('out_refund', 'in_refund'),
+                    prisme_rounding=self.rounding_on_subtotal
                 )
                 for b_tax_res, ac_tax_res in zip(balance_taxes_res['taxes'], amount_currency_taxes_res['taxes']):
                     tax = self.env['account.tax'].browse(b_tax_res['id'])
@@ -191,17 +195,22 @@ class account_move(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         # OVERRIDE
-        print('BEFORE : ' + str(vals_list))
         vals = super(account_move, self).create(vals_list)
-        print('AFTER : ' + str(vals_list))
-        for val in vals:
-            if val['invoice_line_ids']:
-                for line in val['invoice_line_ids']:
-                    print(str(line.name) + ' : ' + str(line.price_unit) + ' | ' + str(line.discount_amount))
-            elif val['invoice_line_ids']:
-                print('No invoice line ids')
-                for line in val['line_ids']:
-                    print(str(line.name) + ' : ' + str(line.price_unit) + ' | ' + str(line.discount_amount))
-            else:
-                print('No line ids')
         return vals
+
+    def _prisme_round_amount(self, amount):
+        new_amount = amount
+        if self.rounding_on_subtotal:
+            factor = self.rounding_on_subtotal
+            new_amount = round(amount / factor) * factor
+        
+        return new_amount
+    
+    @api.onchange('rounding_on_subtotal')
+    def _onchange_rounding(self):
+        for record in self:
+            print('Changed rounding')
+            for line in record.invoice_line_ids:
+                line._onchange_price_subtotal()
+            
+            record._recompute_dynamic_lines(recompute_all_taxes=True, recompute_tax_base_amount=True)

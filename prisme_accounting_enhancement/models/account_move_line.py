@@ -1,4 +1,3 @@
-from odoo import netsvc
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
@@ -11,6 +10,8 @@ class account_move_line(models.Model):
     discount = fields.Float(string='Discount (percent)', digits='Discount', default=0.0)
     #New field for discount in amount
     discount_amount = fields.Float(string='Discount (amount)', digits=(16, 2), default=0.0)
+    
+    origin_price_unit = fields.Float(string='Origin price unit', default=0.0)
     
     @api.onchange('discount')
     def _check_discount_percent(self):
@@ -31,21 +32,21 @@ class account_move_line(models.Model):
     def _check_discount_amount(self):
         """Checks if discount_amount field isn't bigger than the price_unit (with discount percent applied) and raises an error otherwise."""
         for record in self:
+            discount_value = record['discount']
             discount_amount_value = record['discount_amount']
-            subtotal_value = record['price_subtotal']
-            quantity_value = record['quantity']
+            price_unit_value = record['price_unit']
             
-            price_unit_tax = 0
+            price_unit_processed = price_unit_value
             
-            if subtotal_value and quantity_value:
-                price_unit_tax = subtotal_value / quantity_value
+            if discount_value:
+                price_unit_processed = price_unit_value * (1 - (discount_value / 100))
             
-            if discount_amount_value and price_unit_tax:
+            if discount_amount_value and price_unit_processed:
                 error = ''
         
                 if (discount_amount_value < 0.0):
                     error = _("A discount in amount cannot be negative !")
-                elif ((discount_amount_value > price_unit_tax) and (discount_amount_value > 0)):
+                elif (discount_amount_value > price_unit_processed and discount_amount_value > 0):
                     error = _("A discount in amount cannot be bigger than the price !")
                 if error:
                     self._display_error(error)
@@ -108,12 +109,16 @@ class account_move_line(models.Model):
 
         # Compute 'price_total'.
         if taxes:
+            factor = None
+            if self.move_id and self.move_id.rounding_on_subtotal:
+                factor = self.move_id.rounding_on_subtotal
+            
             taxes_res = taxes._origin.compute_all(price_unit_wo_discount,
-                quantity=quantity, currency=currency, product=product, partner=partner, is_refund=move_type in ('out_refund', 'in_refund'))
-            res['price_subtotal'] = taxes_res['total_excluded']
-            res['price_total'] = taxes_res['total_included']
+                quantity=quantity, currency=currency, product=product, partner=partner, is_refund=move_type in ('out_refund', 'in_refund'), prisme_rounding=factor)
+            res['price_subtotal'] = self._prisme_round_amount(taxes_res['total_excluded']) ### PSI modification : rounding price_subtotal
+            res['price_total'] = self._prisme_round_amount(taxes_res['total_included']) ### PSI modification : rounding price_total
         else:
-            res['price_total'] = res['price_subtotal'] = subtotal
+            res['price_total'] = res['price_subtotal'] = self._prisme_round_amount(subtotal) ### PSI modifiation : rounding subtotal
         #In case of multi currency, round before it's use for computing debit credit
         if currency:
             res = {k: currency.round(v) for k, v in res.items()}
@@ -171,11 +176,15 @@ class account_move_line(models.Model):
             # 220           | 10% incl, 5%  |                   | 200               | 230
             # 20            |               | 10% incl          | 20                | 20
             # 10            |               | 5%                | 10                | 10
-            taxes_res = taxes._origin.compute_all(balance, currency=currency, handle_price_include=False)
+            factor = None
+            if self.move_id and self.move_id.rounding_on_subtotal:
+                factor = self.move_id.rounding_on_subtotal
+                
+            taxes_res = taxes._origin.compute_all(balance, currency=currency, handle_price_include=False, prisme_rounding=factor)
             for tax_res in taxes_res['taxes']:
                 tax = self.env['account.tax'].browse(tax_res['id'])
                 if tax.price_include:
-                    balance += tax_res['amount']
+                    balance += self._prisme_round_amount(tax_res['amount']) ### PSI modification : rounding tax amount
         
         ### PSI modifications : subtracting the discount_amount to the balance and adding the discount_amount to the vals dictionary
         vals = {}
@@ -408,10 +417,24 @@ class account_move_line(models.Model):
                 
         lines = super(account_move_line, self).create(vals_list)
         
-        # quick fix
+        ### PSI modifications : 
         for line in lines:
-            if line.discount_amount:
-                line.write({'price_unit' : line.price_unit + line.discount_amount})
+            real_price_unit = 0.0
+            
+            # Price unit is always computed 0.01 or 0.02 CHF bigger or smaller than the SO price unit, even though the taxes are correctly computed with the difference
+            # So we get the SO price unit passed in res
+            if line.origin_price_unit:
+                real_price_unit = line.origin_price_unit
+                            
+            # The price unit is recomputed from subtotal, tax and discount when the line is saved, but the discount_amount is never taken into account
+            # That means the price unit saved will always be the price unit subtracted by the discount_amount but it shouldn't be.
+            # The fix here is to add the discount_amount to the price unit once the lines are saved. This is a workaround but there should be a better solution. 
+            elif line.discount_amount:
+                real_price_unit = line.price_unit + line.discount_amount
+            
+            if real_price_unit:
+                line.write({'price_unit' : real_price_unit})
+        ## End of PSI modifications
 
         moves = lines.mapped('move_id')
         if self._context.get('check_move_validity', True):
@@ -420,3 +443,11 @@ class account_move_line(models.Model):
         lines._check_tax_lock_date()
 
         return lines
+    
+    def _prisme_round_amount(self, amount):
+        new_amount = amount
+        if self.move_id and self.move_id.rounding_on_subtotal:
+            factor = self.move_id.rounding_on_subtotal
+            new_amount = round(amount / factor) * factor
+        
+        return new_amount

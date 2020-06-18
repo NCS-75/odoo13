@@ -1,7 +1,7 @@
 
 {
 "name": "Prisme Accounting Enhancement",
-"version": "2020-06-02 16:00",
+"version": "2020-06-18 16:00",
 "category": "Finance",
 'summary' : "amount discount, rounding subtotal",
 "author": "Prisme Solutions Informatique SA",
@@ -17,8 +17,8 @@
  ],
 "data": [
     "data/migration.sql",
-    #"views/account_invoice_view.xml",
-    "views/account_invoice_line_view.xml",
+    "views/account_move_line_view.xml",
+    "views/account_move_view.xml",
 ],
 "installable": True,
 "active": False,
