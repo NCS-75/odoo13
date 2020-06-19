@@ -1,4 +1,5 @@
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
 
 class account_move(models.Model):
     _inherit = 'account.move'
@@ -209,8 +210,12 @@ class account_move(models.Model):
     @api.onchange('rounding_on_subtotal')
     def _onchange_rounding(self):
         for record in self:
-            print('Changed rounding')
-            for line in record.invoice_line_ids:
-                line._onchange_price_subtotal()
-            
-            record._recompute_dynamic_lines(recompute_all_taxes=True, recompute_tax_base_amount=True)
+            rounding = record.rounding_on_subtotal
+            if rounding < 0:
+                raise UserError(_('A rounding on subtotal cannot be negative !'))
+                    
+            else:
+                for line in record.invoice_line_ids:
+                    line._onchange_price_subtotal()
+                
+                record._recompute_dynamic_lines(recompute_all_taxes=True, recompute_tax_base_amount=True)

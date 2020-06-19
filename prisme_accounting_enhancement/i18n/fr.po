@@ -48,6 +48,12 @@ msgid "A discount in percent cannot be negative !"
 msgstr "Un rabais en pourcent ne peut pas être négatif !"
 
 #. module: prisme_accounting_enhancement
+#: code:addons/prisme_accounting_enhancement/models/account_move.py:0
+#, python-format
+msgid "A rounding on subtotal cannot be negative !"
+msgstr "Un arrondi ne peut pas être négatif !"
+
+#. module: prisme_accounting_enhancement
 #: model:ir.model.fields,field_description:prisme_accounting_enhancement.field_account_move_line__discount_amount
 msgid "Discount (amount)"
 msgstr "Rabais (montant)"
@@ -56,3 +62,8 @@ msgstr "Rabais (montant)"
 #: model:ir.model.fields,field_description:prisme_accounting_enhancement.field_account_move_line__discount
 msgid "Discount (percent)"
 msgstr "Rabais (pourcent)"
+
+#. module: prisme_accounting_enhancement
+#: model:ir.model.fields,field_description:prisme_accounting_enhancement.field_account_move__rounding_on_subtotal
+msgid "Rounding on Subtotal"
+msgstr "Arrondi"

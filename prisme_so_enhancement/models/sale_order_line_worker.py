@@ -197,17 +197,28 @@ class sale_order_line(models.Model):
         for line in self:
             # Prisme modification start
             price = line.price_unit
-            if (line.discount_amount):
-                price = price - line.discount_amount
                 
             if (line.discount):
                 price = price * (1 - (line.discount / 100.0))
+                
+            if (line.discount_amount):
+                price = price - line.discount_amount
             
             # Modification: if the line has been refused, set the price to 0
             if line.refused or line.layout_type != 'article':
                 price = 0.0
             # Prisme modification end
-            taxes = line.tax_id.compute_all(price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id, partner=line.order_id.partner_id)
+            prisme_rounding = 0
+            if line.order_id.rounding_on_subtotal:
+                prisme_rounding = line.order_id.rounding_on_subtotal
+            
+            # if the module "prisme_accounting_enhancement" is installed, the compute_all method is able to recieve the rounding_on_subtotal value so we try with it first
+            try:
+                taxes = line.tax_id.compute_all(price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id, partner=line.order_id.partner_id, prisme_rounding=prisme_rounding)
+            
+            # if it didn't work we call the standard compute_all method
+            except:
+                taxes = line.tax_id.compute_all(price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id, partner=line.order_id.partner_id)
             line.update({
                 'price_tax': taxes['total_included'] - taxes['total_excluded'],
                 'price_total': taxes['total_included'],
@@ -236,11 +247,12 @@ class sale_order_line(models.Model):
                 price = 0
             
             price = line.price_unit
-            if (line.discount_amount):
-                price = price - line.discount_amount
                 
             if (line.discount):
                 price = price * (1 - (line.discount / 100.0))
+                
+            if (line.discount_amount):
+                price = price - line.discount_amount
 
                 
             line.price_reduce = price

@@ -22,7 +22,7 @@
 ##########################################################################
 {
 'name': 'Prisme Sales Order Enhancement',
-'version': '2020-05-04 09:15',
+'version': '2020-06-19 10:30',
 'category': 'Sales',
 'summary': 'ammount discount, rounding on subtotal, partial refusal',
 'author': 'Prisme Solutions Informatique SA',
