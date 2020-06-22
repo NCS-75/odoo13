@@ -28,7 +28,7 @@
 'website': 'http://www.prisme.ch',
 'depends': [
     'stock',
-    'account_voucher',
+    'account',
  ],
 'data': [
     'data/init_scheduler.xml',

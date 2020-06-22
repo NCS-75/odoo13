@@ -160,7 +160,7 @@
 			<field name="name">Serial Numbers Prisme</field>
 			<!-- <field name="type">ir.actions.act_window</field> -->
             <field name="res_model">stock.production.lot</field>
-			<field name="inherit_id" ref="stock.action_production_lot_form" />
+			<!-- <field name="inherit_id" ref="stock.action_production_lot_form" /> -->
 			<field name="context">{"search_default_available":1}</field>
 		</record>
 		

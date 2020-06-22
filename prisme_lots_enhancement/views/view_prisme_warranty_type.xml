@@ -68,7 +68,6 @@
 		<record model="ir.actions.act_window" id="prisme_warranty_type_action">
 			<field name="name">Warranty Types</field>
 			<field name="res_model">prisme.warranty.type</field>
-			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 			<field name="search_view_id" ref="prisme_warranty_type_search" />
 		</record>

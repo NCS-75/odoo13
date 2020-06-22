@@ -110,7 +110,6 @@
 		<record model="ir.actions.act_window" id="prisme_warranty_warranty_action">
 			<field name="name">Warranties</field>
 			<field name="res_model">prisme.warranty.warranty</field>
-			<field name="view_type">form</field>
 			<field name="view_mode">tree,form</field>
 			<field name="search_view_id" ref="prisme_warranty_warranty_search" />
 		</record>

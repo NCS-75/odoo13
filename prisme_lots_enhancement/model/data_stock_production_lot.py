@@ -57,7 +57,6 @@ class stock_production_lot(models.Model):
         self.description = product_description
         
 
-    @api.multi
     def write(self, vals):
         res = super(stock_production_lot,self).write(vals)
         for w in self.warranties_ids:
