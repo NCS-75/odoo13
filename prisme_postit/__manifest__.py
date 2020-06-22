@@ -46,8 +46,6 @@
      'css': [
         'static/src/css/note.css',
      ],
-     'images': [
-     ],
     'installable': True,
     'application': True,
     'auto_install': False,
