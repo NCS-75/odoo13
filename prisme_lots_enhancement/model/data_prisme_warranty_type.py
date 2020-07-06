@@ -23,6 +23,7 @@ from odoo import fields, models
 
 class prisme_warranty_type(models.Model):
     _name = "prisme.warranty.type"
+    _description = "Prisme Warranty Type"
     
     name = fields.Char("Name", required=True, unique=True)
     description = fields.Text("Description")
