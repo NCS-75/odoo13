@@ -28,6 +28,7 @@ _logger = logging.getLogger('prisme_lots_enhancement')
 
 class prisme_warranty_warranty(models.Model):
     _name = 'prisme.warranty.warranty'
+    _description = 'prisme warranty'
     
 
     description = fields.Text('Description')
@@ -43,11 +44,11 @@ class prisme_warranty_warranty(models.Model):
                                    ('closed', 'Closed')],
                                     'State', required=True)
                                     
-    last_suppl_invoice = fields.Many2one('account.invoice',
+    last_suppl_invoice = fields.Many2one('account.move',
                                 string='Last Supplier Invoice',
                                 domain="[('type','=','in_invoice')]")
                                 
-    last_cust_invoice = fields.Many2one('account.invoice',
+    last_cust_invoice = fields.Many2one('account.move',
                                 string='Last Customer Invoice',
                                 domain="[('type','=','out_invoice')]")
                                 

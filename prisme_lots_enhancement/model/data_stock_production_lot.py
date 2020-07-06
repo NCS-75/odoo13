@@ -26,13 +26,13 @@ class stock_production_lot(models.Model):
     _inherit = "stock.production.lot"
     
 
-    description = fields.Text("Description")
+    description = fields.Text("Lot Description")
     model_no = fields.Char("Model No")
     customer = fields.Many2one("res.partner", string="Customer", domain="[('customer','=', 1)]")
     user = fields.Char("End User")
     user_department = fields.Char("End User Dept")
     installation_date = fields.Date("Installation Date")
-    customer_invoice = fields.Many2one("account.invoice",
+    customer_invoice = fields.Many2one("account.move",
                                         string="Customer Invoice",
                                         domain="[('type','=','out_invoice')]",)
     attachments = fields.Text("Attachments")
@@ -41,12 +41,12 @@ class stock_production_lot(models.Model):
     supplier = fields.Many2one("res.partner", string="Supplier", domain="[('supplier','=', 1)]")
     supplier_item_no = fields.Char("Supplier Item No")
 
-    supplier_invoice = fields.Many2one("account.invoice", string="Supplier Invoice", domain="[('type','=','in_invoice')]")
+    supplier_invoice = fields.Many2one("account.move", string="Supplier Invoice", domain="[('type','=','in_invoice')]")
     delivery_date = fields.Date("Delivery Date")
     remarks = fields.Text("Remarks")
                 
     warranties_ids = fields.One2many('prisme.warranty.warranty', 'lot_id', 'Warranties')
-    end_life_date = fields.Date("Delivery Date")
+    end_life_date = fields.Date("End Life Delivery Date")
 
     @api.onchange('product_id')
     def onchange_product(self):
