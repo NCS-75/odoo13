@@ -116,7 +116,7 @@
 						</table>
 					</div>
 
-                    <t t-set="display_discount" t-value="any([l.discount for l in o.invoice_line_ids])"/>
+                    <t t-set="display_discount" t-value="any([l.discount or l.discount_amount for l in o.invoice_line_ids])"/>
 
                     <table class="w-100 table-sm" name="invoice_line_table">
                         <thead class="border-bottom border-dark">
