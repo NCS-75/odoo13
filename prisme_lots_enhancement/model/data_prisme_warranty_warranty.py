@@ -52,8 +52,8 @@ class prisme_warranty_warranty(models.Model):
                                 string='Last Customer Invoice',
                                 domain="[('type','=','out_invoice')]")
                                 
-    start_date = fields.Date('Start Date')
-    end_date = fields.Date('End Date')
+    start_date = fields.Date('Start Date', required=True)
+    end_date = fields.Date('End Date', required=True)
     recall_date = fields.Date('Reminder Date')
         
     internal_notes = fields.Text('Internal Notes')
