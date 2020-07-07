@@ -29,8 +29,7 @@
 'depends': [
             'prisme_accounting_enhancement',
 ],
-'init_xml': [],
-'update_xml': [
+'data': [
                'report/report_invoice.xml',
                ],
 'demo_xml': [],
