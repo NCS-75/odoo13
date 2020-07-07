@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+#    Prisme Solutions Informatique SA
+#    Copyright (c) 2020 Prisme Solutions Informatique SA <http://prisme.ch>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#    You should have received a copy of the GNU Affero General Public Lic
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+#    Project ID :	OERP-002-03
+#	 Phabricator :	T494
+#
+##########################################################################
+-->
+<odoo>
+	<data>
+		<!-- Create the custom new template ('primary="True"') from the original -->
+		<template id="report_prisme_invoice_content" inherit_id="account.report_invoice_document" primary="True">
+		
+			<!-- Removing the partner's VAT -->
+			<xpath expr="//div[@t-if='o.partner_id.vat']" position="replace">
+			</xpath>
+			
+			<!-- Adding the company VAT -->
+			<xpath expr="//div[@class='page']/h2" position="before">
+				<div t-if="o.company_id.partner_id.vat">
+					<span>TVA : <span t-esc="o.company_id.partner_id.vat"/></span>
+				</div>
+			</xpath>
+			
+			<!-- Adding the informations table on the top of the page -->
+			<xpath expr="//div[@id='informations']" position="replace">
+				<div id="informations" class="mt-3">
+					<table class="table table-bordered table-sm text-center"
+						style="margin-bottom: 2em;">
+						<!-- Header -->
+						<tr>
+							<th class="align-middle">
+								<b>Document</b>
+							</th>
+							<th>
+								<b>Invoice Date</b>
+							</th>
+							<th>
+								<b>Partner Ref.</b>
+							</th>
+							<th>
+								<b>Payment Term</b>
+							</th>
+						</tr>
+						<tr>
+							<!-- Document -->
+							<td>
+								<t t-if="'name' in o.fields_get()">
+									<span t-field="o.name" />
+								</t>
+							</td>
+							
+							<!-- Invoice Date -->
+							<td>
+								<t t-if="'invoice_date' in o.fields_get()">
+									<span t-field="o.invoice_date" />
+								</t>
+							</td>
+							
+							<!-- Partner Ref. -->
+							<td>
+								<t t-if="'partner_id' in o.fields_get()">
+									<span t-field="o.partner_id.ref" />
+								</t>
+							</td>
+							
+							<!-- Payment Term -->
+							<td>
+								<t t-if="'invoice_payment_term_id' in o.fields_get()">
+									<span t-field="o.invoice_payment_term_id.name" />
+								</t>
+							</td>
+						</tr>
+					</table>
+				</div>
+		    </xpath>
+		    
+		    <!-- Moving the "Taxes" header next to the "Description" header -->
+		    <xpath expr="//th[@name='th_description']" position="after">
+		    	<xpath expr="//th[@name='th_taxes']" position="move"/>
+		    </xpath>
+		    
+		    <!-- Moving the "Taxes" column next to the "Description" column -->
+		    <xpath expr="//td[@name='account_invoice_line_name']" position="after">
+		    	<xpath expr="//t[@name='account_invoice_line_accountable']/td[5]" position="move"/>
+		    </xpath>
+		    
+		    <!-- Changing the discount cell header -->
+		    <xpath expr="//th[@t-if='display_discount']/span" position="replace">
+		    	<span>Disc.</span>
+		    </xpath>
+		    
+		    <!-- Getting the total discount in amount for the "Disc." cells -->
+		    <xpath expr="//td[@t-if='display_discount']/span" position="replace">
+		    	<span class="text-nowrap" t-esc="o._get_line_discount(line)" />
+		    </xpath>
+		    
+		    <!-- Changing the end subtotal title and value -->
+		    <xpath expr="//div[@class='clearfix']/div/div/table" position="replace">
+		    	<table class="table table-sm" style="page-break-inside: avoid;">
+		    	
+		    		<!-- Amount without taxes -->
+				    <tr class="border-black o_subtotal" style="">
+				        <td>Total without VAT :</td>
+				        <td class="text-right">
+				            <span t-field="o.amount_untaxed"/>
+				        </td>
+				    </tr>
+				    <tr>
+				    	<td>Taxes :</td>
+				    	<td class="text-right">
+				    		<span t-field="o.amount_tax"/>
+				    	</td>
+				    </tr>
+				    <tr class="border-black o_total">
+				        <td><strong>Total with VAT :</strong></td>
+				        <td class="text-right">
+				            <span class="text-nowrap" t-field="o.amount_total"/>
+				        </td>
+				    </tr>
+				</table>
+		    </xpath>
+		    
+		    <!-- Adding the detailed taxes table -->
+		    <xpath expr="//div[@class='clearfix']" position="after">
+		    	<div>
+		    		<table class="table table-sm">
+	    				<tr>
+					        <th>Tax</th>
+					        <th>Base</th>
+					        <th>Amount</th>
+					    </tr>
+		    			<t t-foreach="o.amount_by_group" t-as="amount_by_group">
+		    				<tr>
+		    					<td><span t-esc="amount_by_group[0]"/></td>
+		    					<td><span t-esc="amount_by_group[2]" t-options="{'widget':'float', 'precision':2}"/></td>
+		    					<td><span t-esc="amount_by_group[1]" t-options="{'widget':'float', 'precision':2}"/></td>
+		    				</tr>
+						</t>
+		    		</table>
+		    	</div>
+		    </xpath>
+		    
+		    <!-- Removing the payment reference communication at the bottom of the invoice -->
+		    <xpath expr="//div[@class='page']/p[1]" position="replace"/>
+		    
+		    <!-- Removing the payment terms at the bottom of the invoice -->
+		    <xpath expr="//div[@class='page']/p[2]" position="replace"/>
+		    
+		</template>
+		
+		
+		<!-- Create the base report -->
+		<template id="report_prisme_invoice_base">
+		    <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="prisme_outputs_accounting.report_prisme_invoice_content" t-lang="lang"/>
+                </t>
+            </t>
+		</template>
+		
+		
+		<!-- Create the menu for the report -->
+		<report
+			id="print_report_prisme_invoice"
+			model="account.move"
+			string="Prisme Invoice"
+			report_type="qweb-pdf"
+			name="prisme_outputs_accounting.report_prisme_invoice_base"
+			file="prisme_outputs_accounting.report_prisme_invoice_base"
+			/>
+	</data>
+</odoo>

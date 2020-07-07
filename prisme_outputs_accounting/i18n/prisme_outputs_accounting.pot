@@ -1,0 +1,153 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* prisme_outputs_accounting
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e-20200423\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-07 12:26+0000\n"
+"PO-Revision-Date: 2020-07-07 12:26+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid ""
+"<span groups=\"account.group_show_line_subtotals_tax_excluded\">Amount</span>\n"
+"                                    <span groups=\"account.group_show_line_subtotals_tax_included\">Total Price</span>"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "<span>Description</span>"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "<span>Disc.</span>"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "<span>Quantity</span>"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "<span>Source Document</span>"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "<span>Taxes</span>"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "<span>Unit Price</span>"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "<strong class=\"mr16\">Subtotal</strong>"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "<strong>Total with VAT :</strong>"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Amount"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Base"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Cancelled Invoice"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Credit Note"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Document"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Draft Invoice"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Invoice"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Invoice Date"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model:ir.model,name:prisme_outputs_accounting.model_account_move
+msgid "Journal Entries"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Partner Ref."
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Payment Term"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model:ir.actions.report,name:prisme_outputs_accounting.print_report_prisme_invoice
+msgid "Prisme Invoice"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "VAT :"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Tax"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Taxes :"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Total without VAT :"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Vendor Bill"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Vendor Credit Note"
+msgstr ""
