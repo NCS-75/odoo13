@@ -87,8 +87,8 @@
 							<tr>
 								<!-- Document -->
 								<td>
-									<t t-if="'name' in o.fields_get()">
-										<span t-field="o.name" />
+									<t t-if="'ref' in o.fields_get()">
+										<span t-field="o.ref" />
 									</t>
 								</td>
 								
@@ -196,24 +196,24 @@
 
                     <div class="clearfix">
                         <div id="total" class="row">
-                            <div t-attf-class="col-4 ml-auto">
+                            <div t-attf-class="col-5 ml-auto">
                                 <table class="table table-sm" style="page-break-inside: avoid;">
 						    	
 						    		<!-- Amount without taxes -->
 								    <tr class="border-black o_subtotal" style="">
-								        <td>Total without VAT :</td>
+								        <td>Total w/out VAT</td>
 								        <td class="text-right">
 								            <span t-field="o.amount_untaxed"/>
 								        </td>
 								    </tr>
 								    <tr>
-								    	<td>Taxes :</td>
+								    	<td>Taxes</td>
 								    	<td class="text-right">
 								    		<span t-field="o.amount_tax"/>
 								    	</td>
 								    </tr>
 								    <tr class="border-black o_total">
-								        <td><strong>Total with VAT :</strong></td>
+								        <td><strong>Total with VAT</strong></td>
 								        <td class="text-right">
 								            <span class="text-nowrap" t-field="o.amount_total"/>
 								        </td>
