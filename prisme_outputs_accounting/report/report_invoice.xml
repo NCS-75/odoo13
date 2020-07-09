@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+#    Prisme Solutions Informatique SA
+#    Copyright (c) 2020 Prisme Solutions Informatique SA <http://prisme.ch>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#    You should have received a copy of the GNU Affero General Public Lic
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+#    Project ID :	OERP-002-03
+#	 Phabricator :	T494
+#
+##########################################################################
+-->
+<odoo>
+	<data>
+		<!-- Create the custom new template ('primary="True"') from the original -->
+		<template id="report_prisme_invoice_content">
+			<t t-call="web.external_layout">
+                <t t-set="o" t-value="o.with_context(lang=lang)" />
+                <!-- <t t-set="address">
+                    <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+                </t> -->
+                <div class="page">
+                	<!-- company's VAT and partner's address -->
+                	<table class="w-100">
+                		<tr>
+                			<td style="width: 60%;">
+                				<div t-if="o.company_id.partner_id.vat">
+									<span>VAT : <span t-esc="o.company_id.partner_id.vat"/></span>
+								</div>
+                			</td>
+                			
+                			<td style="width: 40%;">
+                				<t t-if="o.partner_id">
+									<t t-set="partner" t-value="o.partner_id"/>
+								</t>
+								<t t-if="partner" name="partner_address">
+									<!-- Printing the customer's company if there is one -->
+									<t t-if="partner.parent_id">
+										<t t-esc="partner.parent_id.display_name"/>
+										<br/>
+									</t>
+									<!-- If there is a company for the customer, we need to print his title and his name on the same line. 
+										 If it's a private customer, we print his title and his name on two separate lines -->
+									 <t t-if="partner.title">
+									 	<t t-esc="partner.title.name"/><br t-if="not partner.parent_id"/>
+									 </t>
+									<!-- Then we print the customer's name and it's address -->
+									<t t-esc="partner.name"/>
+									<t t-foreach="o._get_partner_address()" t-as="line">
+										<span><br/><t t-esc="line"/></span>
+									</t>
+								</t>
+                			</td>
+                		</tr>
+                	</table>
+                    <h2 class="mt-5">
+                        <span t-if="o.type == 'out_invoice' and o.state == 'posted'">Invoice</span>
+                        <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
+                        <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
+                        <span t-if="o.type == 'out_refund'">Credit Note</span>
+                        <span t-if="o.type == 'in_refund'">Vendor Credit Note</span>
+                        <span t-if="o.type == 'in_invoice'">Vendor Bill</span>
+                        <span t-if="o.name != '/'" t-field="o.name"/>
+                    </h2>
+
+                    <div id="informations" class="mt-3 mb-3">
+						<table class="table table-bordered table-sm text-center"
+							style="margin-bottom: 2em;">
+							<!-- Header -->
+							<tr class="align-middle small font-weight-bold">
+								<th>Document</th>
+								<th>Invoice Date</th>
+								<th>Partner Ref.</th>
+								<th>Payment Term</th>
+							</tr>
+							<tr>
+								<!-- Document -->
+								<td>
+									<t t-if="'name' in o.fields_get()">
+										<span t-field="o.name" />
+									</t>
+								</td>
+								
+								<!-- Invoice Date -->
+								<td>
+									<t t-if="'invoice_date' in o.fields_get()">
+										<span t-field="o.invoice_date" />
+									</t>
+								</td>
+								
+								<!-- Partner Ref. -->
+								<td>
+									<t t-if="'partner_id' in o.fields_get()">
+										<span t-field="o.partner_id.ref" />
+									</t>
+								</td>
+								
+								<!-- Payment Term -->
+								<td>
+									<t t-if="'invoice_payment_term_id' in o.fields_get()">
+										<span t-field="o.invoice_payment_term_id.name" />
+									</t>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+                    <t t-set="display_discount" t-value="any([l.discount or l.discount_amount for l in o.invoice_line_ids])"/>
+
+                    <table class="w-100 table-sm" name="invoice_line_table">
+                        <thead class="border-bottom border-dark">
+                            <tr>
+                                <th name="th_description" class="text-left"><span>Description</span></th>
+                                <th name="th_taxes" t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th>
+                                <!-- TODO: remove in master -->
+                                <th name="th_source" class="d-none text-left" t-if="0"><span>Source Document</span></th>
+                                <th name="th_quantity" class="text-right"><span>Quantity</span></th>
+                                <th name="th_priceunit" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Unit Price</span></th>
+                                <th name="th_price_unit" t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                    <span>Disc.</span>
+                                </th>
+                                <th name="th_subtotal" class="text-right">
+                                    <span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>
+                                    <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="current_subtotal" t-value="0"/>
+                            <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+
+                            <t t-foreach="lines" t-as="line">
+                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+
+                                <tr class="border-bottom">
+                                    <t t-if="not line.display_type" name="account_invoice_line_accountable">
+                                        <td name="account_invoice_line_name"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
+                                        <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                            <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/>
+                                        </td>
+                                        <td class="text-right">
+                                            <span t-field="line.quantity"/>
+                                            <span t-field="line.product_uom_id"  groups="uom.group_uom"/>
+                                        </td>
+                                        <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                            <span class="text-nowrap" t-field="line.price_unit"/>
+                                        </td>
+                                        <td t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
+                                            <span class="text-nowrap" t-esc="o._get_line_discount(line)" />
+                                        </td>
+                                        <td class="text-right o_price_total">
+                                            <span class="text-nowrap" t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
+                                            <span class="text-nowrap" t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
+                                        </td>
+                                    </t>
+                                    <t t-if="line.display_type == 'line_section'">
+                                        <td colspan="99">
+                                            <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                        </td>
+                                        <t t-set="current_section" t-value="line"/>
+                                        <t t-set="current_subtotal" t-value="0"/>
+                                    </t>
+                                    <t t-if="line.display_type == 'line_note'">
+                                        <td colspan="99">
+                                            <span t-field="line.name" t-options="{'widget': 'text'}"/>
+                                        </td>
+                                    </t>
+                                </tr>
+
+                                <t t-if="current_section and (line_last or lines[line_index+1].display_type == 'line_section')">
+                                    <tr class="is-subtotal text-right">
+                                        <td colspan="99">
+                                            <strong class="mr16">Subtotal</strong>
+                                            <span
+                                                t-esc="current_subtotal"
+                                                t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                            />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+
+                    <div class="clearfix">
+                        <div id="total" class="row">
+                            <div t-attf-class="col-4 ml-auto">
+                                <table class="table table-sm" style="page-break-inside: avoid;">
+						    	
+						    		<!-- Amount without taxes -->
+								    <tr class="border-black o_subtotal" style="">
+								        <td>Total without VAT :</td>
+								        <td class="text-right">
+								            <span t-field="o.amount_untaxed"/>
+								        </td>
+								    </tr>
+								    <tr>
+								    	<td>Taxes :</td>
+								    	<td class="text-right">
+								    		<span t-field="o.amount_tax"/>
+								    	</td>
+								    </tr>
+								    <tr class="border-black o_total">
+								        <td><strong>Total with VAT :</strong></td>
+								        <td class="text-right">
+								            <span class="text-nowrap" t-field="o.amount_total"/>
+								        </td>
+								    </tr>
+								</table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div name="taxes_table_container" class="mt-5" style="width: 55%; margin-bottom: 6em;">
+                    	<table class="table-sm w-100" name="taxes_table">
+		    				<tr class="border-bottom border-dark">
+						        <th style="width: 60%">Tax</th>
+						        <th style="width: 20%" class="text-right">Base</th>
+						        <th style="width: 20%" class="text-right">Amount</th>
+						    </tr>
+			    			<t t-foreach="o.amount_by_group" t-as="amount_by_group">
+			    				<tr class="border-bottom small">
+			    					<td><span t-esc="amount_by_group[0]"/></td>
+			    					<td class="text-right"><span t-esc="amount_by_group[2]" t-options="{'widget':'float', 'precision':2}"/></td>
+			    					<td class="text-right"><span t-esc="amount_by_group[1]" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+			    				</tr>
+							</t>
+			    		</table>
+			    	</div>
+                    <p t-if="o.narration" name="comment" class="mt-5">
+                        <span t-field="o.narration"/>
+                    </p>
+                    <p t-if="o.fiscal_position_id.note" name="note" class="mt-5">
+                        <span t-field="o.fiscal_position_id.note"/>
+                    </p>
+                </div>
+            </t>
+		</template>
+		
+		
+		<!-- Create the base report -->
+		<template id="report_prisme_invoice_base">
+		    <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="prisme_outputs_accounting.report_prisme_invoice_content" t-lang="lang"/>
+                </t>
+            </t>
+		</template>
+		
+		
+		<!-- Create the menu for the report -->
+		<report
+			id="print_report_prisme_invoice"
+			model="account.move"
+			string="Prisme Invoice"
+			report_type="qweb-pdf"
+			name="prisme_outputs_accounting.report_prisme_invoice_base"
+			file="prisme_outputs_accounting.report_prisme_invoice_base"
+			/>
+	</data>
+</odoo>

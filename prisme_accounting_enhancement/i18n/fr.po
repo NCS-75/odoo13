@@ -1,0 +1,69 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* prisme_accounting_enhancement
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e-20200423\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-06-15 08:32+0000\n"
+"PO-Revision-Date: 2020-06-15 08:32+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: prisme_accounting_enhancement
+#: code:addons/prisme_accounting_enhancement/models/account_move_line.py:0
+#, python-format
+msgid "A discount in amount cannot be bigger than the price !"
+msgstr "Un rabais en montant ne peut pas être plus grand que le prix !"
+
+#. module: prisme_accounting_enhancement
+#: code:addons/prisme_accounting_enhancement/models/account_move_line.py:0
+#, python-format
+msgid ""
+"A discount in amount cannot be bigger than the price with discount percent !"
+msgstr ""
+"Un rabais en montant ne peut pas être plus grand que le prix réduit par le rabais en pourcent !"
+
+#. module: prisme_accounting_enhancement
+#: code:addons/prisme_accounting_enhancement/models/account_move_line.py:0
+#, python-format
+msgid "A discount in amount cannot be negative !"
+msgstr "Un rabais en montant ne peut pas être négatif !"
+
+#. module: prisme_accounting_enhancement
+#: code:addons/prisme_accounting_enhancement/models/account_move_line.py:0
+#, python-format
+msgid "A discount in percent cannot be bigger than 100 !"
+msgstr "Un rabais en pourcent ne peut pas être plus grand que 100 !"
+
+#. module: prisme_accounting_enhancement
+#: code:addons/prisme_accounting_enhancement/models/account_move_line.py:0
+#, python-format
+msgid "A discount in percent cannot be negative !"
+msgstr "Un rabais en pourcent ne peut pas être négatif !"
+
+#. module: prisme_accounting_enhancement
+#: code:addons/prisme_accounting_enhancement/models/account_move.py:0
+#, python-format
+msgid "A rounding on subtotal cannot be negative !"
+msgstr "Un arrondi ne peut pas être négatif !"
+
+#. module: prisme_accounting_enhancement
+#: model:ir.model.fields,field_description:prisme_accounting_enhancement.field_account_move_line__discount_amount
+msgid "Discount (amount)"
+msgstr "Rabais (montant)"
+
+#. module: prisme_accounting_enhancement
+#: model:ir.model.fields,field_description:prisme_accounting_enhancement.field_account_move_line__discount
+msgid "Discount (percent)"
+msgstr "Rabais (pourcent)"
+
+#. module: prisme_accounting_enhancement
+#: model:ir.model.fields,field_description:prisme_accounting_enhancement.field_account_move__rounding_on_subtotal
+msgid "Rounding on Subtotal"
+msgstr "Arrondi"

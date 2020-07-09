@@ -1,0 +1,32 @@
+To set the Prisme headers and footers for the reports :
+
+1. Go to settings and activate developper mode
+2. Under General Setting > Business Document > Format, select your paper format (usually A4) and open it with the external link button.
+3. Change bottom margin to 15mm.
+4. Save.
+
+5. Under General Setting > Business Document > Document Layout, clic on "Edit Layout".
+6. Paste the following XML inside the root <t t-name="..."> :
+
+	<div t-attf-class="header o_company_#{company.id}_layout">
+	    <div class="row">
+	        <div class="text-center w-100">
+	            <img t-if="company.logo" t-att-src="image_data_uri(company.logo)" style="max-height: 100px;" alt="Logo"/>
+	        </div>
+	    </div>
+	</div>
+	
+	<div t-attf-class="article o_report_layout_standard o_company_#{company.id}_layout pt-5" t-att-data-oe-model="o and o._name" t-att-data-oe-id="o and o.id" t-att-data-oe-lang="o and o.env.context.get('lang')">
+	    <t t-call="web.address_layout"/>
+	    <t t-raw="0"/>
+	</div>
+	
+	<div t-attf-class="footer o_standard_footer o_company_#{company.id}_layout">
+	    <div class="text-center" style="border-top: 2px solid #f4946c;">
+	        <div name="financial_infos">
+	            <span t-field="company.report_footer"/>
+	        </div>
+	    </div>
+	</div>
+    
+7. Save and it's done.

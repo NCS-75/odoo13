@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+###########################################################################
+#
+#    Prisme Solutions Informatique SA
+#    Copyright (c) 2020 Prisme Solutions Informatique SA <http://prisme.ch>
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#    You should have received a copy of the GNU Affero General Public Lic
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+#    Project ID :	OERP-002-09
+#	 Phabricator :	T601
+#
+##########################################################################
+-->
+<odoo>
+	<data>
+		<!-- Create the custom new template ('primary="True"') from the original -->
+		<template id="report_prisme_invoice_qrbill" inherit_id="prisme_outputs_accounting.report_prisme_invoice_content" primary="True">
+			<xpath expr="//div[@class='page']" position="inside">
+				<t t-set="formated_amount" t-value="'{:,.2f}'.format(o.amount_residual).replace(',','\xa0')"/>
+				<div t-if="o.invoice_partner_bank_id.validate_swiss_code_arguments(o.invoice_partner_bank_id.currency_id, o.partner_id, o.invoice_payment_ref) and ((o.currency_id.name == 'EUR') or (o.currency_id.name == 'CHF'))">
+					<!--
+					Warning: The value are in PX not in MM because there is a bug with the DPI
+					
+					This might be corrected in the future, the original CSS is under:
+					- /prisme_invoice_swiss_qrbill/static/src/css/invoice_report.css
+					
+					The value in MM are commented and are used to calculate the value in PX
+					Calculation (approximative): mm * 4.745 = px
+					-->
+					<style>
+.qrinv-container {
+	page-break-before: always;
+	page-break-inside: avoid;
+	font-family: Helvetica;
+}
+.qrinv-payment {
+	page-break-inside: avoid;
+	margin-top: 580px;
+	width: 72.1%;
+	height: 498px;
+	float: right;
+	border-top: 0.5mm solid black;
+}
+.qrinv-receipt{
+	page-break-inside: avoid;
+	margin-top: 580px;
+	border-right: 0.5mm dashed black;
+	width: 27.9%;
+	height: 498px;
+	float: left;
+	border-top: 0.5mm solid black;
+}
+.qrinv-key {
+	font-size: 9pt;
+	font-weight: bold;
+	margin: 0;
+}
+.qrinv-val {
+	font-size: 11pt;
+	margin: 1pt 0 10pt 0;
+}
+.qrinv-title {
+	font-size: 12pt;
+	font-weight: bold;
+}
+.qrinv-qrcode,
+.qrinv-qrcode>img {
+	width: 261px;
+	height: 261px;
+}
+.qrinv-qrcode {
+	margin-left: -20px;
+}
+.ch-cross-container {
+	height: 25px;
+}
+.ch-cross-background {
+	position: relative;
+	top: -147px;
+	left: 96px;
+	width: 30px;
+	height: 30px;
+	background-color: white;
+}
+.ch-cross {
+	position: relative;
+	top: -178px;
+	left: 92px;
+	width: 37px;
+	height: 37px;
+}
+.qrinv-info-left,
+.qrinv-info-right,
+.qrinv-amount {
+	display: inline-block;
+	vertical-align: top;
+}
+.qrinv-info-left {
+	width: 200px;
+	margin: 38px;
+}
+.qrinv-info-right {
+	width: 300px;
+	margin: 0 10px;
+	padding-top: 40px;
+}
+.qrinv-amount {
+	margin-right: 9.5px;
+}
+.qrinv-info-receipt {
+	margin-top: 38px;
+}
+.qrinv-info-receipt .qrinv-key {
+	font-size: 7pt;
+	font-weight: bold;
+}
+.qrinv-info-receipt .qrinv-val {
+	font-size: 9pt;
+	margin-top: 1pt;
+}
+.qrinv-info-receipt .qrinv-amount {
+	margin-left: 0;
+	margin-top: 75px;
+}
+.qrinv-acceptance-point {
+	text-align: right;
+	margin-top: 15px;
+	margin-right: 10px;
+}
+					</style>
+					<div class="qrinv-container">
+						<div class="qrinv-receipt">
+							<div class="qrinv-info-receipt">
+								<div class="qrinv-title">
+									<p>Receipt</p>
+								</div>
+								<p class="qrinv-key">Account / Payable to</p>
+								<p class="qrinv-val">
+									<span t-field="o.invoice_partner_bank_id.acc_number"/><br/>
+									<span t-field="o.company_id.partner_id.name" />
+									<br t-if="o.company_id.partner_id.street" />
+									<span t-if="o.company_id.partner_id.street" t-field="o.company_id.partner_id.street" />
+									<br />
+									<span t-field="o.company_id.partner_id.zip" /> <span t-field="o.company_id.partner_id.city" />
+								</p>
+								<div t-if="o.invoice_partner_bank_id._is_qr_iban()">
+									<p class="qrinv-key">Reference</p>
+									<p class="qrinv-val" t-esc="o.space_qrr_reference(o.invoice_payment_ref)" />
+								</div>
+								<p class="qrinv-key">Payable by</p>
+								<p class="qrinv-val">
+									<span t-if="(not o.partner_id.is_company) and o.partner_id.parent_id.name" t-field="o.partner_id.parent_id.name" />
+									<span t-else="" t-field="o.partner_id.name" />
+									<br t-if="o.partner_id.street" />
+									<span t-if="o.partner_id.street" t-field="o.partner_id.street" />
+									<br />
+									<span t-field="o.partner_id.zip" /> <span t-field="o.partner_id.city" />
+								</p>
+								<div class="qrinv-amount">
+									<p class="qrinv-key">Currency</p>
+									<p class="qrinv-val" t-field="o.currency_id.name" />
+								</div>
+								<div class="qrinv-amount">
+									<p class="qrinv-key">Amount</p>
+									<p class="qrinv-val" t-esc="formated_amount" />
+								</div>
+								
+								<div class="qrinv-acceptance-point">
+									<p class="qrinv-key">Acceptance point</p>
+								</div>
+							</div>
+						</div>
+						<div class="qrinv-payment">
+							<!-- 
+							Each text field are displayed with their key name
+							Use css .qrinv-key to format the key
+							Use css .qrinv-val to format the value
+							 -->
+						
+							<!-- The left side -->
+							<div class="qrinv-info-left">
+								<div class="qrinv-title">
+									<p>Payment part</p>
+								</div>
+								<!-- Payment support isn't used anymore in v2.1 -->
+								<!-- <div class="qrinv-scheme">
+									<p class="qrinv-key">Support</p>
+									<p class="qrinv-val">Credit transfer</p>
+								</div> -->
+								<div class="qrinv-qrcode">
+									<img t-att-src="o.invoice_partner_bank_id.build_swiss_code_url(o.amount_residual, o.currency_id.name, None, o.partner_id, None, o.invoice_payment_ref, None)" alt="QR-Invoice" />
+								</div>
+								<!-- We need to set a div with a blank background for the ch-cross, but the ch-cross can't be inside directly otherwise the background will be "overriden" by the cross transparency -->
+								<div class="ch-cross-container">
+									<div class="ch-cross-background">
+										<span> </span>
+									</div>
+									<img class="ch-cross" src="/l10n_ch/static/src/img/CH-Cross_7mm.png"/>
+								</div>
+								<div class="qrinv-amount">
+									<p class="qrinv-key">Currency</p>
+									<p class="qrinv-val" t-field="o.currency_id.name" />
+								</div>
+								<div class="qrinv-amount">
+									<p class="qrinv-key">Amount</p>
+									<p class="qrinv-val" t-esc="formated_amount" />
+								</div>
+							</div>
+							
+							<!-- The right side -->
+							<div class="qrinv-info-right">
+								<p class="qrinv-key">Account / Payable to</p>
+								<p class="qrinv-val">
+									<span t-field="o.invoice_partner_bank_id.acc_number"/><br/>
+									<span t-field="o.company_id.partner_id.name" />
+									<br t-if="o.company_id.partner_id.street" />
+									<span t-if="o.company_id.partner_id.street" t-field="o.company_id.partner_id.street" />
+									<br />
+									<span t-field="o.company_id.partner_id.zip" /> <span t-field="o.company_id.partner_id.city" />
+								</p>
+								<div t-if="o.invoice_partner_bank_id._is_qr_iban()">
+									<p class="qrinv-key">Reference</p>
+									<p class="qrinv-val" t-esc="o.space_qrr_reference(o.invoice_payment_ref)" />
+								</div>
+								<p class="qrinv-key">Payable by</p>
+								<p class="qrinv-val">
+									<span t-if="(not o.partner_id.is_company) and o.partner_id.parent_id.name" t-field="o.partner_id.parent_id.name" />
+									<span t-else="" t-field="o.partner_id.name" />
+									<br t-if="o.partner_id.street" />
+									<span t-if="o.partner_id.street" t-field="o.partner_id.street" />
+									<br />
+									<span t-field="o.partner_id.zip" /> <span t-field="o.partner_id.city" />
+								</p>
+								<!-- Date due isn't used anymore in v2.1 -->
+								<!-- <div t-if="o.date_due">
+									<p class="qrinv-key">Payable by</p>
+									<p class="qrinv-val" t-field="o.date_due" />
+								</div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</xpath>
+		</template>
+		
+		<!-- Create the base report -->
+		<template id="report_prisme_invoice_qrbill_base">
+		    <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="lang" t-value="o.invoice_user_id.sudo().lang if o.type in ('in_invoice', 'in_refund') else o.partner_id.lang"/>
+                    <t t-call="prisme_outputs_accounting_qrcode.report_prisme_invoice_qrbill" t-lang="lang"/>
+                </t>
+            </t>
+		</template>
+		
+		
+		<!-- Create the menu for the report -->
+		<report
+			id="print_report_prisme_invoice_qrbill"
+			model="account.move"
+			string="Prisme Invoice with QR-Bill"
+			report_type="qweb-pdf"
+			name="prisme_outputs_accounting_qrcode.report_prisme_invoice_qrbill_base"
+			file="prisme_outputs_accounting_qrcode.report_prisme_invoice_qrbill_base"
+			/>
+	</data>
+</odoo>
