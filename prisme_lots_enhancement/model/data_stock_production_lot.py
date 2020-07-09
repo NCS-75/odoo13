@@ -28,7 +28,7 @@ class stock_production_lot(models.Model):
 
     description = fields.Text("Lot Description")
     model_no = fields.Char("Model No")
-    customer = fields.Many2one("res.partner", string="Customer", domain="[('customer','=', 1)]")
+    customer = fields.Many2one("res.partner", string="Customer")
     user = fields.Char("End User")
     user_department = fields.Char("End User Dept")
     installation_date = fields.Date("Installation Date")
@@ -38,7 +38,7 @@ class stock_production_lot(models.Model):
     attachments = fields.Text("Attachments")
     manufacturer = fields.Char("Manufacturer")
     manufact_item_no = fields.Char("Part. Number")
-    supplier = fields.Many2one("res.partner", string="Supplier", domain="[('supplier','=', 1)]")
+    supplier = fields.Many2one("res.partner", string="Supplier")
     supplier_item_no = fields.Char("Supplier Item No")
 
     supplier_invoice = fields.Many2one("account.move", string="Supplier Invoice", domain="[('type','=','in_invoice')]")
