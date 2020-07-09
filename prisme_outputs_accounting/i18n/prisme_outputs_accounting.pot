@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0+e-20200423\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-07-07 12:26+0000\n"
-"PO-Revision-Date: 2020-07-07 12:26+0000\n"
+"POT-Creation-Date: 2020-07-09 13:01+0000\n"
+"PO-Revision-Date: 2020-07-09 13:01+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -59,7 +59,7 @@ msgstr ""
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
-msgid "<strong>Total with VAT :</strong>"
+msgid "<strong>Total with VAT</strong>"
 msgstr ""
 
 #. module: prisme_outputs_accounting
@@ -124,22 +124,22 @@ msgstr ""
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
-msgid "VAT :"
-msgstr ""
-
-#. module: prisme_outputs_accounting
-#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Tax"
 msgstr ""
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
-msgid "Taxes :"
+msgid "Taxes"
 msgstr ""
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
-msgid "Total without VAT :"
+msgid "Total w/out VAT"
+msgstr ""
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "VAT :"
 msgstr ""
 
 #. module: prisme_outputs_accounting

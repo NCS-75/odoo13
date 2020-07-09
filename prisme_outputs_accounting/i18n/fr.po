@@ -61,8 +61,8 @@ msgstr "<strong class=\"mr16\">Sous-total</strong>"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
-msgid "<strong>Total with VAT :</strong>"
-msgstr "<strong>Total TTC :</strong>"
+msgid "<strong>Total with VAT</strong>"
+msgstr "<strong>Total TTC</strong>"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
@@ -136,13 +136,13 @@ msgstr "Taxe"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
-msgid "Taxes :"
-msgstr "Taxes :"
+msgid "Taxes"
+msgstr "Taxes"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
-msgid "Total without VAT :"
-msgstr "Total HT :"
+msgid "Total w/out VAT"
+msgstr "Total HT"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
