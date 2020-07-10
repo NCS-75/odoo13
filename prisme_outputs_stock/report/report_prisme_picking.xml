@@ -44,7 +44,7 @@
 				<t t-set="picking_type_code" t-value="o.picking_type_code" />
 				<div class="row" name="customer_address"
 					style="padding-top: 2em; margin-bottom: 6em;">
-					<div class="col-8">
+					<div class="col-7">
 						<t t-set="partner"
 							t-value="(o.sale_id and o.sale_id.partner_id) or o.partner_id or (o.move_lines and o.move_lines[0].partner_id) or False" />
 						<t t-if="partner" name="partner_header">
@@ -67,7 +67,7 @@
 					</div>
 					
 					<!-- Displaying the partner's address and name to the top right of the page for mailing -->
-					<div class="col-4">
+					<div class="col-5">
 						<!-- Checking if there is a delivery address set. We print this delivery address if so, or we print the customer's address otherwise -->
 						<t t-if="o.partner_id or (o.sale_id and o.sale_id.partner_shipping_id)">
 							<t t-set="partner" t-value="o.partner_id or o.sale_id.partner_shipping_id"/>
@@ -292,7 +292,6 @@
 						<tbody>
 							<!-- Looping through each move line of the stock picking -->
 							<tr t-foreach="o.move_ids_without_package" t-as="move">
-								
 								<!-- Product cell -->
 								<td>
 									<t t-call="prisme_outputs_stock.product_description"/>
@@ -307,12 +306,14 @@
 					
 								<!-- Shipped quantity cell -->
 								<td class="text-center">
-									<span t-field="move.quantity_done"/>
+									<t t-set="qty_done" t-value="move.quantity_done"/>
+									<span t-esc="o._format_product_uom(qty_done)"/>
 								</td>
 					
 								<!-- Back order cell -->
 								<td class="text-center">
-									<span t-esc="o.get_backorder_quantity(o, move)"/>
+									<t t-set="backorder_qty" t-value="o.get_backorder_quantity(o, move)"/>
+									<span t-esc="o._format_product_uom(backorder_qty)"/>
 								</td>
 							</tr>
 							
@@ -333,14 +334,15 @@
 					
 								<!-- Shipped quantity cell -->
 								<td class="text-center">
-									<!-- The quantity will always be 0.0 in this loop block. Partially shipped products were already printed in the previous loop block -->
-									<span>0.0</span>
+									<!-- The quantity will always be 0 in this loop block. Partially shipped products were already printed in the previous loop block -->
+									<span t-esc="o._format_product_uom(0)"/>
 								</td>
 					
 								<!-- Back order cell -->
 								<td class="text-center">
-									<!-- Since the quantity shipped is always 0.0, the backorder quantity for the backorder lines is always the demanded quantity -->
-									<span t-esc="move.product_uom_qty"/>
+									<!-- Since the quantity shipped is always 0, the backorder quantity for the backorder lines is always the demanded quantity -->
+									<t t-set="product_uom_qty" t-value="move.product_uom_qty"/>
+									<span t-esc="o._format_product_uom(product_uom_qty)"/>
 								</td>
 								</tr>
 							</t>

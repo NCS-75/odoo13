@@ -1,7 +1,7 @@
 
 {
 'name': 'Prisme Reporting for Stock',
-'version': '2020-02-21 10:45',
+'version': '2020-07-10 09:30',
 'category': 'Warehouse',
 'summary': 'More fields for stock picking reports',
 'author': 'Prisme Solutions Informatique SA',
@@ -9,15 +9,15 @@
 'depends': [
             'stock',
             'sale_stock',
+            'sale_management',
             'purchase',
+            'delivery',
 ],
 'init_xml': [],
-'update_xml': [
+'data': [
                'view/stock_picking.xml',
                'report/report_prisme_picking.xml',
-], 
-'demo_xml': [],
-'test': [],
+],
 'installable': True,
 'active': False,
 'images': [

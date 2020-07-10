@@ -75,4 +75,24 @@ class stock_picking(models.Model):
         
         print(str(sn))
         return sn
-
+        
+    def _format_product_uom(self, number):
+        try:
+            # In case the given number is in a string or an integer.
+            float_number = float(number)
+            
+            # We get the decimal precision set for the current instance. Defaults to 3 decimals
+            decimal_precision = self.env['decimal.precision'].search([('name', 'ilike', 'Product Unit of Measure')])
+            print('DP : ' + str(decimal_precision))
+            print('DIGITS : ' + str(decimal_precision.digits))
+            
+            digits = 3
+            if decimal_precision:
+                digits = decimal_precision.digits
+            
+            # Finally formatting the value.
+            formatted_value = f"{float_number:.{digits}f}"
+        except:
+            # If the given parameter couldn't be converted to float, we return the parameter without change
+            formatted_value = number
+        return formatted_value
