@@ -20,7 +20,7 @@ class prisme_account_analytic_line(models.Model):
     @api.depends('date')
     def _get_month(self):
         for line in self:
-            date = line.date#datetime.strptime(line.date, '%Y-%m-%d')
+            date = line.date
             month = date.strftime('%Y-%m')
             line.working_month = month
     
