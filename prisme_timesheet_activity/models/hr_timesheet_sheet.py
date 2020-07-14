@@ -256,7 +256,6 @@ class HrTimesheetSheetSheetAccount(models.Model):
     sheet_id = fields.Many2one('hr_timesheet_sheet.sheet', string='Sheet', readonly=True)
     total = fields.Float('Total Time', digits=(16, 2), readonly=True)
 
-    # still seing _depends in BaseModel, ok to leave this as is?
     _depends = {
         'account.analytic.line': ['account_id', 'date', 'unit_amount', 'user_id'],
         'hr_timesheet_sheet.sheet': ['date_from', 'date_to', 'user_id'],
