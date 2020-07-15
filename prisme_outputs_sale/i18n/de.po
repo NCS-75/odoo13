@@ -1,0 +1,186 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* prisme_outputs_sale
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e-20170917\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-05-23 08:10+0000\n"
+"PO-Revision-Date: 2018-05-23 08:10+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Date Ordered"
+msgstr ""
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Description"
+msgstr "Beschreibung"
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Disc."
+msgstr "Rabatt"
+
+#. module: prisme_outputs_sale
+#: model:ir.model.fields,field_description:prisme_outputs_sale.field_sale_order_footer_comment
+msgid "Footer comment"
+msgstr ""
+
+#. module: prisme_outputs_sale
+#: model:ir.model.fields,field_description:prisme_outputs_sale.field_sale_order_header_comment
+msgid "Header comment"
+msgstr ""
+
+#. module: prisme_outputs_sale
+#: model:ir.model.fields,field_description:prisme_outputs_sale.field_sale_order_line_notes
+msgid "Notes"
+msgstr ""
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Order N�"
+msgstr ""
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Payment Term"
+msgstr "Zahlungsbedingungen"
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Price"
+msgstr "Preis"
+
+#. module: prisme_outputs_sale
+#: model:ir.model.fields,field_description:prisme_outputs_sale.field_sale_order_print_totals
+msgid "Print Totals"
+msgstr ""
+
+#. module: prisme_outputs_sale
+#: model:ir.model.fields,field_description:prisme_outputs_sale.field_sale_order_print_vat
+msgid "Print VAT"
+msgstr ""
+
+#. module: prisme_outputs_sale
+#: model:ir.actions.report.xml,name:prisme_outputs_sale.report_prisme_so_email
+msgid "Prisme Quotation/SO for E-Mail"
+msgstr ""
+
+#. module: prisme_outputs_sale
+#: model:ir.actions.report.xml,name:prisme_outputs_sale.report_prisme_so_paper
+msgid "Prisme Quotation/SO for Paper"
+msgstr ""
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Quantity"
+msgstr "Menge"
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Quotation Comment"
+msgstr "Betrift"
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Quotation Date"
+msgstr "Angebotsdatum"
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Quotation N°"
+msgstr "Angebot N°"
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Quotation Validity"
+msgstr "Angebot Gültig bis"
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Reference"
+msgstr "Artikel"
+
+#. module: prisme_outputs_sale
+#: model:ir.model,name:prisme_outputs_sale.model_sale_order
+msgid "Sales Order"
+msgstr ""
+
+#. module: prisme_outputs_sale
+#: model:ir.model,name:prisme_outputs_sale.model_sale_order_line
+msgid "Sales Order Line"
+msgstr ""
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Salesman"
+msgstr "Verkäufer"
+
+#. module: prisme_outputs_sale
+#: model:ir.model.fields,help:prisme_outputs_sale.field_sale_order_print_vat
+msgid "Show the VAT on the bottom  on the Quotation/SO. Warning: you cannot print VAT if you don't print the totals."
+msgstr ""
+
+#. module: prisme_outputs_sale
+#: model:ir.model.fields,help:prisme_outputs_sale.field_sale_order_print_totals
+msgid "Show the totals on the botom of the quotation/SO. Used, for example, to offer 2 choices to a customer and  don't show a useless total."
+msgstr ""
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Total W/out VAT :"
+msgstr "Gesamt ohne Steuern"
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Total with VAT :"
+msgstr "Gesamt"
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Unit Price"
+msgstr "Preis Pro ME"
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "VAT"
+msgstr ""
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "VAT Total :"
+msgstr "Mwst."
+
+#. module: prisme_outputs_sale
+#: report:sale.order.email.prisme:0
+#: report:sale.order.paper.prisme:0
+msgid "Your Reference"
+msgstr "Kundenreferenz"
+
