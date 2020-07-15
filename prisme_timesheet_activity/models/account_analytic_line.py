@@ -26,14 +26,15 @@ class prisme_account_analytic_line(models.Model):
             self.account_id = self.project_id.analytic_account_id
         else:
             self.account_id = None
-    
+
     @api.depends('date')
     def _get_month(self):
         for line in self:
             date = line.date
             month = date.strftime('%Y-%m')
             line.working_month = month
-            
+
+    #Update product associated to employee
     @api.onchange('user_id')
     def getEmployeeProduct(self):
         emp_obj = self.env['hr.employee']
