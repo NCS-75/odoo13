@@ -16,6 +16,13 @@ class prisme_account_analytic_line(models.Model):
     def _onchange_project(self):
         if self.project_id and self.project_id.partner_id:
             self.partner_id = self.project_id.partner_id
+        else:
+            self.partner_id = None
+
+        if self.project_id and self.project_id.analytic_account_id:
+            self.account_id = self.project_id.analytic_account_id
+        else:
+            self.account_id = None
     
     @api.depends('date')
     def _get_month(self):
@@ -84,6 +91,7 @@ class prisme_account_analytic_line(models.Model):
 
     def write(self, values):
         self._check_state()
+        self._check_if_one_task_in_project(values)
         return super(prisme_account_analytic_line, self).write(values)
 
     def unlink(self):
@@ -95,3 +103,18 @@ class prisme_account_analytic_line(models.Model):
             if line.sheet_id and line.sheet_id.state not in ('draft', 'new'):
                 raise UserError(_('You cannot modify an entry in a confirmed timesheet.'))
         return True
+    
+    def _check_if_one_task_in_project(self, values):
+        for line in self:
+            if 'project_id' in values:
+                project_id = line.env['project.project'].browse(values['project_id'])
+            else:
+                project_id = line.project_id
+            if project_id:
+                if project_id.tasks:
+                    if 'task_id' in values:
+                        task_id = values['task_id']
+                    else:
+                        task_id = line.task_id
+                    if not task_id:
+                        raise ValidationError(_("There is at least one task available for this project ! Please select one."))

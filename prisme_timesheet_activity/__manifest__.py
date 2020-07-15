@@ -22,6 +22,7 @@
       'hr_timesheet_attendance',
       'analytic',
       'account',
+      'account_accountant',
       'mail'
     ],
     'data': [

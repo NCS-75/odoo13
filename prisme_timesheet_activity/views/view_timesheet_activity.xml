@@ -16,12 +16,15 @@
             <field name="name">account.analytic.line.tree.hr_timesheet</field>
             <field name="model">account.analytic.line</field>
             <field name="arch" type="xml">
-                <tree string="Timesheet Activities">
+                <tree string="Timesheet Activities" default_order="date,user_id,time_beginning desc" >
                     <field name="date"/>
                     <field name="user_id" required="1" options='{"no_open": True}'/>
-                    <field name="name"/>
+                    <field name="partner_id"/>
                     <field name="project_id" required="1"/>
+                    <field name="name"/>
                     <field name="task_id" context="{'default_project_id': project_id}" domain="[('project_id', '=', project_id)]"/>
+                    <field name="time_beginning"/>
+                    <field name="time_end"/>
                     <field name="unit_amount" string="Duration" sum="Total time" widget="float_time"/>
                 </tree>
             </field>
@@ -74,7 +77,8 @@
 	                           	</group>
 	                           	<group string="Accounting" name="info_accounting">
 	                           		<field name="company_id" />	
-	                           		<field name="partner_id" />		
+	                           		<field name="partner_id" />
+	                           		<field name="account_id"/>		
 									<field name="amount"/>
 	                           	</group>
 	                           	<group colspan="2" col="2">
