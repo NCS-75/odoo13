@@ -12,7 +12,7 @@ class prisme_account_analytic_line(models.Model):
     sheet_id_computed = fields.Many2one('hr_timesheet_sheet.sheet', string='Sheet', compute='_compute_sheet', index=True, ondelete='cascade',
         search='_search_sheet')
     sheet_id = fields.Many2one('hr_timesheet_sheet.sheet', compute='_compute_sheet', string='Sheet', store=True)
-    general_account_id = fields.Many2one(related='product_id.property_account_expense_id', relation='account.account')
+    general_account_id = fields.Many2one(relation='account.account')
     
     @api.onchange('project_id')
     def _onchange_project(self):
@@ -25,6 +25,13 @@ class prisme_account_analytic_line(models.Model):
             self.account_id = self.project_id.analytic_account_id
         else:
             self.account_id = None
+           
+    @api.onchange('product_id') 
+    def _onchange_product(self):
+        if self.product_id and self.product_id.property_account_expense_id:
+            self.general_account_id = self.product_id.property_account_expense_id
+        else:
+            self.general_account_id = None
     
     @api.depends('date')
     def _get_month(self):
