@@ -14,6 +14,7 @@ class prisme_account_analytic_line(models.Model):
     sheet_id = fields.Many2one('hr_timesheet_sheet.sheet', compute='_compute_sheet', string='Sheet', store=True)
     general_account_id = fields.Many2one('account.account', related='product_id.property_account_expense_id', readonly=True, store=True)
     
+    #Update partner and analytic account
     @api.onchange('project_id')
     def _onchange_project(self):
         if self.project_id and self.project_id.partner_id:
