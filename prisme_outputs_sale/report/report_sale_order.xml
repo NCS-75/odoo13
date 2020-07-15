@@ -56,18 +56,15 @@
 						class="table table-bordered table-sm text-center"
 							style="margin-bottom: 2em;">
 						<tr class="align-middle small font-weight-bold">
-							<td>
-								<span>Your Reference</span>
-							</td>
-								<td>Date Ordered
-							</td>
+							<th>
+								Your Reference
+							</th>
+								<th>Date Ordered
+							</th>
 
-							<td>
-								<span>Our Reference</span>
-							</td>
-							<td>
-								<span>Payment Term</span>
-							</td>
+							<th>Our Reference	</th>
+							<th>Payment Term
+							</th>
 						</tr>
 						<tr>
 							<td>
@@ -93,13 +90,13 @@
 						class="table table-bordered table-sm text-center"
 							style="margin-bottom: 2em;">
 						<tr class="align-middle small font-weight-bold">
-							<td>
-								<span>Your Reference</span>
-							</td>
-							<td>
-														<span>Quotation Date</span>
-							</td>
-								<td>Quotation Validity</td>
+							<th>
+								Your Reference
+							</th>
+							<th>
+														Quotation Date
+							</th>
+								<th>Quotation Validity</th>
 						</tr>
 						<tr>
 							<td>
@@ -114,13 +111,13 @@
 								</td>
 						</tr>
 						<tr class="align-middle small font-weight-bold">
-							<td>
-								<span>Our Reference</span>
-							</td>
-							<td>
-								<span>Payment Term</span>
-							</td>
-								<td>Quotation Comment</td>
+							<th>
+								Our Reference
+							</th>
+							<th>
+								Payment Term
+							</th>
+								<th>Quotation Comment</th>
 						</tr>
 						<tr>
 							<td>
