@@ -29,17 +29,17 @@
 							<th style="width: 60%;">
 
 								<b>Shipping address :</b>
-								<address t-field="o.partner_shipping_id"
+								<address class="text-nowrap" t-field="o.partner_shipping_id"
 									t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
 
 								<b>Invoice address :</b>
-								<address t-field="o.partner_invoice_id"
+								<address class="text-nowrap" t-field="o.partner_invoice_id"
 									t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
 
 
 							</th>
 							<th style="width: 40%;">
-								<address t-field="o.partner_id"
+								<address class="text-nowrap" t-field="o.partner_id"
 									t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
 							</th>
 						</tr>
@@ -53,7 +53,8 @@
 
 							<t t-if="is_order">
 					<table
-						class="w-100 table table-bordered table-sm text-center">
+						class="table table-bordered table-sm text-center"
+							style="margin-bottom: 2em;">
 						<tr class="align-middle small font-weight-bold">
 							<td>
 								<span>Your Reference</span>
@@ -70,26 +71,27 @@
 						</tr>
 						<tr>
 							<td>
-								<span t-field="o.client_order_ref" />
+								<span class="text-nowrap" t-field="o.client_order_ref" />
 							</td>
 
 
 								<td>
-									<span t-field="o.date_order" />
+									<span  class="text-nowrap" t-field="o.date_order" />
 								</td>
 
 							<td>
-								<span t-field="o.user_id" />
+								<span class="text-nowrap" t-field="o.user_id" />
 							</td>
 							<td>
-								<span t-field="o.payment_term_id" />
+								<span class="text-nowrap" t-field="o.payment_term_id" />
 							</td>
 						</tr>
 					</table>
 </t>
 <t t-else="">
 <table
-						class="w-100 table table-bordered table-sm text-center">
+						class="table table-bordered table-sm text-center"
+							style="margin-bottom: 2em;">
 						<tr class="align-middle small font-weight-bold">
 							<td>
 								<span>Your Reference</span>
@@ -101,14 +103,14 @@
 						</tr>
 						<tr>
 							<td>
-								<span t-field="o.client_order_ref" />
+								<span class="text-nowrap" t-field="o.client_order_ref" />
 							</td>
 							<td>
-								<span t-field="o.date_order" />
+								<span class="text-nowrap" t-field="o.date_order" />
 							</td>
 
 								<td>
-									<span t-field="o.validity_date" />
+									<span class="text-nowrap" t-field="o.validity_date" />
 								</td>
 						</tr>
 						<tr class="align-middle small font-weight-bold">
@@ -122,13 +124,13 @@
 						</tr>
 						<tr>
 							<td>
-								<span t-field="o.user_id" />
+								<span class="text-nowrap" t-field="o.user_id" />
 							</td>
 							<td>
-								<span t-field="o.payment_term_id" />
+								<span class="text-nowrap" t-field="o.payment_term_id" />
 							</td>
 								<td>
-									<span t-field="o.quotation_comment" />
+									<span class="text-nowrap" t-field="o.quotation_comment" />
 								</td>
 											</tr>
 					</table>
