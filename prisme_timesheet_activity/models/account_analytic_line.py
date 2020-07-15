@@ -3,7 +3,8 @@ from odoo.exceptions import ValidationError, UserError
 
 class prisme_account_analytic_line(models.Model):
     _inherit = 'account.analytic.line'
-    _order = "date ASC, time_beginning ASC"
+    _order="date,user_id,time_beginning"
+    
     time_beginning =  fields.Float("Beginning")
     time_end = fields.Float("End")
     internal_description = fields.Text("Internal Description")
@@ -11,6 +12,7 @@ class prisme_account_analytic_line(models.Model):
     sheet_id_computed = fields.Many2one('hr_timesheet_sheet.sheet', string='Sheet', compute='_compute_sheet', index=True, ondelete='cascade',
         search='_search_sheet')
     sheet_id = fields.Many2one('hr_timesheet_sheet.sheet', compute='_compute_sheet', string='Sheet', store=True)
+    general_account_id = fields.Many2one(related='product_id.property_account_expense_id', relation='account.account')
     
     @api.onchange('project_id')
     def _onchange_project(self):
