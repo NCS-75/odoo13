@@ -12,7 +12,7 @@ class prisme_account_analytic_line(models.Model):
     sheet_id_computed = fields.Many2one('hr_timesheet_sheet.sheet', string='Sheet', compute='_compute_sheet', index=True, ondelete='cascade',
         search='_search_sheet')
     sheet_id = fields.Many2one('hr_timesheet_sheet.sheet', compute='_compute_sheet', string='Sheet', store=True)
-    general_account_id = fields.Many2one(relation='account.account', related='product_id.property_account_expense_id', readonly=True, store=True)
+    general_account_id = fields.Many2one('account.account', related='product_id.property_account_expense_id', readonly=True, store=True)
     
     @api.onchange('project_id')
     def _onchange_project(self):
@@ -32,6 +32,23 @@ class prisme_account_analytic_line(models.Model):
             date = line.date
             month = date.strftime('%Y-%m')
             line.working_month = month
+            
+    @api.onchange('product_id', 'product_uom_id', 'unit_amount', 'currency_id', 'account_id', 'user_id')
+    def on_change_unit_amount(self):
+        if not self.product_id:
+            return {}
+
+        result = 0.0
+        unit = self.product_uom_id
+        if not unit or self.product_id.uom_po_id.category_id.id != unit.category_id.id:
+            unit = self.product_id.uom_po_id
+
+        # Compute based on pricetype
+        amount_unit = self.product_id.price_compute('standard_price', uom=unit)[self.product_id.id]
+        amount = amount_unit * self.unit_amount or 0.0
+        result = (self.currency_id.round(amount) if self.currency_id else round(amount, 2)) * -1
+        self.amount = result
+        self.product_uom_id = unit
     
     @api.onchange('time_beginning', 'time_end')
     def onchange_times(self):
