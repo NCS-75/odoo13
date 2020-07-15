@@ -9,6 +9,7 @@ class HrEmployee(models.Model):
     _description = 'Employee'
 
     timesheet_count = fields.Integer(compute='_compute_timesheet_count', string='Timesheets')
+    product_id = fields.Many2one('product.product', 'Product')
 
     def _compute_timesheet_count(self):
         for employee in self:

@@ -33,22 +33,13 @@ class prisme_account_analytic_line(models.Model):
             month = date.strftime('%Y-%m')
             line.working_month = month
             
-    @api.onchange('product_id', 'product_uom_id', 'unit_amount', 'currency_id', 'account_id', 'user_id')
-    def on_change_unit_amount(self):
-        if not self.product_id:
-            return {}
-
-        result = 0.0
-        unit = self.product_uom_id
-        if not unit or self.product_id.uom_po_id.category_id.id != unit.category_id.id:
-            unit = self.product_id.uom_po_id
-
-        # Compute based on pricetype
-        amount_unit = self.product_id.price_compute('standard_price', uom=unit)[self.product_id.id]
-        amount = amount_unit * self.unit_amount or 0.0
-        result = (self.currency_id.round(amount) if self.currency_id else round(amount, 2)) * -1
-        self.amount = result
-        self.product_uom_id = unit
+    @api.onchange('user_id')
+    def getEmployeeProduct(self):
+        emp_obj = self.env['hr.employee']
+        emp = emp_obj.search([('user_id', '=', self.user_id.id or self.env.uid)], limit=1)
+        if emp:
+            if emp.product_id:
+                self.product_id = emp.product_id.id
     
     @api.onchange('time_beginning', 'time_end')
     def onchange_times(self):
