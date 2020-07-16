@@ -30,6 +30,7 @@
 				'sale',
 				'sale_stock',
 				'crm',
+				'account_accountant',
 	],
 	'data': [
 				   'views/sale_order_view.xml',
