@@ -23,7 +23,8 @@
       'analytic',
       'account',
       'account_accountant',
-      'mail'
+      'mail',
+      'sale_management'
     ],
     'data': [
         'views/view_timesheet_activity.xml',
