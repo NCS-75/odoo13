@@ -33,6 +33,7 @@
         'views/hr_timesheet_sheet_views.xml',
         'views/hr_department_views.xml',
         'views/hr_timesheet_sheet_config_settings_views.xml',
+        'views/hr_employee.xml',
         'data/hr_timesheet_sheet_timesheet_grid_data.xml'
     ],
     'demo': [
