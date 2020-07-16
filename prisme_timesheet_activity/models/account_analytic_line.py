@@ -3,7 +3,7 @@ from odoo.exceptions import ValidationError, UserError
 
 class prisme_account_analytic_line(models.Model):
     _inherit = 'account.analytic.line'
-    _order="date,user_id,time_beginning"
+    _order="date ASC, user_id ASC, time_beginning ASC"
     
     time_beginning =  fields.Float("Beginning")
     time_end = fields.Float("End")
