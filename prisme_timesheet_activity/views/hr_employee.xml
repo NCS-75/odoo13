@@ -10,7 +10,6 @@
 	            <xpath expr="//page[@name='hr_settings']" position="inside">
 	                <group>
 	                    <group string="Accounting" name="accounting">
-	                        <label for="product_id"/>
 	                        <field name="product_id" domain="[('type','=','service')]"/>
 	                    </group>
 	                </group>
