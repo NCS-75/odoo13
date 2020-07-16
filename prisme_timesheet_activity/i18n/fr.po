@@ -758,3 +758,9 @@ msgstr "hr.timesheet.current.open"
 #: model_terms:ir.ui.view,arch_db:prisme_timesheet_activity.hr_timesheet_sheet_form
 msgid "to"
 msgstr "au"
+
+#. module: prisme_timesheet_activity
+#: model:ir.model.fields,field_description:prisme_timesheet_activity.field_hr_employee__product_id
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_activity.hr_timesheet_line_form_view
+msgid "Product"
+msgstr "Produit"
