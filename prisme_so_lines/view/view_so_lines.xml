@@ -114,8 +114,6 @@
 							<newline />
 							<field name="layout_type" on_change="1"
 								modifiers="{'required': true}" />
-							<field name="rel_subtotal"
-								modifiers="{'readonly': true}" />
 							<field name="price_subtotal" on_change="1"
 								modifiers="{'readonly': true}" />
 							<field name="price_tax"
