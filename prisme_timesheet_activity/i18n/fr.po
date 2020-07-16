@@ -431,11 +431,6 @@ msgstr ""
 "%.2f."
 
 #. module: prisme_timesheet_activity
-#: model_terms:ir.ui.view,arch_db:prisme_timesheet_activity.hr_timesheet_line_form_view
-msgid "Product"
-msgstr "Produit"
-
-#. module: prisme_timesheet_activity
 #: model:ir.model.fields,field_description:prisme_timesheet_activity.field_hr_timesheet_sheet_sheet_account__name
 msgid "Project / Analytic Account"
 msgstr "Projet / Compte analytique"
