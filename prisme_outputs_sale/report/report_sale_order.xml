@@ -197,9 +197,6 @@
 									
                                     </t>
 									
-
-									
-                                    </t>
                                     <t t-if="line.display_type == 'line_section'">
                                         <td colspan="99">
                                             <span t-field="line.name" t-options="{'widget': 'text'}"/>
