@@ -7,7 +7,7 @@
             <field name="priority">30</field>
 	        <field name="inherit_id" ref="hr.view_employee_form"/>
 	        <field name="arch" type="xml">
-	            <xpath expr="//field[@name='hr_settings']" position="inside">
+	            <xpath expr="//page[@name='hr_settings']" position="inside">
 	                <group>
 	                    <group string="Accounting" name="accounting">
 	                        <label for="product_id"/>
