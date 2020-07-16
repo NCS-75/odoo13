@@ -58,6 +58,7 @@ class sale_order(models.Model):
     
     @api.model
     def is_print_subtotal(self):
+        is_print_subtotal = False
         config = self.env['res.config.settings'].sudo().search(
                 [], order="id desc")
         if config:
