@@ -197,28 +197,17 @@ class sale_order_line(models.Model):
         for line in self:
             # Prisme modification start
             price = line.price_unit
+            if (line.discount_amount):
+                price = price - line.discount_amount
                 
             if (line.discount):
                 price = price * (1 - (line.discount / 100.0))
-                
-            if (line.discount_amount):
-                price = price - line.discount_amount
             
             # Modification: if the line has been refused, set the price to 0
             if line.refused or line.layout_type != 'article':
                 price = 0.0
             # Prisme modification end
-            prisme_rounding = 0
-            if line.order_id.rounding_on_subtotal:
-                prisme_rounding = line.order_id.rounding_on_subtotal
-            
-            # if the module "prisme_accounting_enhancement" is installed, the compute_all method is able to recieve the rounding_on_subtotal value so we try with it first
-            try:
-                taxes = line.tax_id.compute_all(price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id, partner=line.order_id.partner_id, prisme_rounding=prisme_rounding)
-            
-            # if it didn't work we call the standard compute_all method
-            except:
-                taxes = line.tax_id.compute_all(price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id, partner=line.order_id.partner_id)
+            taxes = line.tax_id.compute_all(price, line.order_id.currency_id, line.product_uom_qty, product=line.product_id, partner=line.order_id.partner_id)
             line.update({
                 'price_tax': taxes['total_included'] - taxes['total_excluded'],
                 'price_total': taxes['total_included'],
@@ -247,12 +236,11 @@ class sale_order_line(models.Model):
                 price = 0
             
             price = line.price_unit
+            if (line.discount_amount):
+                price = price - line.discount_amount
                 
             if (line.discount):
                 price = price * (1 - (line.discount / 100.0))
-                
-            if (line.discount_amount):
-                price = price - line.discount_amount
 
                 
             line.price_reduce = price
@@ -335,19 +323,19 @@ class sale_order_line(models.Model):
             record.date_delivery = date_from + timedelta(days=record.customer_lead)
     
     
-    def _sub_total(self):
-        for sol in self:
-
-            sub_total = 0.0
-            if sol.layout_type == 'subtotal' and self._is_number(sol.order_id.id):
-                sub_sols = self.env['sale.order.line'].search([('order_id','=',sol.order_id.id),('sequence','<=',sol.sequence),('id','!=',sol.id)], order='sequence desc,id desc')
-                for sub_sol in sub_sols:
-                    if sub_sol.layout_type == 'subtotal': break
-                    if sub_sol.sequence == sol.sequence and sub_sol.id > sol.id: break
-                    if sub_sol.layout_type == 'article' and sub_sol.refused != True:
-                        sub_total += sub_sol.price_subtotal
+#    def _sub_total(self):
+#        for sol in self:
+#
+#            sub_total = 0.0
+#            if sol.layout_type == 'subtotal' and self._is_number(sol.order_id.id):
+#                sub_sols = self.env['sale.order.line'].search([('order_id','=',sol.order_id.id),('sequence','<=',sol.sequence),('id','!=',sol.id)], order='sequence desc,id desc')
+#                for sub_sol in sub_sols:
+#                    if sub_sol.layout_type == 'subtotal': break
+#                    if sub_sol.sequence == sol.sequence and sub_sol.id > sol.id: break
+#                    if sub_sol.layout_type == 'article' and sub_sol.refused != True:
+#                        sub_total += sub_sol.price_subtotal
             
-            sol.rel_subtotal = sub_total
+#            sol.rel_subtotal = sub_total
     
     
     @api.depends('state', 'product_uom_qty', 'qty_delivered', 'qty_to_invoice', 'qty_invoiced')

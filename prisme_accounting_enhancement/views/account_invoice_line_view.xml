@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <odoo>
 	<data>
-		<record model="ir.ui.view" id="account_move_prisme_discount">
+		<record model="ir.ui.view" id="account_invoice_prisme_discount">
 			<field name="name">account.move.prisme.discount</field>
 			<field name="model">account.move</field>
 			<field name="type">form</field>
