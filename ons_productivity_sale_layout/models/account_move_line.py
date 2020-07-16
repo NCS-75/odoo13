@@ -33,30 +33,6 @@ class account_move_line(models.Model):
             return False
 
     layout_type = fields.Selection(layout.LAYOUTS_LIST, 'Layout type', required=True, index=True, default=lambda *a: 'article')
-    rel_subtotal = fields.Float(compute='_sub_total', string='Rel. Sub-total', digits='Account')
-
-#     _order = 'move_id desc, sequence asc , id'
-
-    def _sub_total(self):
-        for invl in self:
- 
-            invl.rel_subtotal = 0
-            invl.sequence_number_next = 2
- 
-            sub_total = 0.0
- 
-            if invl.layout_type == 'subtotal' and self._is_number(invl.move_id.id):
-                id = invl.id
-                if not isinstance(id, int):
-                    id = id.origin
-                sub_invls = self.env['account.move.line'].search([('move_id','=',invl.move_id.id),('sequence','<=',invl.sequence),('id','!=',id)], order='sequence desc,id desc')
-                for sub_invl in sub_invls:
-                    if invl.sequence > sub_invl.sequence or (invl.sequence == sub_invl.sequence and id > sub_invl.id ):
-                        if (sub_invl.layout_type == 'subtotal') or (sub_invl.sequence == invl.sequence and sub_invl.id > id):                             
-                            break
-                        if sub_invl.layout_type == 'article' and not sub_invl.account_internal_type == 'receivable' and not sub_invl.tax_group_id and not sub_invl.account_internal_type == 'payable':
-                            sub_total += sub_invl.price_subtotal
-            invl.rel_subtotal = sub_total
  
     # ------------------------- Instance management
     @api.model_create_multi
