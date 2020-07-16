@@ -52,9 +52,6 @@
                     <xpath expr="//field[@name='order_line']/tree/field[@name='product_id' and not(@invisible)]" position="before">
                         <field name="layout_type"/>
                     </xpath>
-                    <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal' and not(@invisible)]" position="after">
-                        <field name="rel_subtotal" attrs="{'invisible':[('layout_type', '!=', 'subtotal')]}"/>
-                    </xpath>
                 </data>
             </field>
         </record>
