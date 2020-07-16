@@ -323,19 +323,19 @@ class sale_order_line(models.Model):
             record.date_delivery = date_from + timedelta(days=record.customer_lead)
     
     
-    def _sub_total(self):
-        for sol in self:
-
-            sub_total = 0.0
-            if sol.layout_type == 'subtotal' and self._is_number(sol.order_id.id):
-                sub_sols = self.env['sale.order.line'].search([('order_id','=',sol.order_id.id),('sequence','<=',sol.sequence),('id','!=',sol.id)], order='sequence desc,id desc')
-                for sub_sol in sub_sols:
-                    if sub_sol.layout_type == 'subtotal': break
-                    if sub_sol.sequence == sol.sequence and sub_sol.id > sol.id: break
-                    if sub_sol.layout_type == 'article' and sub_sol.refused != True:
-                        sub_total += sub_sol.price_subtotal
+#    def _sub_total(self):
+#        for sol in self:
+#
+#            sub_total = 0.0
+#            if sol.layout_type == 'subtotal' and self._is_number(sol.order_id.id):
+#                sub_sols = self.env['sale.order.line'].search([('order_id','=',sol.order_id.id),('sequence','<=',sol.sequence),('id','!=',sol.id)], order='sequence desc,id desc')
+#                for sub_sol in sub_sols:
+#                    if sub_sol.layout_type == 'subtotal': break
+#                    if sub_sol.sequence == sol.sequence and sub_sol.id > sol.id: break
+#                    if sub_sol.layout_type == 'article' and sub_sol.refused != True:
+#                        sub_total += sub_sol.price_subtotal
             
-            sol.rel_subtotal = sub_total
+#            sol.rel_subtotal = sub_total
     
     
     @api.depends('state', 'product_uom_qty', 'qty_delivered', 'qty_to_invoice', 'qty_invoiced')
