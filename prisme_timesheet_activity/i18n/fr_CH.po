@@ -33,8 +33,15 @@ msgstr "<span class=\"o_stat_text\">Feuille de temps</span>"
 
 #. module: prisme_timesheet_activity
 #: model_terms:ir.ui.view,arch_db:prisme_timesheet_activity.hr_timesheet_line_form_view
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_activity.prisme_timesheet_view_employee_form
 msgid "Accounting"
 msgstr "Comptabilité"
+
+#. module: prisme_timesheet_activity
+#: code:addons/prisme_timesheet_activity/models/account_analytic_line.py:0
+#, python-format
+msgid "There is at least one task available for this project ! Please select one."
+msgstr "Il y a au moins une tâche disponible pour le projet sélectionné ! Veuillez en sélectionner une."
 
 #. module: prisme_timesheet_activity
 #: model:ir.model.fields,field_description:prisme_timesheet_activity.field_hr_timesheet_sheet_sheet__message_needaction
