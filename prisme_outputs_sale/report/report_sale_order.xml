@@ -184,7 +184,7 @@
 					<table class="w-100 table-sm">
 						<thead class="border-bottom border-dark">
 							<tr>
-								<th name="th_description" class="text-left">
+								<th name="th_description" class="text-left" style="width: 30%;">
 									<span>Description</span>
 								</th>
 								<th name="th_vat"
@@ -232,7 +232,7 @@
 										t-if="not line.display_type and line.layout_type=='article'"
 										name="account_invoice_line_accountable">
 
-										<td name="account_invoice_line_name">
+										<td name="account_invoice_line_name" style="width: 30%;">
 											<span t-field="line.name" t-options="{'widget': 'text'}" />
 										</td>
 										<td name="td_taxes" class="text-right">
@@ -275,7 +275,21 @@
 										</td>
 									</t>
 								</tr>
-							
+								
+								<t t-set="show_subtotal" t-value="False" />
+								<t t-set="foo" t-value="False"/>
+								<t t-foreach="range(range(o.order_line)-line_index)" t-as="l">
+								<t t-if="foo == False">
+									<t	t-if="o.order_line[line_index+l_index].layout_type == 'article'">									
+									 <t t-set="foo" t-value="True"/>
+									</t>
+									<t	t-if="o.order_line[line_index+l_index].display_type == 'line_section'">									
+									 <t t-set="foo" t-value="True"/>
+									 <t t-set="show_subtotal" t-value="True" />
+									</t>
+									
+								</t>
+								</t>
 								
 								<t	t-if="current_section and (line_last or o.order_line[line_index+1].display_type == 'line_section') and o.company_id.totals_below_sections">
 									<tr class="is-subtotal">
