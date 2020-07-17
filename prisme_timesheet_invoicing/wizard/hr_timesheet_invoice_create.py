@@ -51,7 +51,6 @@ class hr_timesheet_invoice_create(models.TransientModel):
             if analytic.invoice_id:
                 raise ValidationError(_("Invoice is already linked to some of the analytic line(s)!"))
 
-    @api.multi
     def do_create(self):
         data = self.read()[0]
         # Create an invoice based on selected timesheet lines
@@ -66,7 +65,3 @@ class hr_timesheet_invoice_create(models.TransientModel):
         result['domain'] = [('id','in',invs)]
         result['res_id'] = invs
         return result
-
-
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

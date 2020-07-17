@@ -230,7 +230,6 @@ class prisme_account_analytic_line(models.Model):
             'project_id':project_id
         }
     
-    @api.multi
     def write(self, vals):
         for record in self:
             self._check_sheet(record, vals)
