@@ -33,16 +33,9 @@
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">hr.timesheet.invoice.create</field>
             <field name="view_mode">form</field>
+            <field name="binding_model_id">account.analytic.line</field>
+            <field name="binding_type">action</field>
             <field name="target">new</field>
-        </record>
-
-        <record model="ir.values" id="hr_timesheet_invoice_create_values">
-            <field name="model_id" ref="model_account_analytic_line" />
-            <field name="name">Create Invoice</field>
-            <field name="key2">client_action_multi</field>
-            <field name="value" eval="'ir.actions.act_window,' + str(ref('action_hr_timesheet_invoice_create'))" />
-            <field name="key">action</field>
-            <field name="model">account.analytic.line</field>
         </record>
 
     </data>
