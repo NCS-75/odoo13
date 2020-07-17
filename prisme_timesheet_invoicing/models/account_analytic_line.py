@@ -227,7 +227,7 @@ class prisme_account_analytic_line(models.Model):
             'partner_id': partner.id,
             'company_id': company_id,
             'invoice_payment_term_id': partner.property_payment_term_id.id or False,
-            'account_id': partner.property_account_receivable_id.id,
+            #'account_id': partner.property_account_receivable_id.id,
             'currency_id': currency_id,
             # 'date_due': date_due,
             'fiscal_position_id': partner.property_account_position_id.id,
