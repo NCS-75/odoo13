@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="account_analytic_account_form_form" model="ir.ui.view">
+            <field name="name">account.analytic.account.invoice.form</field>
+            <field name="model">account.analytic.account</field>
+            <field name="priority">30</field>
+            <field name="inherit_id" ref="analytic.view_account_analytic_account_form"/>
+            <field name="arch" type="xml">
+	            <xpath expr="//form/sheet/group[@name='main']" position="before">
+	            	<field name="pricelist_id"/>
+	            </xpath>  
+         	</field>
+        </record>
+   </data>
+</openerp>

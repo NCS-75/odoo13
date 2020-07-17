@@ -1,0 +1,4 @@
+eclipse.preferences.version=1
+encoding//prisme_timesheet_invoicing/model/invoice.py=utf-8
+encoding//prisme_timesheet_invoicing/wizard/__init__.py=utf-8
+encoding//prisme_timesheet_invoicing/wizard/hr_timesheet_invoice_create.py=utf-8
