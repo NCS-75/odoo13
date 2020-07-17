@@ -69,22 +69,31 @@
 								style="margin-bottom: 2em;">
 								<tr class="align-middle small font-weight-bold">
 									<th>
-										<strong class="mr16"><font style="font-size: 12px;">Your Reference</font></strong>
+										<strong class="mr16">
+											<font style="font-size: 12px;">Your Reference</font>
+										</strong>
 									</th>
 									<th>
-										<strong class="mr16"><font style="font-size: 12px;">Date Ordered</font></strong>
+										<strong class="mr16">
+											<font style="font-size: 12px;">Date Ordered</font>
+										</strong>
 									</th>
 
 									<th>
-										<strong class="mr16"><font style="font-size: 12px;">Our Reference</font></strong>
+										<strong class="mr16">
+											<font style="font-size: 12px;">Our Reference</font>
+										</strong>
 									</th>
 									<th>
-										<strong class="mr16"><font style="font-size: 12px;">Payment Term</font></strong>
+										<strong class="mr16">
+											<font style="font-size: 12px;">Payment Term</font>
+										</strong>
 									</th>
 								</tr>
 								<tr>
 									<td>
-										<span class="text-nowrap small" t-field="o.client_order_ref" />
+										<span class="text-nowrap small"
+											t-field="o.client_order_ref" />
 									</td>
 
 
@@ -96,7 +105,8 @@
 										<span class="text-nowrap small" t-field="o.user_id" />
 									</td>
 									<td>
-										<span class="text-nowrap small" t-field="o.payment_term_id" />
+										<span class="text-nowrap small"
+											t-field="o.payment_term_id" />
 									</td>
 								</tr>
 							</table>
@@ -106,18 +116,25 @@
 								style="margin-bottom: 2em;">
 								<tr class="align-middle small font-weight-bold">
 									<th class="align-middle small font-weight-bold">
-										<strong class="mr16"><font style="font-size: 12px;">Your Reference</font></strong>
+										<strong class="mr16">
+											<font style="font-size: 12px;">Your Reference</font>
+										</strong>
 									</th>
 									<th>
-										<strong class="mr16"><font style="font-size: 12px;">Quotation Date</font></strong>
+										<strong class="mr16">
+											<font style="font-size: 12px;">Quotation Date</font>
+										</strong>
 									</th>
 									<th>
-										<strong class="mr16"><font style="font-size: 12px;">Quotation Validity</font></strong>
+										<strong class="mr16">
+											<font style="font-size: 12px;">Quotation Validity</font>
+										</strong>
 									</th>
 								</tr>
 								<tr>
 									<td>
-										<span class="text-nowrap small" t-field="o.client_order_ref" />
+										<span class="text-nowrap small"
+											t-field="o.client_order_ref" />
 									</td>
 									<td>
 										<span class="text-nowrap small" t-field="o.date_order" />
@@ -129,13 +146,19 @@
 								</tr>
 								<tr class="align-middle small font-weight-bold">
 									<th>
-										<strong class="mr16"><font style="font-size: 12px;">Our Reference</font></strong>
+										<strong class="mr16">
+											<font style="font-size: 12px;">Our Reference</font>
+										</strong>
 									</th>
 									<th>
-										<strong class="mr16"><font style="font-size: 12px;">Payment Term</font></strong>
+										<strong class="mr16">
+											<font style="font-size: 12px;">Payment Term</font>
+										</strong>
 									</th>
 									<th>
-										<strong class="mr16"><font style="font-size: 12px;">Quotation Comment</font></strong>
+										<strong class="mr16">
+											<font style="font-size: 12px;">Quotation Comment</font>
+										</strong>
 									</th>
 								</tr>
 								<tr>
@@ -143,10 +166,12 @@
 										<span class="text-nowrap small" t-field="o.user_id" />
 									</td>
 									<td>
-										<span class="text-nowrap small" t-field="o.payment_term_id" />
+										<span class="text-nowrap small"
+											t-field="o.payment_term_id" />
 									</td>
 									<td>
-										<span class="text-nowrap small" t-field="o.quotation_comment" />
+										<span class="text-nowrap small"
+											t-field="o.quotation_comment" />
 									</td>
 								</tr>
 							</table>
@@ -246,25 +271,31 @@
 										</td>
 									</t>
 								</tr>
-								<t
-									t-if="current_section and (line_last or o.order_line[line_index+1].display_type == 'line_section') and o.is_print_subtotal()">
+								<t	t-if="current_section and (line_last or o.order_line[line_index+1].display_type == 'line_section') and o.is_print_subtotal()">
 									<tr class="is-subtotal">
 										<td colspan="99">
-											<strong class="mr16">Subtotal</strong>
+											<strong class="mr16">Subtotal
+											<span t-field="current_section.name" t-options="{'widget': 'text'}" /> 
 											<span class="text-right" t-esc="current_subtotal"
-												t-options='{"widget": "monetary", "display_currency": o.currency_id}' />
+												t-options='{"widget": "monetary", "display_currency": o.currency_id}' /></strong>
 										</td>
 									</tr>
 								</t>
 
 								<t t-if="line.layout_type=='break'">
-									<p style="page-break-after:always;" />
+								<tr>
+									<td>
+										<p style="page-break-after:always;">
+										</p>
+										<br/>
+									</td>
+									</tr>
 								</t>
 								<t t-if="line.layout_type=='line'">
-									<td class="border-bottom border-dark" colspan="99">
+									<tr><td class="border-bottom border-dark" colspan="99">
 										<font color="white">
 										</font>
-									</td>
+									</td></tr>
 								</t>
 							</t>
 						</tbody>
@@ -301,66 +332,9 @@
 							</div>
 						</div>
 					</div>
-					<!-- <div name="taxes_table_container" class="mt-5" style="width: 55%; 
-						margin-bottom: 6em;"> <table class="table-sm w-100" name="taxes_table"> <tr 
-						class="border-bottom border-dark"> <th style="width: 60%">Tax</th> <th style="width: 
-						20%" class="text-right">Base</th> <th style="width: 20%" class="text-right">Amount</th> 
-						</tr> <t t-foreach="o.amount_by_group" t-as="amount_by_group"> <tr class="border-bottom 
-						small"> <td><span t-esc="amount_by_group[0]"/></td> <td class="text-right"><span 
-						t-esc="amount_by_group[2]" t-options="{'widget':'float', 'precision':2}"/></td> 
-						<td class="text-right"><span t-esc="amount_by_group[1]" t-options='{"widget": 
-						"monetary", "display_currency": o.currency_id}'/></td> </tr> </t> </table> 
-						</div> -->
-					<!--<p t-if="o.narration" name="comment" class="mt-5"> <span t-field="o.narration"/> 
-						</p> -->
 					<p t-if="o.fiscal_position_id.note" name="note" class="mt-5">
 						<span t-field="o.fiscal_position_id.note" />
 					</p>
-					<!-- <section> <span>[[repeatIn(sale_order_lines(o),'a')]]</span> <table 
-						colWidths="537.0" style="TableSeparationLine"> [[ a['layout_type'] == 'line' 
-						or removeParentNode('table') ]] <tr> <td> </td> </tr> </table> <table colWidths="189.0,80.0,45.0,40.0,60.0,60,63.0" 
-						style="Table5"> [[ a['layout_type'] == 'break' and removeParentNode('table') 
-						]] <tr> <td> <span> <font face="Helvetica" size="8.0">[[ a['layout_type']=='subtotal' 
-						and ( setTag('para','para',{'fontName':'Helvetica-Bold'})) or removeParentNode('font') 
-						]]</font> [[ a['name'] ]] </span> </td> <td> <span> <font face="Helvetica" 
-						size="8.0">[[ a['layout_type']=='subtotal' and ( setTag('para','para',{'fontName':'Helvetica-Bold'})) 
-						or removeParentNode('font') ]]</font> [[ a['tax_id'] ]] </span> </td> <td> 
-						<span> <font face="Helvetica" size="8.0">[[ a['layout_type']=='subtotal' 
-						and ( setTag('para','para',{'fontName':'Helvetica-Bold'})) or removeParentNode('font') 
-						]]</font> [[ formatLang(a['product_uom_qty']) ]] </span> </td> <td> <span> 
-						<font face="Helvetica" size="8.0">[[ a['layout_type']=='subtotal' and ( setTag('para','para',{'fontName':'Helvetica-Bold'})) 
-						or removeParentNode('font') ]]</font> [[ a['product_uom'] ]] </span> </td> 
-						<td> <span> <font face="Helvetica" size="8.0">[[ a['layout_type']=='subtotal' 
-						and ( setTag('para','para',{'fontName':'Helvetica-Bold'})) or removeParentNode('font') 
-						]]</font> [[ formatLang(a['price_unit'], digits=get_digits(dp='Sale Price')) 
-						]] </span> </td> <td> <span> <font face="Helvetica" size="8.0">[[ a['layout_type']=='subtotal' 
-						and ( setTag('para','para',{'fontName':'Helvetica-Bold'})) or removeParentNode('font') 
-						]]</font> [[ a['discount'] ]] <font face="Helvetica" size="8.0">[[ a['layout_type']=='subtotal' 
-						and ( setTag('para','para',{'fontName':'Helvetica-Bold'})) or removeParentNode('font') 
-						]]</font> </span> </td> <td> <span> <font face="Helvetica" size="8.0">[[ 
-						a['layout_type']=='subtotal' and ( setTag('para','para',{'fontName':'Helvetica-Bold'})) 
-						or removeParentNode('font') ]]</font> [[ a['price_subtotal'] ]] </span> </td> 
-						</tr> <tr> <td> <span>[[ a['notes'] and format(a['notes']) or removeParentNode('tr') 
-						]]</span> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> </td> <td> 
-						</td> </tr> </table> <pageBreak>[[ a['layout_type']!='break' and removeParentNode('pageBreak')]]</pageBreak> 
-						<table colWidths="189.0,90.0,75.0,60.0,60.0,63.0" repeatRows="1" style="Table4"> 
-						<tr> <td> <span> Description <font face="Helvetica" size="8.0"> [[ a['layout_type']!='break' 
-						and removeParentNode('table')]]</font> </span> </td> <td> <span>VAT</span> 
-						</td> <td> <span>Quantity</span> </td> <td> <span>Unit Price</span> </td> 
-						<td> <span>[[get_column_disc(o)=='0' and removeParentNode('para')]]Disc.</span> 
-						</td> <td> <span>Price [[ o.pricelist_id.currency_id.symbol ]]</span> </td> 
-						</tr> </table> </section> <table colWidths="357.0,106.0,73.0" style="Table6"> 
-						<tr> <td> </td> <td> <span>Total W/out VAT :</span> </td> <td> <span>[[ o.print_totals 
-						and formatLang(o.amount_untaxed , digits=get_digits(dp='Sale Price')) or 
-						removeParentNode('table') ]]</span> </td> </tr> <tr> <td> </td> <td> <span>Taxes 
-						:</span> </td> <td> <span>[[ o.print_vat and formatLang(o.amount_tax , digits=get_digits(dp='Sale 
-						Price')) or removeParentNode('tr') ]]</span> </td> </tr> <tr> <td> </td> 
-						<td> <span>Total with VAT :</span> </td> <td> <span>[[ o.print_vat and formatLang(o.amount_total 
-						, digits=get_digits(dp='Sale Price')) or removeParentNode('tr') ]] </span> 
-						</td> </tr> </table> <br /> <table colWidths="533.0" style="Table7"> <tr> 
-						<td> <span>[[ format(o.note or '') ]]</span> </td> </tr> </table> <br /> 
-						<span>[[ o.footer_comment]] </span> -->
-
 					<div class="oe_structure" />
 				</div>
 			</t>

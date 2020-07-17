@@ -62,6 +62,6 @@ class sale_order(models.Model):
         config = self.env['res.config.settings'].sudo().search(
                 [], order="id desc")
         if config:
-                config = config[0]
-                is_print_subtotal = config.totals_below_sections or ""
+            config = config[0]
+            is_print_subtotal = config.totals_below_sections or ""
         return is_print_subtotal
