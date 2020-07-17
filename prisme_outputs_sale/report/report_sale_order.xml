@@ -212,8 +212,9 @@
 								</th>
 							</tr>
 						</thead>
-						<tbody>
-							<t t-set="current_subtotal" t-value="0" />
+						</table>
+						
+						<t t-set="current_subtotal" t-value="0" />
 							<t t-foreach="o.order_line" t-as="line">
 								<t t-set="current_subtotal"
 									t-value="current_subtotal + line.price_subtotal"
@@ -221,6 +222,9 @@
 								<t t-set="current_subtotal"
 									t-value="current_subtotal + line.price_total"
 									groups="account.group_show_line_subtotals_tax_included" />
+						
+						<table class="w-100 table-sm">
+						<tbody>				
 
 
 								<tr class="border-bottom">
@@ -271,6 +275,8 @@
 										</td>
 									</t>
 								</tr>
+							
+								
 								<t	t-if="current_section and (line_last or o.order_line[line_index+1].display_type == 'line_section') and o.company_id.totals_below_sections">
 									<tr class="is-subtotal">
 										<td colspan="3">
@@ -286,23 +292,25 @@
 									</tr>
 								</t>
 
-								<t t-if="line.layout_type=='break'">
-								<tr>
-									<td>
-										<div style="page-break-after:auto;"/>
-										<br/>
-									</td>
-									</tr>
-								</t>
+								
 								<t t-if="line.layout_type=='line'">
 									<tr><td class="border-bottom border-dark" colspan="99">
 										<font color="white">
 										</font>
 									</td></tr>
 								</t>
-							</t>
+							
 						</tbody>
 					</table>
+					<t t-if="line.layout_type=='break'">
+								<tr>
+									<td>
+										<p style="page-break-after:always;"/>
+										<br/>
+									</td>
+									</tr>
+								</t>
+					</t>
 
 					<div class="clearfix">
 						<div id="total" class="row">
