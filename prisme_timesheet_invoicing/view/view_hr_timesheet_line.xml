@@ -5,10 +5,10 @@
 			<field name="name">account.analytic.line.form.prisme</field>
 			<field name="model">account.analytic.line</field>
 			<field name="type">form</field>
-			<field name="inherit_id" ref="hr_timesheet.hr_timesheet_line_form" />
+			<field name="inherit_id" ref="prisme_timesheet_activity.hr_timesheet_line_form_view" />
 			<field name="arch" type="xml">
 			    		
-				<xpath expr="/form/sheet/group/notebook/page/group[@name='info_accounting']" position="after">
+				<xpath expr="//group[@name='info_accounting']" position="after">
 	                <group string="Billing">
 	                	<field name="to_invoice"/>	
 						<field name="invoice_id" readonly="True"/>
