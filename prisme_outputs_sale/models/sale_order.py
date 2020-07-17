@@ -64,4 +64,6 @@ class sale_order(models.Model):
         if config:
             config = config[0]
             is_print_subtotal = config.totals_below_sections or ""
+        print("AAAA")
+        print(is_print_subtotal)
         return is_print_subtotal
