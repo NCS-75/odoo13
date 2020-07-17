@@ -291,7 +291,7 @@
 								</t>
 								</t>
 								</t>
-								<t	t-if="current_section and (line_last or o.order_line[line_index+1].display_type == 'line_section') and o.company_id.totals_below_sections">
+								<t	t-if="(line_last and current_section and o.company_id.totals_below_sections) or show_subtotal">
 									<tr class="is-subtotal">
 										<td colspan="3">
 											<strong class="mr16">Subtotal
