@@ -278,7 +278,7 @@
 								
 								<t t-set="show_subtotal" t-value="False" />
 								<t t-set="foo" t-value="False"/>
-								<t t-foreach="range(range(o.order_line)-line_index)" t-as="l">
+								<t t-foreach="range(len(o.order_line)-line_index)" t-as="l">
 								<t t-if="foo == False">
 									<t	t-if="o.order_line[line_index+l_index].layout_type == 'article'">									
 									 <t t-set="foo" t-value="True"/>
