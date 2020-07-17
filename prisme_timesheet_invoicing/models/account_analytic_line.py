@@ -192,7 +192,7 @@ class prisme_account_analytic_line(models.Model):
                 if data.get('name', False):
                     details.append(line['name'])
                 if details:
-                    note.append(u' - '.join(map(lambda x: unicode(x) or '', details)))
+                    note.append(u' - '.join(map(lambda x: str(x) or '', details)))
 
             if note:
                 self._cr.execute("SELECT column_name FROM information_schema.columns WHERE table_name='account_invoice_line' and column_name='note'")
