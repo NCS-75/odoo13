@@ -273,9 +273,11 @@
 								</tr>
 								<t	t-if="current_section and (line_last or o.order_line[line_index+1].display_type == 'line_section') and o.company_id.totals_below_sections">
 									<tr class="is-subtotal">
-										<td colspan="99">
+										<td colspan="3">
 											<strong class="mr16">Subtotal
 											<span t-field="current_section.name" t-options="{'widget': 'text'}" /> 
+											</td>
+											<td colspan="99">
 											<span class="text-right" t-esc="current_subtotal"
 												t-options='{"widget": "monetary", "display_currency": o.currency_id}' /></strong>
 										</td>
@@ -285,8 +287,7 @@
 								<t t-if="line.layout_type=='break'">
 								<tr>
 									<td>
-										<p style="page-break-after:always;">
-										</p>
+										<div style="page-break-after:auto;"/>
 										<br/>
 									</td>
 									</tr>
