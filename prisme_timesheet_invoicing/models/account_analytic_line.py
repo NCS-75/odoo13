@@ -226,7 +226,7 @@ class prisme_account_analytic_line(models.Model):
             'name': "%s - %s" % (time.strftime('%d/%m/%Y'), invoice_name),
             'partner_id': partner.id,
             'company_id': company_id,
-            'payment_term_id': partner.property_payment_term_id.id or False,
+            'invoice_payment_term_id': partner.property_payment_term_id.id or False,
             'account_id': partner.property_account_receivable_id.id,
             'currency_id': currency_id,
             # 'date_due': date_due,
