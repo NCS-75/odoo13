@@ -135,7 +135,6 @@ class prisme_account_analytic_line(models.Model):
             'product_id': product_id,
             'discount': factor_id.factor,
             'move_id': invoice_id,
-            'note': '',
             'name': name,
             'uom_id': uom,
             'account_analytic_id': account.id,
