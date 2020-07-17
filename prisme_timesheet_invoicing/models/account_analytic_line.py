@@ -198,9 +198,9 @@ class prisme_account_analytic_line(models.Model):
                 self._cr.execute("SELECT column_name FROM information_schema.columns WHERE table_name='account_invoice_line' and column_name='note'")
                 field= self._cr.fetchone()
                 if field!=None and field[0]!=None:
-                    curr_invoice_line['note'] += "\n" + ("\n".join(map(lambda x: unicode(x) or '', note)))
+                    curr_invoice_line['note'] += "\n" + ("\n".join(map(lambda x: str(x) or '', note)))
                 else:
-                    curr_invoice_line['name'] += "\n" + ("\n".join(map(lambda x: unicode(x) or '', note)))
+                    curr_invoice_line['name'] += "\n" + ("\n".join(map(lambda x: str(x) or '', note)))
         return curr_invoice_line
     
     def _prepare_cost_invoice(self, partner, company_id, currency_id, analytic_lines):
