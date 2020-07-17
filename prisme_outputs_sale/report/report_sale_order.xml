@@ -276,8 +276,10 @@
 										<td colspan="3">
 											<strong class="mr16">Subtotal
 											<span t-field="current_section.name" t-options="{'widget': 'text'}" /> 
+											</strong>
 											</td>
 											<td colspan="99">
+											<strong class="mr16">
 											<span class="text-right" t-esc="current_subtotal"
 												t-options='{"widget": "monetary", "display_currency": o.currency_id}' /></strong>
 										</td>
