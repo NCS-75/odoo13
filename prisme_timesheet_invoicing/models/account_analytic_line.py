@@ -212,12 +212,16 @@ class prisme_account_analytic_line(models.Model):
         partner= self.env['res.partner'].browse(partner)
         date_due = False
         if partner.property_payment_term_id:
-            pterm_list = account_payment_term_obj.with_context(currency_id=currency_id).compute(value=1, date_ref=time.strftime('%Y-%m-%d'))
-            if pterm_list:
+            pterm_list = account_payment_term_obj.with_context(currency_id=currency_id)
+            pterm_list_compute = []
+            for pterm in pterm_list:
+                pterm_list_compute.append(pterm.compute(value=1, date_ref=time.strftime('%Y-%m-%d')))
+            
+            if pterm_list_compute:
                 # pterm_list = [line[0] for line in pterm_list
                 # pterm_list.sort()
                 # date_due = pterm_list[-1]
-                date_due = max(line[0] for line in pterm_list[0])
+                date_due = max(line[0] for line in pterm_list_compute[0])
         return {
             'name': "%s - %s" % (time.strftime('%d/%m/%Y'), invoice_name),
             'partner_id': partner.id,
