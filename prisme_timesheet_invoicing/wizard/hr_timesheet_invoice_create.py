@@ -56,8 +56,8 @@ class hr_timesheet_invoice_create(models.TransientModel):
         # Create an invoice based on selected timesheet lines
         invs = self.env['account.analytic.line'].invoice_cost_create(self._context['active_ids'], data)
         
-        form_view = self.env.ref('account.invoice_form')
-        tree_view = self.env.ref('account.invoice_tree')
+        form_view = self.env.ref('account.view_move_form')
+        tree_view = self.env.ref('account.view_invoice_tree')
 
         action = self.env.ref(self.env.context.get('action', 'account.action_invoice_tree1'))
         result = action.read()[0]
