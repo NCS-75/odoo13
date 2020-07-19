@@ -59,7 +59,7 @@ class hr_timesheet_invoice_create(models.TransientModel):
         form_view = self.env.ref('account.view_move_form')
         tree_view = self.env.ref('account.view_invoice_tree')
 
-        action = self.env.ref(self.env.context.get('action', 'account.action_invoice_tree1'))
+        action = self.env.ref(self.env.context.get('action', 'account.action_move_out_invoice_type'))
         result = action.read()[0]
         result['views'] = [(tree_view.id, 'tree'),(form_view.id, 'form')]
         result['domain'] = [('id','in',invs)]
