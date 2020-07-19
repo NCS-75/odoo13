@@ -137,7 +137,7 @@ class prisme_account_analytic_line(models.Model):
             'move_id': invoice_id,
             'name': name,
             #'uom_id': uom,
-            'account_analytic_id': account.id,
+            #'account_analytic_id': account.id,
         }
 
         if product_id:
