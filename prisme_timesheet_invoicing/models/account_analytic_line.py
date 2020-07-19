@@ -97,7 +97,7 @@ class prisme_account_analytic_line(models.Model):
 
                 l.invoice_id = last_invoice
 
-                last_invoice.compute_taxes()                
+                #last_invoice.compute_taxes()                
             # invoice_obj.button_reset_taxes(cr, uid, [last_invoice], context)
         return invoices
     
