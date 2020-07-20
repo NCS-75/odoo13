@@ -132,6 +132,7 @@ class prisme_account_analytic_line(models.Model):
         curr_invoice_line = {
             'price_unit': unit_price,
             'quantity': total_qty,
+            'product_uom_id': total_qty,
             'product_id': product_id,
             'discount': factor_id.factor,
             'move_id': invoice_id,
@@ -229,7 +230,7 @@ class prisme_account_analytic_line(models.Model):
             'invoice_payment_term_id': partner.property_payment_term_id.id or False,
             #'account_id': partner.property_account_receivable_id.id,
             'currency_id': currency_id,
-            # 'date_due': date_due,
+            'invoice_date': date_due,
             'fiscal_position_id': partner.property_account_position_id.id,
             'project_id':project_id
         }
