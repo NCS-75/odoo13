@@ -136,7 +136,6 @@ class prisme_account_analytic_line(models.Model):
             'discount': factor_id.factor,
             'move_id': invoice_id,
             'name': name,
-            'type': 'out_invoice'
             #'uom_id': uom,
             #'account_analytic_id': account.id,
         }
@@ -226,6 +225,7 @@ class prisme_account_analytic_line(models.Model):
             'name': "%s - %s" % (time.strftime('%d/%m/%Y'), invoice_name),
             'partner_id': partner.id,
             'company_id': company_id,
+            'type': 'out_invoice',
             'invoice_payment_term_id': partner.property_payment_term_id.id or False,
             #'account_id': partner.property_account_receivable_id.id,
             'currency_id': currency_id,
