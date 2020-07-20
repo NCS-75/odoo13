@@ -53,7 +53,7 @@ class prisme_account_analytic_line(models.Model):
                                    lang=partner.lang,
                                    force_company=company_id,  # set force_company in context so the correct product properties are selected (eg. income account)
                                    company_id=company_id)  # set company_id in context, so the correct default journal will be selected
-            last_invoice = invoice_obj.create(curr_invoice)
+            last_invoice = invoice_obj.create(curr_invoice).with_context(check_move_validity=False)
 
             invoices.append(last_invoice.id)
 
