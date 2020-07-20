@@ -53,7 +53,9 @@ class prisme_account_analytic_line(models.Model):
                                    lang=partner.lang,
                                    force_company=company_id,  # set force_company in context so the correct product properties are selected (eg. income account)
                                    company_id=company_id)  # set company_id in context, so the correct default journal will be selected
+            _logger.info("Creating invoice !")
             last_invoice = invoice_obj.create(curr_invoice).with_context(check_move_validity=False)
+            _logger.info("Invoice created !")
 
             invoices.append(last_invoice.id)
 
@@ -83,8 +85,9 @@ class prisme_account_analytic_line(models.Model):
                     if uom:
                         curr_invoice_line = self._prepare_cost_invoice_line(last_invoice.id,
                             product_id, uom, user_id, factor_id, account, lines_to_invoice, data)
-
+                        _logger.info("Creating invoice line !")
                         invoice_line_obj.create(curr_invoice_line)
+                        _logger.info("Invoice line created !")
                     else:
                         raise ValidationError(_("Please define Unit of Measure!"))
                         # raise osv.except_osv(_('Warning!'), _("Please define Unit of Measure!"))
