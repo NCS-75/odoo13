@@ -53,11 +53,6 @@ class prisme_account_analytic_line(models.Model):
                                    lang=partner.lang,
                                    force_company=company_id,  # set force_company in context so the correct product properties are selected (eg. income account)
                                    company_id=company_id)  # set company_id in context, so the correct default journal will be selected
-            _logger.info("Creating invoice !")
-            last_invoice = invoice_obj.create(curr_invoice).with_context(check_move_validity=False)
-            _logger.info("Invoice created !")
-
-            invoices.append(last_invoice.id)
 
             # use key (product, uom, user, invoiceable, analytic account, journal type)
             # creates one invoice line per key
@@ -78,22 +73,32 @@ class prisme_account_analytic_line(models.Model):
                 # We want to retrieve the data in the partner language for the invoice creation
                 analytic_line = analytic_line_obj.browse([line.id for line in analytic_line])
                 invoice_lines_grouping.setdefault(key, []).append(analytic_line)
-
+            
+            invoice_lines = []
+            
             # finally creates the invoice line
             for (product_id, uom, user_id, factor_id, account), lines_to_invoice in invoice_lines_grouping.items():
                 if product_id:
                     if uom:
-                        curr_invoice_line = self._prepare_cost_invoice_line(last_invoice.id,
-                            product_id, uom, user_id, factor_id, account, lines_to_invoice, data)
-                        _logger.info("Creating invoice line !")
-                        invoice_line_obj.create(curr_invoice_line)
-                        _logger.info("Invoice line created !")
+                        curr_invoice_line = self._prepare_cost_invoice_line(product_id, uom, user_id, factor_id, account, lines_to_invoice, data)
+                        invoice_lines.append((0, 0, curr_invoice_line))
+                        #_logger.info("Creating invoice line !")
+                        #invoice_line_obj.create(curr_invoice_line)
+                        #_logger.info("Invoice line created !")
                     else:
                         raise ValidationError(_("Please define Unit of Measure!"))
                         # raise osv.except_osv(_('Warning!'), _("Please define Unit of Measure!"))
                 else:
                     raise ValidationError(_("Please define a product!"))
                     # raise osv.except_osv(_('Warning!'), _("Please define a product!"))
+            
+            curr_invoice["invoice_line_ids"] = invoice_lines
+
+            #_logger.info("Creating invoice !")
+            last_invoice = invoice_obj.create(curr_invoice)#.with_context(check_move_validity=False)
+            #_logger.info("Invoice created !")
+
+            invoices.append(last_invoice.id)
 
             for l in analytic_lines:
                 # l.write({'invoice_id': last_invoice.id})
@@ -105,7 +110,7 @@ class prisme_account_analytic_line(models.Model):
         return invoices
     
 
-    def _prepare_cost_invoice_line(self, invoice_id, product_id, uom, user_id, factor_id, account, analytic_lines, data):
+    def _prepare_cost_invoice_line(self, product_id, uom, user_id, factor_id, account, analytic_lines, data):
 
         product_obj = self.env['product.product']
         uom_context = dict(self._context or {}, uom=uom)
@@ -138,7 +143,7 @@ class prisme_account_analytic_line(models.Model):
             'product_uom_id': total_qty,
             'product_id': product_id,
             'discount': factor_id.factor,
-            'move_id': invoice_id,
+            #'move_id': invoice_id,
             'name': name,
             #'uom_id': uom,
             #'account_analytic_id': account.id,
@@ -160,10 +165,10 @@ class prisme_account_analytic_line(models.Model):
                 # raise osv.except_osv(_('Error!'), _("Configuration Error!") + '\n' + _("Please define income account for product '%s'.") % product.name)
             taxes = product.taxes_id or general_account.tax_ids or False
             
-            invoice_id = self.env['account.move'].browse(invoice_id)
-            if not taxes:
-                taxes = []
-            fp_taxes = invoice_id.fiscal_position_id.map_tax(taxes, product, invoice_id.partner_id).ids
+            #invoice_id = self.env['account.move'].browse(invoice_id)
+            #if not taxes:
+            #    taxes = []
+            #fp_taxes = invoice_id.fiscal_position_id.map_tax(taxes, product, invoice_id.partner_id).ids
             curr_invoice_line.update({
                 # 'invoice_line_tax_ids': [(6, 0, fp_taxes)],
                 'name': factor_name,
