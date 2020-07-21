@@ -21,12 +21,12 @@
                         <group attrs="{'invisible': [('invoice_on_timesheets','=',False)]}">
 	                        <table class="oe_form_analytic_account">
 	                            <tr>
-                                    <th width="100px"><label string="Expected"/></th>
-                                    <th width="100px"><label string="Invoiced"/></th>
-                                    <th width="100px"><label string="Remaining"/></th>
-                                    <th width="100px"><label string="To Invoice"/></th>
-                                    <th width="30px"></th>
-                                    <th></th>
+                                    <td width="100px"><label string="Expected"/></td>
+                                    <td width="100px"><label string="Invoiced"/></td>
+                                    <td width="100px"><label string="Remaining"/></td>
+                                    <td width="100px"><label string="To Invoice"/></td>
+                                    <td width="30px"></td>
+                                    <td></td>
 	                            </tr>
                                 <tr>
 	                                <td>
