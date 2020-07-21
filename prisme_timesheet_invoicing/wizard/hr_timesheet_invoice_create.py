@@ -32,9 +32,7 @@ class hr_timesheet_invoice_create(models.TransientModel):
     date = fields.Boolean('Date', help='The real date of each work will be displayed on the invoice', default=True)
     time= fields.Boolean('Time spent', help='The time of each work done will be displayed on the invoice')
     name = fields.Boolean('Description', help='The detail of each work done will be displayed on the invoice', default=True)
-    price = fields.Boolean('Cost', help='The cost of each work done will be displayed on the invoice. You probably don\'t want to check this')
-    product = fields.Many2one('product.product', 'Force Product', help='Fill this field only if you want to force to use a specific product. Keep empty to use the real product that comes from the cost.')
-
+    
     @api.model
     def view_init(self, fields):
         """

@@ -1,112 +1,412 @@
-# Translation of OpenERP Server.
+# Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* prisme_timesheet_enhancement
+# 	* prisme_timesheet_invoicing
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.0.0-rc1\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-12-07 09:40:03+0000\n"
-"PO-Revision-Date: 2010-12-07 09:40:03+0000\n"
-"Last-Translator: <>\n"
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-07-21 10:05+0000\n"
+"PO-Revision-Date: 2020-07-21 10:05+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: prisme_timesheet_enhancement
-#: view:account.analytic.line:0
-#: view:hr.analytic.timesheet:0
-msgid "Customer"
-msgstr "Client"
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields.selection,name:prisme_timesheet_invoicing.selection__hr_timesheet_invoice_factor__code__f
+msgid "(F) Job fixed price"
+msgstr "(F) Forfait"
 
-#. module: prisme_timesheet_enhancement
-#: constraint:ir.ui.view:0
-msgid "Invalid XML for View Architecture!"
-msgstr "XML non valide pour l'architecture de la vue"
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields.selection,name:prisme_timesheet_invoicing.selection__hr_timesheet_invoice_factor__code__g
+msgid "(G) Gratis"
+msgstr "(G) Gratuit"
 
-#. module: prisme_timesheet_enhancement
-#: field:hr.analytic.timesheet,time_end:0
-msgid "End"
-msgstr "Fin"
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields.selection,name:prisme_timesheet_invoicing.selection__hr_timesheet_invoice_factor__code__r
+msgid "(R) Job service price"
+msgstr "(R) Régie"
 
-#. module: prisme_timesheet_enhancement
-#: model:ir.model,name:prisme_timesheet_enhancement.model_hr_analytic_timesheet
-msgid "Timesheet Line"
-msgstr "Ligne de feuille de temps"
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields.selection,name:prisme_timesheet_invoicing.selection__hr_timesheet_invoice_factor__code__t
+msgid "(T) Trip"
+msgstr "(T) Déplacement"
 
-#. module: prisme_timesheet_enhancement
-#: view:hr.analytic.timesheet:0
-#: field:hr.analytic.timesheet,internal_description:0
-msgid "Internal Description"
-msgstr "Description Interne"
+#. module: prisme_timesheet_invoicing
+#: model:ir.model,name:prisme_timesheet_invoicing.model_account_analytic_account
+msgid "Analytic Account"
+msgstr "Compte analytique"
 
-#. module: prisme_timesheet_enhancement
-#: constraint:ir.model:0
-msgid "The Object name must start with x_ and not contain any special character !"
-msgstr "Le nom de l'objet doit commencer par x_ et ne doit pas contenir de caractères spéciaux !"
-
-#. module: prisme_timesheet_enhancement
-#: model:ir.model,name:prisme_timesheet_enhancement.model_hr_timesheet_sheet_sheet
-msgid "Timesheet"
-msgstr "Feuille de temps"
-
-#. module: prisme_timesheet_enhancement
-#: view:hr.analytic.timesheet:0
-msgid "Month"
-msgstr "Mois"
-
-#. module: prisme_timesheet_enhancement
-#: field:hr_timesheet_sheet.sheet,period_hours:0
-msgid "Period Hours"
-msgstr "Heures de la période"
-
-#. module: prisme_timesheet_enhancement
-#: field:hr.analytic.timesheet,time_quantity:0
-#: field:hr.analytic.timesheet,working_date:0
-msgid "unknown"
-msgstr "inconnu"
-
-#. module: prisme_timesheet_enhancement
-#: model:ir.model,name:prisme_timesheet_enhancement.model_account_analytic_line
+#. module: prisme_timesheet_invoicing
+#: model:ir.model,name:prisme_timesheet_invoicing.model_account_analytic_line
 msgid "Analytic Line"
-msgstr "Ligne Analytique"
+msgstr "Ligne analytique"
 
-#. module: prisme_timesheet_enhancement
-#: field:account.analytic.line,account_partner:0
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_account_move__project_id
+msgid "Analytic account"
+msgstr "Compte analytique"
+
+#. module: prisme_timesheet_invoicing
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.account_analytic_line_form_prisme
+msgid "Billing"
+msgstr "Facturation"
+
+#. module: prisme_timesheet_invoicing
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.view_hr_timesheet_invoice_create
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: prisme_timesheet_invoicing
+#: model_terms:ir.actions.act_window,help:prisme_timesheet_invoicing.action_hr_timesheet_invoice_factor_form
+msgid "Click to add a new type of invoicing."
+msgstr "Cliquez pour ajouter un nouveau type de facturation."
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_factor__code
+msgid "Code"
+msgstr "Code"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,help:prisme_timesheet_invoicing.field_account_analytic_account__remaining_hours_to_invoice
+msgid ""
+"Computed using the formula: Expected on timesheets - Total invoiced on "
+"timesheets"
+msgstr ""
+"Calculé selon la formule : Heures prévues - Heures effectives"
+
+#. module: prisme_timesheet_invoicing
+#: code:addons/prisme_timesheet_invoicing/models/account_analytic_line.py:0
+#, python-format
+msgid ""
+"Contract incomplete. Please fill in the Customer and Pricelist fields for "
+"%s."
+msgstr ""
+"Compte analytique incomplet. Feuillez remplir les champs Client et Liste de prix de "
+"%s."
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.actions.act_window,name:prisme_timesheet_invoicing.action_hr_timesheet_invoice_create
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.view_hr_timesheet_invoice_create
+msgid "Create Invoice"
+msgstr "Créer une facture"
+
+#. module: prisme_timesheet_invoicing
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.view_hr_timesheet_invoice_create
+msgid "Create Invoices"
+msgstr "Créer les factures"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model,name:prisme_timesheet_invoicing.model_hr_timesheet_invoice_create
+msgid "Create invoice from timesheet"
+msgstr "Création de facture depuis les feuilles de temps"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_create__create_uid
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_factor__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_create__create_date
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_factor__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_create__date
+msgid "Date"
+msgstr "Date"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_create__name
+msgid "Description"
+msgstr "Description"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_factor__factor
+msgid "Discount (%)"
+msgstr "Rabais (%)"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,help:prisme_timesheet_invoicing.field_hr_timesheet_invoice_factor__factor
+msgid "Discount in percentage"
+msgstr "Rabais en pourcent"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_create__display_name
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_factor__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: prisme_timesheet_invoicing
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.view_hr_timesheet_invoice_create
+msgid "Do you want to show details of work in invoice?"
+msgstr "Voulez-vous afficher les détails suivants dans la facture ?"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_account_analytic_account__hours_qtt_est
+msgid "Estimation of Hours to Invoice"
+msgstr "Estimation des heures à facturer"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_create__id
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_factor__id
+msgid "ID"
+msgstr "ID"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,help:prisme_timesheet_invoicing.field_account_analytic_account__ca_to_invoice
+msgid ""
+"If invoice from analytic account, the remaining amount you can invoice to "
+"the customer based on the total costs."
+msgstr ""
+"Si facturation depuis un compte analytique, le montant restant pouvant être facturé au "
+"client basé sur les coûts totaux."
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_factor__name
+msgid "Internal Name"
+msgstr "Nom interne"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_account_analytic_line__invoice_id
+msgid "Invoice"
+msgstr "Facture"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_account_analytic_account__invoice_on_timesheets
+msgid "Invoice On Timesheets"
+msgstr "Facturation des feuilles de temps"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model,name:prisme_timesheet_invoicing.model_hr_timesheet_invoice_factor
+msgid "Invoice Rate"
+msgstr "Taux de facturation"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.actions.act_window,name:prisme_timesheet_invoicing.action_project_timesheet_bill_task
+#: model:ir.ui.menu,name:prisme_timesheet_invoicing.menu_project_billing_line
+msgid "Invoice Tasks"
+msgstr "Facturation des tâches"
+
+#. module: prisme_timesheet_invoicing
+#: code:addons/prisme_timesheet_invoicing/wizard/hr_timesheet_invoice_create.py:0
+#, python-format
+msgid "Invoice is already linked to some of the analytic line(s)!"
+msgstr "La facture est déjà liée à certaines des lignes analytiques !"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_account_analytic_line__to_invoice
+msgid "Invoiceable"
+msgstr "Type de facturation"
+
+#. module: prisme_timesheet_invoicing
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.view_account_analytic_line_search_inherit
+msgid "Invoiced"
+msgstr "Facturé"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.ui.menu,name:prisme_timesheet_invoicing.menu_project_billing
+msgid "Invoicing"
+msgstr "Facturation"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,help:prisme_timesheet_invoicing.field_account_analytic_line__to_invoice
+msgid ""
+"It allows to set the discount while making invoice, keep empty if the "
+"activities should not be invoiced."
+msgstr ""
+"Permet d'effectuer un rabais lors de la facturation, laisser vide si les "
+"activités ne doivent pas être facturées."
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,help:prisme_timesheet_invoicing.field_hr_timesheet_invoice_factor__customer_name
+msgid "Label for the customer"
+msgstr "Label pour le client"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_create____last_update
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_factor____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_create__write_uid
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_factor__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_create__write_date
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_factor__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_factor__customer_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: prisme_timesheet_invoicing
+#: model_terms:ir.actions.act_window,help:prisme_timesheet_invoicing.action_hr_timesheet_invoice_factor_form
+msgid ""
+"Odoo allows you to create default invoicing types. You might\n"
+"                have to regularly assign discounts because of a specific\n"
+"                contract or agreement with a customer. From this menu, you can\n"
+"                create additional types of invoicing to speed up your\n"
+"                invoicing."
+msgstr ""
+"Odoo permet de créer des types de facturation par défaut. Vous pourriez\n"
+"                devoir assigner régulièrement des rabais à cause d'un contrat ou\n"
+"                arangement spécifique avec le client. Depuis ce menu, vous pouvez\n"
+"                créer des types de facturation supplémentaires pour accélérer la\n"
+"                facturation."
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_account_analytic_line__account_partner
 msgid "Partner Id"
-msgstr "Id Partenaire"
+msgstr "Partenaire"
 
-#. module: prisme_timesheet_enhancement
-#: field:hr.analytic.timesheet,time_beginning:0
-msgid "Beginning"
-msgstr "Début"
+#. module: prisme_timesheet_invoicing
+#: code:addons/prisme_timesheet_invoicing/models/account_analytic_line.py:0
+#, python-format
+msgid "Please define Unit of Measure!"
+msgstr "Veuillez définir l'unité de mesure !"
 
-#. module: prisme_timesheet_enhancement
-#: field:hr_timesheet_sheet.sheet,bonus_malus:0
-msgid "Bonus/malus"
-msgstr "Bonus/malus"
+#. module: prisme_timesheet_invoicing
+#: code:addons/prisme_timesheet_invoicing/models/account_analytic_line.py:0
+#, python-format
+msgid "Please define a product!"
+msgstr "Veuillez définir un produit !"
 
-#. module: prisme_timesheet_enhancement
-#: view:hr.analytic.timesheet:0
-msgid "This Month"
-msgstr "Ce Mois"
+#. module: prisme_timesheet_invoicing
+#: code:addons/prisme_timesheet_invoicing/models/account_analytic_line.py:0
+#, python-format
+msgid "Please define income account for product '%s'."
+msgstr "Veuillez définir un compte de revenus dans le produit '%s'."
 
-#. module: prisme_timesheet_enhancement
-#: code:addons/prisme_timesheet_enhancement/model/data_hr_timesheet_invoice.py:318
-#: code:addons/prisme_timesheet_enhancement/model/data_hr_timesheet_invoice.py:327
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_account_analytic_account__pricelist_id
+msgid "Pricelist"
+msgstr "Liste de prix"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_account_analytic_account__remaining_hours_to_invoice
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_account_analytic_account__timesheet_ca_invoiced
+msgid "Remaining Time"
+msgstr "Temps restant"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,help:prisme_timesheet_invoicing.field_account_analytic_account__timesheet_ca_invoiced
+msgid "Sum of timesheet lines invoiced for this contract."
+msgstr "Somme des lignes de feuille de temps facturées pour ce compte analytique."
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,help:prisme_timesheet_invoicing.field_hr_timesheet_invoice_create__name
+msgid "The detail of each work done will be displayed on the invoice"
+msgstr "Le détail de chaque travail réalisé sera affiché dans la facture"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,help:prisme_timesheet_invoicing.field_account_analytic_account__pricelist_id
+msgid ""
+"The product to invoice is defined on the employee form, the price will be "
+"deducted by this pricelist on the product."
+msgstr ""
+"Le produit à facturer est défini dans le formulaire de l'employé, le prix sera déduit "
+"par cette liste de prix dans le produit."
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,help:prisme_timesheet_invoicing.field_hr_timesheet_invoice_create__date
+msgid "The real date of each work will be displayed on the invoice"
+msgstr "La date de chaque travail sera affichée dans la facture"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,help:prisme_timesheet_invoicing.field_hr_timesheet_invoice_create__time
+msgid "The time of each work done will be displayed on the invoice"
+msgstr "Les heures de chaque travail seront affichées dans la facture"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_hr_timesheet_invoice_create__time
+msgid "Time spent"
+msgstr "Temps écoulé"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_account_analytic_account__to_invoice
+msgid "Timesheet Invoicing Ratio"
+msgstr "Pourcentage de facturation des feuilles de temps"
+
+#. module: prisme_timesheet_invoicing
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.view_account_analytic_line_search_inherit
+msgid "To Invoice"
+msgstr "À facturer"
+
+#. module: prisme_timesheet_invoicing
+#: code:addons/prisme_timesheet_invoicing/models/account_analytic_line.py:0
+#, python-format
+msgid "La ligne %s n'est pas facturable !"
+msgstr ""
+
+#. module: prisme_timesheet_invoicing
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.view_hr_timesheet_invoice_factor_form
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.view_hr_timesheet_invoice_factor_search
+msgid "Type of invoicing"
+msgstr "Type de facturation"
+
+#. module: prisme_timesheet_invoicing
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.view_hr_timesheet_invoice_factor_tree
+msgid "Types of invoicing"
+msgstr "Types de facturation"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.actions.act_window,name:prisme_timesheet_invoicing.action_hr_timesheet_invoice_factor_form
+#: model:ir.ui.menu,name:prisme_timesheet_invoicing.hr_timesheet_invoice_factor_view
+msgid "Types of timesheets invoicing"
+msgstr "Types de facturation des feuilles de temps"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_account_analytic_account__ca_to_invoice
+msgid "Uninvoiced Amount"
+msgstr "Montant non facturé"
+
+#. module: prisme_timesheet_invoicing
+#: code:addons/prisme_timesheet_invoicing/models/account_analytic_line.py:0
+#, python-format
+msgid "You cannot modify an entry in a confirmed timesheet."
+msgstr "Vous ne pouvez pas modifier une entrée dans une feuille de temps confirmée."
+
+#. module: prisme_timesheet_invoicing
+#: code:addons/prisme_timesheet_invoicing/models/account_analytic_line.py:0
+#: code:addons/prisme_timesheet_invoicing/models/account_analytic_line.py:0
 #, python-format
 msgid "You cannot modify an invoiced analytic line!"
 msgstr "Vous ne pouvez pas modifier une ligne analytique facturée !"
 
-#. module: prisme_timesheet_enhancement
-#: code:addons/prisme_timesheet_enhancement/report/account_analytic_line.py:69
-#, python-format
-msgid "There is at least one task available for this project ! Please select one."
-msgstr "Il y a au moins une tâche disponible pour le projet sélectionné ! Veuillez en sélectionner une."
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,help:prisme_timesheet_invoicing.field_account_analytic_account__to_invoice
+msgid ""
+"You usually invoice 100% of the timesheets. But if you mix fixed price and "
+"timesheet invoicing, you may use another ratio. For instance, if you do a "
+"20% advance invoice (fixed price, based on a sales order), you should "
+"invoice the rest on timesheet with a 80% ratio."
+msgstr ""
+"Généralement 100% des feuilles de temps sont facturées. Mais si vous mélangez facturation au forfait et"
+"par feuille de temps, vous pouvez utiliser un autre pourcentage. Par exemple, si vous une facture de 20% d'avance"
+"(forfait, basé sur un devis), vous devez facturer le reste des feuilles de temps avec un ration de 80%."
 
-#. module: prisme_timesheet_enhancement
-#: model:ir.model.fields,field_description:prisme_timesheet_enhancement.field_hr_timesheet_invoice_factor_code
-msgid "Code"
-msgstr "Code"
+#. module: prisme_timesheet_invoicing
+#: model_terms:ir.actions.act_window,help:prisme_timesheet_invoicing.action_project_timesheet_bill_task
+msgid ""
+"You will find here timesheets and purchases you did for contracts that can be reinvoiced to the customer.\n"
+"                  If you want to record new jobs to invoice, you should use the timesheet menu instead."
+msgstr ""
+"Vous trouverez ici les feuilles de temps et achats faits pour les contrats qui peuvent être refacturés au client.\n"
+"                  Si vous voulez enregistrer de nouveaux travaux à facturer, vous devez utiliser le menu 'Feuille de temps'."
+
+#. module: prisme_timesheet_invoicing
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.view_hr_timesheet_invoice_create
+msgid "or"
+msgstr "ou"
