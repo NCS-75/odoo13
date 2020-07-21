@@ -173,7 +173,7 @@ class prisme_account_analytic_line(models.Model):
             else:
                 fp_taxes = taxes
             curr_invoice_line.update({
-                'tax_ids': [(6, 0, fp_taxes)],
+                'tax_ids': [(6, 0, fp_taxes.ids)],
                 'name': factor_name,
                 # 'invoice_line_tax_ids': [(6, 0, tax)],
                 'account_id': general_account.id,
