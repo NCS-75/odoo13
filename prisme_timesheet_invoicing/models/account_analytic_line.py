@@ -168,8 +168,8 @@ class prisme_account_analytic_line(models.Model):
             #invoice_id = self.env['account.move'].browse(invoice_id)
             if not taxes:
                 taxes = []
-            if analytic_lines[0].partner_id and analytic_lines[0].partner_id.propery_account_position_id:
-                fp_taxes = analytic_lines[0].partner_id.propery_account_position_id.map_tax(taxes, product, analytic_lines[0].partner_id).ids
+            if analytic_lines[0].partner_id and analytic_lines[0].partner_id.property_account_position_id:
+                fp_taxes = analytic_lines[0].partner_id.property_account_position_id.map_tax(taxes, product, analytic_lines[0].partner_id).ids
             else:
                 fp_taxes = taxes
             curr_invoice_line.update({
