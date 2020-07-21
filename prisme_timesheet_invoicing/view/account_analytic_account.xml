@@ -15,6 +15,28 @@
                            	<field name="to_invoice"/>
                         </group>
                     </xpath>
+                    
+                    <xpath expr="//form/sheet/group[@name='main']" position="after">
+                        <separator string="Invoicing Tracking of Timesheets" attrs="{'invisible': [('invoice_on_timesheets','=',False)]}"/>
+                        <group attrs="{'invisible': [('invoice_on_timesheets','=',False)]}">
+	                        <table class="oe_form_analytic_account">
+                                <tr>
+	                                <td>
+	                                    <field class="oe_inline" name="hours_qtt_est"/>
+	                                </td>
+                                    <td>
+	                                    <field class="oe_inline" name="timesheet_ca_invoiced"/>
+	                                </td>
+                                    <td>
+	                                    <field class="oe_inline" name="remaining_hours_to_invoice"/>
+	                                </td>
+                                    <td>
+	                                    <field class="oe_inline" name="ca_to_invoice"/>
+	                                </td>
+	                            </tr>
+	                        </table>
+                        </group>
+                    </xpath>
            </field>
         </record>
    </data>
