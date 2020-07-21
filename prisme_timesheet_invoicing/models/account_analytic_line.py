@@ -77,10 +77,10 @@ class prisme_account_analytic_line(models.Model):
             invoice_lines = []
             
             # finally creates the invoice line
-            for (product_id, uom, user_id, factor_id, account), lines_to_invoice in invoice_lines_grouping.items():
+            for (partner_id, product_id, uom, user_id, factor_id, account), lines_to_invoice in invoice_lines_grouping.items():
                 if product_id:
                     if uom:
-                        curr_invoice_line = self._prepare_cost_invoice_line(product_id, uom, user_id, factor_id, account, lines_to_invoice, data)
+                        curr_invoice_line = self._prepare_cost_invoice_line(partner_id, product_id, uom, user_id, factor_id, account, lines_to_invoice, data)
                         invoice_lines.append((0, 0, curr_invoice_line))
                         #_logger.info("Creating invoice line !")
                         #invoice_line_obj.create(curr_invoice_line)
@@ -110,7 +110,7 @@ class prisme_account_analytic_line(models.Model):
         return invoices
     
 
-    def _prepare_cost_invoice_line(self, product_id, uom, user_id, factor_id, account, analytic_lines, data):
+    def _prepare_cost_invoice_line(self, partner_id, product_id, uom, user_id, factor_id, account, analytic_lines, data):
 
         product_obj = self.env['product.product']
         uom_context = dict(self._context or {}, uom=uom)
@@ -166,11 +166,11 @@ class prisme_account_analytic_line(models.Model):
             taxes = product.taxes_id or general_account.tax_ids or False
             
             #invoice_id = self.env['account.move'].browse(invoice_id)
-            #if not taxes:
-            #    taxes = []
-            #fp_taxes = invoice_id.fiscal_position_id.map_tax(taxes, product, invoice_id.partner_id).ids
+            if not taxes:
+                taxes = []
+            fp_taxes = partner_id.propery_account_position_id.map_tax(taxes, product, partner_id).ids
             curr_invoice_line.update({
-                # 'invoice_line_tax_ids': [(6, 0, fp_taxes)],
+                'tax_ids': [(6, 0, fp_taxes)],
                 'name': factor_name,
                 # 'invoice_line_tax_ids': [(6, 0, tax)],
                 'account_id': general_account.id,
