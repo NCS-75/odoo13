@@ -270,21 +270,21 @@ class prisme_account_analytic_line(models.Model):
                 #Else check if timesheet has already been invoiced
                 ###If only the "Task" field and/or the "Internal description" field and/or the "Reference" field are being modified, do nothing
                 ###Else show an error
-                if ( not vals.has_key('invoice_id')):
-                    if (vals.has_key('task_id') and vals.has_key('internal_description') and vals.has_key('ref')) and len(vals.keys())==3:
+                if ( not ('invoice_id' in vals)):
+                    if (('task_id' in vals) and ('internal_description' in vals) and ('ref' in vals) and len(vals.keys()))==3:
                         return
-                    elif ((vals.has_key('task_id') and vals.has_key('internal_description')) or (vals.has_key('task_id') and vals.has_key('ref')) or (vals.has_key('ref') and vals.has_key('internal_description'))) and len(vals.keys())==2:
+                    elif ((('task_id' in vals) and ('internal_description' in vals)) or (('task_id' in vals) and ('ref' in vals)) or (('ref' in vals) and ('internal_description' in vals))) and len(vals.keys())==2:
                         return
-                    elif (vals.has_key('task_id') or vals.has_key('internal_description') or vals.has_key('ref')) and len(vals.keys())==1:
+                    elif (('task_id' in vals) or ('internal_description' in vals) or ('ref' in vals)) and len(vals.keys())==1:
                         return
                     else:
                         raise ValidationError(_('You cannot modify an invoiced analytic line!'))
                 elif vals['invoice_id' ] == False:
-                    if (vals.has_key('task_id') and vals.has_key('internal_description') and vals.has_key('ref')) and len(vals.keys())==4:
+                    if (('task_id' in vals) and ('internal_description' in vals) and ('ref' in vals)) and len(vals.keys())==4:
                         return
-                    elif ((vals.has_key('task_id') and vals.has_key('internal_description')) or (vals.has_key('task_id') and vals.has_key('ref')) or (vals.has_key('ref') and vals.has_key('internal_description'))) and len(vals.keys())==3:
+                    elif ((('task_id' in vals) and ('internal_description' in vals)) or (('task_id' in vals) and ('ref' in vals)) or (('ref' in vals) and ('internal_description' in vals))) and len(vals.keys())==3:
                         return
-                    elif (vals.has_key('task_id') or vals.has_key('internal_description') or vals.has_key('ref')) and len(vals.keys())==2:
+                    elif (('task_id' in vals) or ('internal_description' in vals) or ('ref' in vals)) and len(vals.keys())==2:
                         return
                     else:
                         raise ValidationError(_('You cannot modify an invoiced analytic line!'))
