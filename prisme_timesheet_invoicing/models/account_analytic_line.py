@@ -16,6 +16,16 @@ class prisme_account_analytic_line(models.Model):
     
     account_partner = fields.Many2one(related='account_id.partner_id', relation='res.partner', string='Partner Id', store=True)
     
+    @api.onchange("account_id")
+    def on_change_account_id(self):
+        if not self.account_id:
+            self.to_invoice = False
+        else:
+            if self.account_id.to_invoice:
+                self.to_invoice = self.account_id.to_invoice
+            else:
+                self.to_invoice = False
+    
     def invoice_cost_create(self, dados, data=None):
         invoice_obj = self.env['account.move']
         invoice_line_obj = self.env['account.move.line']

@@ -2,7 +2,7 @@
 'name': 'Prisme Timesheet Invoicing',
 'version': '2017-12-01 16:24',
 'category': 'Human Resources',
-'summary': '',
+'summary': 'This module reimplements timesheet invoicing as it was in Odoo 8.',
 'author': 'Prisme Solutions Informatique SA',
 'website': 'http://www.prisme.ch',
 'depends': [
