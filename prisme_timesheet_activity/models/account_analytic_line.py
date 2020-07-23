@@ -36,12 +36,12 @@ class prisme_account_analytic_line(models.Model):
 
     #Update product associated to employee
     @api.onchange('user_id')
-    def getEmployeeProduct(self):
+    def _onchange_user(self):
         emp_obj = self.env['hr.employee']
         emp = emp_obj.search([('user_id', '=', self.user_id.id or self.env.uid)], limit=1)
         if emp:
             if emp.product_id:
-                self.product_id = emp.product_id.id
+                self.product_id = emp.product_id
     
     @api.onchange('time_beginning', 'time_end')
     def onchange_times(self):
