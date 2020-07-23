@@ -178,11 +178,6 @@ msgid "Invoice"
 msgstr "Facture"
 
 #. module: prisme_timesheet_invoicing
-#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_account_analytic_account__invoice_on_timesheets
-msgid "Invoice On Timesheets"
-msgstr "Facturation des feuilles de temps"
-
-#. module: prisme_timesheet_invoicing
 #: model:ir.model,name:prisme_timesheet_invoicing.model_hr_timesheet_invoice_factor
 msgid "Invoice Rate"
 msgstr "Taux de facturation"
