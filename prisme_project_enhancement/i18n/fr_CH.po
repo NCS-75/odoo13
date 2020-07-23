@@ -22,11 +22,6 @@ msgid "Amount"
 msgstr "Montant"
 
 #. module: prisme_project_enhancement
-#: model:ir.model.fields,field_description:prisme_project_enhancement.field_account_move__project_id
-msgid "Analytic account"
-msgstr "Compte analytique"
-
-#. module: prisme_project_enhancement
 #: model:ir.model.fields,field_description:prisme_project_enhancement.field_project_task__balance_previous_command
 msgid "Balance previous command"
 msgstr "Solde commande précédente"
