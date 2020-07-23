@@ -205,6 +205,7 @@ msgid "Invoiceable"
 msgstr "Type de facturation"
 
 #. module: prisme_timesheet_invoicing
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.account_analytic_account_form_form
 #: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.view_account_analytic_line_search_inherit
 msgid "Invoiced"
 msgstr "Facturé"
@@ -337,9 +338,10 @@ msgstr "Temps écoulé"
 #. module: prisme_timesheet_invoicing
 #: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_account_analytic_account__to_invoice
 msgid "Timesheet Invoicing Ratio"
-msgstr "Pourcentage de facturation des feuilles de temps"
+msgstr "Type de facturation"
 
 #. module: prisme_timesheet_invoicing
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.account_analytic_account_form_form
 #: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.view_account_analytic_line_search_inherit
 msgid "To Invoice"
 msgstr "À facturer"
@@ -410,3 +412,24 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.view_hr_timesheet_invoice_create
 msgid "or"
 msgstr "ou"
+
+#. module: prisme_timesheet_invoicing
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.account_analytic_account_form_form
+msgid "Invoicing Tracking of Timesheets"
+msgstr "Suivi de la facturation des feuilles de temps"
+
+#. module: prisme_timesheet_invoicing
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.account_analytic_account_form_form
+msgid "Expected"
+msgstr "Attendu"
+
+#. module: prisme_timesheet_invoicing
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.account_analytic_account_form_form
+msgid "Remaining"
+msgstr "Restant"
+
+#. module: prisme_timesheet_invoicing
+#: model:ir.model.fields,field_description:prisme_timesheet_invoicing.field_account_analytic_account__invoice_on_timesheets
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_invoicing.account_analytic_account_form_form
+msgid "Invoice On Timesheets"
+msgstr "Facturation des feuilles de temps"

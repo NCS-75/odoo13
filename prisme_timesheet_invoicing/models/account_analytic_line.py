@@ -182,8 +182,12 @@ class prisme_account_analytic_line(models.Model):
                 fp_taxes = analytic_lines[0].partner_id.property_account_position_id.map_tax(taxes, product, analytic_lines[0].partner_id).ids
             else:
                 fp_taxes = taxes
+                
+            if fp_taxes:
+                fp_taxes = fp_taxes.ids
+            
             curr_invoice_line.update({
-                'tax_ids': [(6, 0, fp_taxes.ids)],
+                'tax_ids': [(6, 0, fp_taxes)],
                 'name': factor_name,
                 # 'invoice_line_tax_ids': [(6, 0, tax)],
                 'account_id': general_account.id,
