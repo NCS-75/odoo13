@@ -66,12 +66,12 @@ class account_invoice_detail(models.Model):
         try:
             # Try to use the QWeb function (should works)
             return self._get_contact_qweb(value, options)
-        except Exception, e:
+        except Exception as e:
             #print("Failed to generate address with QWeb method: " + str(e))
             # Otherwise use the older version (from Odoo 7)
             try:
                 return self._get_contact_display_address(value)
-            except Exception, e:
+            except Exception as e:
                 print("Failed to generate address with RML method: " + str(e))
     
     # This method return the address block.
