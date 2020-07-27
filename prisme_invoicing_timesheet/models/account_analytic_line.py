@@ -16,7 +16,6 @@ class prisme_account_analytic_line(models.Model):
     
     account_partner = fields.Many2one(related='account_id.partner_id', relation='res.partner', string='Partner Id', store=True)
     
-    #Update invoice type with account
     @api.onchange("account_id")
     def on_change_account_id(self):
         if not self.account_id:
@@ -162,6 +161,7 @@ class prisme_account_analytic_line(models.Model):
 
         if product_id:
             product = product_obj.browse(product_id)
+            factor_name = ""
             if product.default_code:
                 factor_name = "[" + product.default_code + "] "
             factor_name += product.name
@@ -264,7 +264,7 @@ class prisme_account_analytic_line(models.Model):
     def write(self, vals):
         for record in self:
             self._check_sheet(record, vals)
-        return self._write(vals)
+        return super(prisme_account_analytic_line, self).write(vals)
             
     #Check the timesheet, to allow the "Task", "Internal description" and "Reference" field to be modified anytime.
     #Also prevents modification of a timesheet if it has been invoiced.
