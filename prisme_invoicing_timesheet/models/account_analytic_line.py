@@ -161,6 +161,7 @@ class prisme_account_analytic_line(models.Model):
 
         if product_id:
             product = product_obj.browse(product_id)
+            factor_name = ""
             if product.default_code:
                 factor_name = "[" + product.default_code + "] "
             factor_name += product.name
