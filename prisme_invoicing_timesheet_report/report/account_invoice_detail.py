@@ -77,7 +77,7 @@ class account_invoice_detail(models.Model):
                 _logger.info("Get Display !")
                 return self._get_contact_display_address(value)
             except Exception as e:
-                _logger.info("Massive failure bro !")
+                _logger.info("Massive failure bro !"+str(e))
                 print("Failed to generate address with RML method: " + str(e))
     
     # This method return the address block.
