@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
 <data>
+   <record id="paperformat_euro_prisme" model="report.paperformat">
+        <field name="name">European A4</field>
+        <field name="default" eval="True" />
+        <field name="format">A4</field>
+        <field name="page_height">0</field>
+        <field name="page_width">0</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">23</field>
+        <field name="margin_left">7</field>
+        <field name="margin_right">7</field>
+        <field name="header_line" eval="False" />
+        <field name="header_spacing">0</field>
+        <field name="dpi">90</field>
+    </record>
+
     <report id="report_account_invoice_detail"
             model="account.invoice"
             string="Prisme décompte de prestations"
@@ -9,22 +25,6 @@
         	file="prisme_invoicing_timesheet_report.report_account_invoice_detail"
         	paperformat="prisme_invoicing_timesheet_report.paperformat_euro_prisme"
     />
-    
-       <record id="paperformat_euro_prisme" model="report.paperformat">
-            <field name="name">European A4</field>
-            <field name="default" eval="True" />
-            <field name="format">A4</field>
-            <field name="page_height">0</field>
-            <field name="page_width">0</field>
-            <field name="orientation">Portrait</field>
-            <field name="margin_top">0</field>
-            <field name="margin_bottom">23</field>
-            <field name="margin_left">7</field>
-            <field name="margin_right">7</field>
-            <field name="header_line" eval="False" />
-            <field name="header_spacing">0</field>
-            <field name="dpi">90</field>
-        </record>
     
 	<template id="report_account_invoice_detail_view">
         
@@ -189,4 +189,4 @@
 	</template>
 	
 </data>
-</openerp>
+</odoo>
