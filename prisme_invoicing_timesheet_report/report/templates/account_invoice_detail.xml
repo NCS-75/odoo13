@@ -5,8 +5,9 @@
             model="account.invoice"
             string="Prisme décompte de prestations"
             report_type="qweb-pdf"
- 			name="prisme_timesheet_enhancement.report_account_invoice_detail_view"
-        	file="prisme_timesheet_enhancement.report_account_invoice_detail"
+ 			name="prisme_invoicing_timesheet_report.report_account_invoice_detail_view"
+        	file="prisme_invoicing_timesheet_report.report_account_invoice_detail"
+        	paperformat="prisme_invoicing_timesheet_report.paperformat_euro_prisme"
     />
     
        <record id="paperformat_euro_prisme" model="report.paperformat">
@@ -25,17 +26,9 @@
             <field name="dpi">90</field>
         </record>
     
-    <!-- paper format is in hr_timesheet_sheet_check report template --> 	
-	<record id="report_account_invoice_detail" model="ir.actions.report.xml">
-    	<field name="paperformat_id" ref="prisme_timesheet_enhancement.paperformat_euro_prisme"/>
-	</record>
-
-	
-	
-	
 	<template id="report_account_invoice_detail_view">
         
-        		<!-- <t t-call="prisme_timesheet_enhancement.report_account_invoice_detail_layout"/> -->
+        		<!-- <t t-call="prisme_invoicing_timesheet_report.report_account_invoice_detail_layout"/> -->
 			    <div class="footer">
             		<div class="row">
                 		<div class="pull-right">
