@@ -1,6 +1,8 @@
 from odoo import models, fields, api, _
 from operator import itemgetter, attrgetter
 from datetime import datetime
+import logging
+_logger = logging.getLogger(__name__)
 
 class account_invoice_detail(models.Model):
     _name = "account.move"
@@ -60,18 +62,22 @@ class account_invoice_detail(models.Model):
     # The second value is the options to pass to the QWeb method.
     def get_contact(self, value, options=False):
         if not value:
+            _logger.info("No value !")
             return ""
         
         
         try:
             # Try to use the QWeb function (should works)
+            _logger.info("Get QWeb !")
             return self._get_contact_qweb(value, options)
         except Exception as e:
             #print("Failed to generate address with QWeb method: " + str(e))
             # Otherwise use the older version (from Odoo 7)
             try:
+                _logger.info("Get Display !")
                 return self._get_contact_display_address(value)
             except Exception as e:
+                _logger.info("Massive failure bro !")
                 print("Failed to generate address with RML method: " + str(e))
     
     # This method return the address block.
