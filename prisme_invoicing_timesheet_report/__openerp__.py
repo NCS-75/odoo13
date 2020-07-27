@@ -6,7 +6,7 @@
 'author': 'Prisme Solutions Informatique SA',
 'website': 'http://www.prisme.ch',
 'depends': [
-        'prisme_timesheet_invoicing'
+        'prisme_invoicing_timesheet'
         ],
 'init_xml': [],
     'update_xml': [
