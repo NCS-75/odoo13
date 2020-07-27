@@ -21,12 +21,12 @@ class account_invoice_detail(models.Model):
         
         for row in sortedList:
             row_list = list(row)
-            row_list[2] = datetime.strptime(row_list[2], '%Y-%m-%d').strftime('%d.%m.%Y')
+            row_list[2] = row_list[2].strftime('%d.%m.%Y')
             row = tuple(row_list)
             
         for idx, row in enumerate(sortedList):
             row_list = list(row)
-            row_list[2] = datetime.strptime(row_list[2], '%Y-%m-%d').strftime('%d.%m.%Y')
+            row_list[2] = row_list[2].strftime('%d.%m.%Y')
             sortedList[idx] = row_list
         return sortedList
     
