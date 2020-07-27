@@ -89,7 +89,7 @@ class account_invoice_detail(models.Model):
         contact_str = ""
         # No need to show the company name twice
         
-        if isinstance(value.parent_name, basestring) and not value.is_company:
+        if isinstance(value.parent_name, str) and not value.is_company:
             contact_str += value.parent_name + "\n"
         if value.parent_name != value.name:
             if value.title:
