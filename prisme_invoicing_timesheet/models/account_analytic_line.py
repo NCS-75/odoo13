@@ -263,7 +263,7 @@ class prisme_account_analytic_line(models.Model):
     def write(self, vals):
         for record in self:
             self._check_sheet(record, vals)
-        return self._write(vals)
+        return super(prisme_account_analytic_line, self).write(vals)
             
     #Check the timesheet, to allow the "Task", "Internal description" and "Reference" field to be modified anytime.
     #Also prevents modification of a timesheet if it has been invoiced.
