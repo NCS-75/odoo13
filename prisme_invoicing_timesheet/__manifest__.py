@@ -1,5 +1,5 @@
 {
-'name': 'Prisme Timesheet Invoicing',
+'name': 'Prisme Invoicing Timesheet',
 'version': '2017-12-01 16:24',
 'category': 'Human Resources',
 'summary': 'This module reimplements timesheet invoicing as it was in Odoo 8.',
