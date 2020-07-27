@@ -16,6 +16,7 @@ class prisme_account_analytic_line(models.Model):
     
     account_partner = fields.Many2one(related='account_id.partner_id', relation='res.partner', string='Partner Id', store=True)
     
+    #Update invoice type with account
     @api.onchange("account_id")
     def on_change_account_id(self):
         if not self.account_id:
