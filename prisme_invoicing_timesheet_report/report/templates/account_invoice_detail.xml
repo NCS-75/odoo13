@@ -18,7 +18,7 @@
     </record>
 
     <report id="report_account_invoice_detail"
-            model="account.invoice"
+            model="account.move"
             string="Prisme décompte de prestations"
             report_type="qweb-pdf"
  			name="prisme_invoicing_timesheet_report.report_account_invoice_detail_view"
@@ -88,7 +88,7 @@
 										</tr>
 										<tr>
 											<td style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #ffffff;"><span t-esc="sortedList[0]"/></td>
-											<td style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #ffffff;"><span t-field="doc.date_invoice"/></td>
+											<td style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #ffffff;"><span t-field="doc.invoice_date"/></td>
 										</tr>
 									</table>
 								</p>
