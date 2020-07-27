@@ -13,7 +13,7 @@
         #'report/templates/hr_timesheet_sheet_check.xml',
         #'report/templates/account_analytic_line.xml',
         'report/templates/account_invoice_detail.xml',
-        'security/ir.model.access.csv',
+        #'security/ir.model.access.csv',
     ],
     'demo_xml': [],
     'test': [],
