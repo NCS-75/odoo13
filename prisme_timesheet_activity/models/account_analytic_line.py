@@ -42,6 +42,7 @@ class prisme_account_analytic_line(models.Model):
         if emp:
             if emp.product_id:
                 self.product_id = emp.product_id.id
+				#Make sure amount is updated
                 self.on_change_unit_amount()
     
     @api.onchange('time_beginning', 'time_end')
