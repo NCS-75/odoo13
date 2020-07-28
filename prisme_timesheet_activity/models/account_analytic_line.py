@@ -107,8 +107,6 @@ class prisme_account_analytic_line(models.Model):
     def write(self, values):
         self._check_state()
         self._check_if_one_task_in_project(values)
-        self.on_change_unit_amount()
-        values['amount'] = self.amount
         return super(prisme_account_analytic_line, self).write(values)
 
     def unlink(self):
