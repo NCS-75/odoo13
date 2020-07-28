@@ -14,8 +14,6 @@ class prisme_account_analytic_line(models.Model):
     invoice_id = fields.Many2one('account.move', 'Invoice', ondelete="set null", copy=False)
     to_invoice = fields.Many2one('hr_timesheet_invoice.factor', 'Invoiceable', help="It allows to set the discount while making invoice, keep empty if the activities should not be invoiced.")
     
-    account_partner = fields.Many2one(related='account_id.partner_id', relation='res.partner', string='Partner Id', store=True)
-    
     @api.onchange("account_id")
     def on_change_account_id(self):
         if not self.account_id:

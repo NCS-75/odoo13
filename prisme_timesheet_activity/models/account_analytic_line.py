@@ -9,7 +9,7 @@ class prisme_account_analytic_line(models.Model):
     time_end = fields.Float("End")
     internal_description = fields.Text("Internal Description")
     working_month = fields.Char(compute='_get_month', store=True)
-    sheet_id_computed = fields.Many2one('hr_timesheet_sheet.sheet', string='Sheet', compute='_compute_sheet', index=True, ondelete='cascade',
+    sheet_id_computed = fields.Many2one('hr_timesheet_sheet.sheet', string='Sheet Computed', compute='_compute_sheet', index=True, ondelete='cascade',
         search='_search_sheet')
     sheet_id = fields.Many2one('hr_timesheet_sheet.sheet', compute='_compute_sheet', string='Sheet', store=True)
     general_account_id = fields.Many2one('account.account', related='product_id.property_account_expense_id', readonly=True, store=True)
