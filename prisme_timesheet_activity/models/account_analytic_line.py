@@ -42,6 +42,7 @@ class prisme_account_analytic_line(models.Model):
         if emp:
             if emp.product_id:
                 self.product_id = emp.product_id.id
+                self.on_change_unit_amount()
     
     @api.onchange('time_beginning', 'time_end')
     def onchange_times(self):
@@ -106,6 +107,8 @@ class prisme_account_analytic_line(models.Model):
     def write(self, values):
         self._check_state()
         self._check_if_one_task_in_project(values)
+        self.on_change_unit_amount()
+        values['amount'] = self.amount
         return super(prisme_account_analytic_line, self).write(values)
 
     def unlink(self):
