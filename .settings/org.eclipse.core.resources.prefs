@@ -8,3 +8,4 @@ encoding//prisme_timesheet_activity/__manifest__.py=utf-8
 encoding//prisme_timesheet_activity/models/hr_timesheet_sheet.py=utf-8
 encoding//prisme_timesheet_activity/wizard/__init__.py=utf-8
 encoding//prisme_timesheet_activity/wizard/hr_timesheet_current.py=utf-8
+encoding/<project>=UTF-8
