@@ -201,7 +201,7 @@ class prisme_account_analytic_line(models.Model):
             #    cr.execute("select p.name from res_partner p, res_users u where p.id=u.partner_id and u.id="+str(user_id))
             #    usr=cr.fetchall()
             # set invoice_line_note
-            #    details = []
+                details = []
             #    if not(alreadyadded):
             #        details.append("- "+usr[0][0])
             #    alreadyadded=True
