@@ -70,6 +70,15 @@ class prisme_account_analytic_line(models.Model):
             if not (beginning <= end or end == 0):
                 raise ValidationError(_("End time must not be before beginning time"))
 
+    @api.constrains('time_beginning', 'time_end', 'unit_amount')
+    def _check_beginning_end_delta(self):
+        for hr_line in self:
+            beginning = hr_line.time_beginning
+            end = hr_line.time_end
+            unit_amount = hr_line.unit_amount
+            if ((beginning > 0 or end > 0) and unit_amount != (end - beginning)):
+                raise ValidationError("Time quantity must be equal to End - Beginning")
+
     @api.depends('date', 'user_id', 'project_id', 'sheet_id_computed.date_to', 'sheet_id_computed.date_from', 'sheet_id_computed.employee_id')
     def _compute_sheet(self):
         """Links the timesheet line to the corresponding sheet
