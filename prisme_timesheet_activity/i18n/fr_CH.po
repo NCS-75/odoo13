@@ -763,3 +763,9 @@ msgstr "hr.timesheet.current.open"
 #: model_terms:ir.ui.view,arch_db:prisme_timesheet_activity.hr_timesheet_sheet_form
 msgid "to"
 msgstr "au"
+
+#. module: prisme_timesheet_activity
+#: code:addons/prisme_timesheet_activity/models/account_analytic_line.py:0
+#, python-format
+msgid "Time quantity must be equal to End - Beginning"
+msgstr "La quantité de temps doit être égale à Fin - Début"
