@@ -9,7 +9,7 @@ class prisme_account_analytic_line(models.Model):
     time_end = fields.Float("End")
     internal_description = fields.Text("Internal Description")
     working_month = fields.Char(compute='_get_month', store=True)
-    sheet_id_computed = fields.Many2one('hr_timesheet_sheet.sheet', string='Sheet', compute='_compute_sheet', index=True, ondelete='cascade',
+    sheet_id_computed = fields.Many2one('hr_timesheet_sheet.sheet', string='Sheet Computed', compute='_compute_sheet', index=True, ondelete='cascade',
         search='_search_sheet')
     sheet_id = fields.Many2one('hr_timesheet_sheet.sheet', compute='_compute_sheet', string='Sheet', store=True)
     general_account_id = fields.Many2one('account.account', related='product_id.property_account_expense_id', readonly=True, store=True)
@@ -36,12 +36,13 @@ class prisme_account_analytic_line(models.Model):
 
     #Update product associated to employee
     @api.onchange('user_id')
-    def _onchange_user(self):
+    def getEmployeeProduct(self):
         emp_obj = self.env['hr.employee']
         emp = emp_obj.search([('user_id', '=', self.user_id.id or self.env.uid)], limit=1)
         if emp:
             if emp.product_id:
-                self.product_id = emp.product_id
+                self.product_id = emp.product_id.id
+                self.on_change_unit_amount()
     
     @api.onchange('time_beginning', 'time_end')
     def onchange_times(self):
@@ -69,6 +70,15 @@ class prisme_account_analytic_line(models.Model):
             if not (beginning <= end or end == 0):
                 raise ValidationError(_("End time must not be before beginning time"))
 
+    @api.constrains('time_beginning', 'time_end', 'unit_amount')
+    def _check_beginning_end_delta(self):
+        for hr_line in self:
+            beginning = hr_line.time_beginning
+            end = hr_line.time_end
+            unit_amount = hr_line.unit_amount
+            if ((beginning > 0 or end > 0) and unit_amount != (end - beginning)):
+                raise ValidationError(_("Time quantity must be equal to End - Beginning"))
+
     @api.depends('date', 'user_id', 'project_id', 'sheet_id_computed.date_to', 'sheet_id_computed.date_from', 'sheet_id_computed.employee_id')
     def _compute_sheet(self):
         """Links the timesheet line to the corresponding sheet
@@ -86,20 +96,22 @@ class prisme_account_analytic_line(models.Model):
                 ts_line.sheet_id = sheets[0]
 
     def _search_sheet(self, operator, value):
-        assert operator == 'in'
-        ids = []
-        for ts in self.env['hr_timesheet_sheet.sheet'].browse(value):
-            self._cr.execute("""
-                    SELECT l.id
-                        FROM account_analytic_line l
-                    WHERE %(date_to)s >= l.date
-                        AND %(date_from)s <= l.date
-                        AND %(user_id)s = l.user_id
-                    GROUP BY l.id""", {'date_from': ts.date_from,
-                                       'date_to': ts.date_to,
-                                       'user_id': ts.employee_id.user_id.id, })
-            ids.extend([row[0] for row in self._cr.fetchall()])
-        return [('id', 'in', ids)]
+        if operator == 'in':
+            ids = []
+            for ts in self.env['hr_timesheet_sheet.sheet'].browse(value):
+                self._cr.execute("""
+                        SELECT l.id
+                            FROM account_analytic_line l
+                        WHERE %(date_to)s >= l.date
+                            AND %(date_from)s <= l.date
+                            AND %(user_id)s = l.user_id
+                        GROUP BY l.id""", {'date_from': ts.date_from,
+                                           'date_to': ts.date_to,
+                                           'user_id': ts.employee_id.user_id.id, })
+                ids.extend([row[0] for row in self._cr.fetchall()])
+            return [('id', 'in', ids)]
+        else:
+            return []
 
     def write(self, values):
         self._check_state()
