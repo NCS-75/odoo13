@@ -31,8 +31,8 @@
         		<!-- <t t-call="prisme_invoicing_timesheet_report.report_account_invoice_detail_layout"/> -->
 	        	<t t-foreach="docs" t-as="doc">
 	            	<div class="page">
-	        			<p style="margin-bottom: 45px;"> </p>
 				        <div class="row" style="margin-bottom: 45px;">
+				            <div style="margin-bottom: 45px;"></div>
 				            <center>
 				            <img t-if="docs.company_id.logo" t-att-src="image_data_uri(docs.company_id.logo)" style="max-height: 70px;"/>
 				            </center>
