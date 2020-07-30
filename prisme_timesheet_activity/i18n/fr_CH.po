@@ -481,12 +481,6 @@ msgid "Sheet Computed"
 msgstr "Feuille (utilisé pour calcul interne)"
 
 #. module: prisme_timesheet_activity
-#: model:ir.model.fields,field_description:prisme_timesheet_activity.field_account_analytic_line__sheet_id_computed
-#: model:ir.model.fields,field_description:prisme_timesheet_activity.field_hr_attendance__sheet_id_computed
-msgid "Sheet Computed"
-msgstr "Feuille (utilisé pour calcul interne)"
-
-#. module: prisme_timesheet_activity
 #: model:ir.model.fields,field_description:prisme_timesheet_activity.field_hr_timesheet_sheet_sheet__state
 msgid "Status"
 msgstr "État"
