@@ -52,7 +52,7 @@
 							</tr>
 						</table>
 						
-						<h3 style="font-family: verdana,arial,sans-serif; font-weight: normal; font-size: 26px;">Prestations facture <span t-field="doc.name"/></h3>
+						<h3 style="font-family: verdana,arial,sans-serif; font-weight: normal; font-size: 24px;">Prestations facture <span t-field="doc.name"/></h3>
 						
 						<t t-set="colTotal" t-value="0"/>
 						<t t-set="colAmount" t-value="0"/>
@@ -91,8 +91,7 @@
 										</tr>
 									</table>
 								</t>
-								<br/>
-								<h4 style="font-family: verdana,arial,sans-serif; font-weight: normal; font-size: 20px;"> Collaborateur: <span t-esc="sortedList[1]"/></h4>
+								<h4 style="font-family: verdana,arial,sans-serif; font-weight: normal; font-size: 18px;"> Collaborateur: <span t-esc="sortedList[1]"/></h4>
 							</t>
 							
 							<t t-if="(sortedList[5]!=oldProduct) or (sortedList[8]!=oldFactor) or chgCollab">
