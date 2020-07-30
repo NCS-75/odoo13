@@ -52,7 +52,7 @@
 							</tr>
 						</table>
 						
-						<h3 style="font-family: verdana,arial,sans-serif; font-weight: normal; font-size: 24px;">Prestations facture <span t-field="doc.name"/></h3>
+						<h3 style="font-family: verdana,arial,sans-serif; font-weight: normal; font-size: 24px; margin-bottom: 0px;">Prestations facture <span t-field="doc.name"/></h3>
 						
 						<t t-set="colTotal" t-value="0"/>
 						<t t-set="colAmount" t-value="0"/>
