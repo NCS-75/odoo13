@@ -166,17 +166,15 @@
   							</tr>
   						</table>
 	        		</div>
-				    <div class="footer">
-	            		<div class="row">
-	                		<div style="text-align: right;">
-			                    <small>
-			                        <span>Page</span>
-			                        <span class="page" />
-			                       	/
-			                        <span class="topage" />
-			                    </small>
-	                		</div>
-	            		</div>
+				    <div t-attf-class="footer">
+                		<div style="text-align: right;">
+		                    <small>
+		                        <span>Page</span>
+		                        <span class="page" />
+		                       	/
+		                        <span class="topage" />
+		                    </small>
+                		</div>
 	        		</div>
 	        		
 	        	</t>
