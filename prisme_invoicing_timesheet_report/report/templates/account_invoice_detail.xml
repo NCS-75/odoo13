@@ -165,20 +165,19 @@
 							  	<td style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #ffffff;" align="right" width="10%"><b><span t-esc="docs.getAndResetAmount()"/></b></td>
   							</tr>
   						</table>
-					    <div class="footer">
-		            		<div class="row">
-		                		<div style="text-align: right;">
-				                    <small>
-				                        <span>Page</span>
-				                        <span class="page" />
-				                       	/
-				                        <span class="topage" />
-				                    </small>
-		                		</div>
-		            		</div>
-		        		</div>
 	        		</div>
-
+				    <div class="footer">
+	            		<div class="row">
+	                		<div style="text-align: right;">
+			                    <small>
+			                        <span>Page</span>
+			                        <span class="page" />
+			                       	/
+			                        <span class="topage" />
+			                    </small>
+	                		</div>
+	            		</div>
+	        		</div>
 	        		
 	        	</t>
 	    </t>
