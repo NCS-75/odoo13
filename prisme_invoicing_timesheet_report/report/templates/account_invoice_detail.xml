@@ -8,7 +8,7 @@
         <field name="page_height">0</field>
         <field name="page_width">0</field>
         <field name="orientation">Portrait</field>
-        <field name="margin_top">18</field>
+        <field name="margin_top">14</field>
         <field name="margin_bottom">23</field>
         <field name="margin_left">7</field>
         <field name="margin_right">7</field>
@@ -52,7 +52,7 @@
 							</tr>
 						</table>
 						
-						<h3>Prestations facture <span t-field="doc.name"/></h3>
+						<h3 style="font-family: verdana,arial,sans-serif; font-weight: normal;">Prestations facture <span t-field="doc.name"/></h3>
 						
 						<t t-set="colTotal" t-value="0"/>
 						<t t-set="colAmount" t-value="0"/>
@@ -68,12 +68,12 @@
 								<p>
 									<table style="font-family: verdana,arial,sans-serif; font-size: 12px; color:#333333; border-width: 1px; border-color: #666666; border-collapse: collapse" width="100%">
 										<tr>
-											<th style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #dedede;" align="left">Projet</th>
-											<th style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #dedede;" align="left">Date</th>
+											<th width="60%" style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #dedede;" align="left">Projet</th>
+											<th width="40%" style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #dedede;" align="left">Date</th>
 										</tr>
 										<tr>
-											<td style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #ffffff;"><span t-esc="sortedList[0]"/></td>
-											<td style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #ffffff;"><span t-field="doc.invoice_date"/></td>
+											<td width="60%" style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #ffffff;"><span t-esc="sortedList[0]"/></td>
+											<td width="40%" style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #ffffff;"><span t-field="doc.invoice_date"/></td>
 										</tr>
 									</table>
 								</p>
@@ -91,7 +91,8 @@
 										</tr>
 									</table>
 								</t>
-								<br/><h4 > Collaborateur: <span t-esc="sortedList[1]"/></h4>
+								<br/>
+								<h4 style="font-family: verdana,arial,sans-serif; font-weight: normal;"> Collaborateur: <span t-esc="sortedList[1]"/></h4>
 							</t>
 							
 							<t t-if="(sortedList[5]!=oldProduct) or (sortedList[8]!=oldFactor) or chgCollab">
@@ -107,13 +108,13 @@
 										</table>
 									</t>
 								</t>
-								<h5><span t-esc="sortedList[5]"/> - <span t-esc="sortedList[8]"/></h5>
+								<h5 style="font-family: verdana,arial,sans-serif; font-weight: normal;"><span t-esc="sortedList[5]"/> - <span t-esc="sortedList[8]"/></h5>
 								<table style="font-family: verdana,arial,sans-serif; font-size: 12px; color:#333333; border-width: 1px; border-color: #666666; border-collapse: collapse" width="100%">
 									<tr>
 										<th style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #dedede;" align="left" width="10%">Date</th>
 										<th style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #dedede;" align="left" width="70%">Description</th>
-										<th style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #dedede;" align="right" width="10%">Total</th>
-										<th style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #dedede;" align="right" width="10%">CHF</th>
+										<th style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #dedede;" align="left" width="10%">Total</th>
+										<th style="border-width: 1px; padding: 1px; border-style: solid; border-color: #666666; background-color: #dedede;" align="left" width="10%">CHF</th>
 									</tr>
 									<t t-set="colTotal" t-value="0"/>
 									<t t-set="colAmount" t-value="0"/>
@@ -183,6 +184,5 @@
 	        	</t>
 	    </t>
 	</template>
-	
 </data>
 </odoo>
