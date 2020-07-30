@@ -14,8 +14,6 @@ class prisme_account_analytic_line(models.Model):
     invoice_id = fields.Many2one('account.move', 'Invoice', ondelete="set null", copy=False)
     to_invoice = fields.Many2one('hr_timesheet_invoice.factor', 'Invoiceable', help="It allows to set the discount while making invoice, keep empty if the activities should not be invoiced.")
     
-    account_partner = fields.Many2one(related='account_id.partner_id', relation='res.partner', string='Partner Id', store=True)
-    
     @api.onchange("account_id")
     def on_change_account_id(self):
         if not self.account_id:
@@ -156,7 +154,7 @@ class prisme_account_analytic_line(models.Model):
             #'move_id': invoice_id,
             'name': name,
             #'uom_id': uom,
-            #'account_analytic_id': account.id,
+            'analytic_account_id': account.id,
         }
 
         if product_id:
@@ -196,17 +194,17 @@ class prisme_account_analytic_line(models.Model):
 
             note = []
             # start prisme modification
-            alreadyadded=False
+            #alreadyadded=False
             for line in analytic_lines:
-                # Get user
-                cr = self.env.cr
-                cr.execute("select p.name from res_partner p, res_users u where p.id=u.partner_id and u.id="+str(user_id))
-                usr=cr.fetchall()
-                # set invoice_line_note
+            #    # Get user
+            #    cr = self.env.cr
+            #    cr.execute("select p.name from res_partner p, res_users u where p.id=u.partner_id and u.id="+str(user_id))
+            #    usr=cr.fetchall()
+            # set invoice_line_note
                 details = []
-                if not(alreadyadded):
-                    details.append("- "+usr[0][0])
-                alreadyadded=True
+            #    if not(alreadyadded):
+            #        details.append("- "+usr[0][0])
+            #    alreadyadded=True
             # end prisme modification
                 if data.get('date', False):
                     details.append(line['date'])

@@ -431,6 +431,12 @@ msgstr ""
 "%.2f."
 
 #. module: prisme_timesheet_activity
+#: model:ir.model.fields,field_description:prisme_timesheet_activity.field_hr_employee__product_id
+#: model_terms:ir.ui.view,arch_db:prisme_timesheet_activity.hr_timesheet_line_form_view
+msgid "Product"
+msgstr "Produit"
+
+#. module: prisme_timesheet_activity
 #: model:ir.model.fields,field_description:prisme_timesheet_activity.field_hr_timesheet_sheet_sheet_account__name
 msgid "Project / Analytic Account"
 msgstr "Projet / Compte analytique"
@@ -462,13 +468,17 @@ msgstr "Marquer comme brouillon"
 
 #. module: prisme_timesheet_activity
 #: model:ir.model.fields,field_description:prisme_timesheet_activity.field_account_analytic_line__sheet_id
-#: model:ir.model.fields,field_description:prisme_timesheet_activity.field_account_analytic_line__sheet_id_computed
 #: model:ir.model.fields,field_description:prisme_timesheet_activity.field_hr_attendance__sheet_id
-#: model:ir.model.fields,field_description:prisme_timesheet_activity.field_hr_attendance__sheet_id_computed
 #: model:ir.model.fields,field_description:prisme_timesheet_activity.field_hr_timesheet_sheet_sheet_account__sheet_id
 #: model:ir.model.fields,field_description:prisme_timesheet_activity.field_hr_timesheet_sheet_sheet_day__sheet_id
 msgid "Sheet"
 msgstr "Feuille"
+
+#. module: prisme_timesheet_activity
+#: model:ir.model.fields,field_description:prisme_timesheet_activity.field_account_analytic_line__sheet_id_computed
+#: model:ir.model.fields,field_description:prisme_timesheet_activity.field_hr_attendance__sheet_id_computed
+msgid "Sheet Computed"
+msgstr "Feuille (utilisé pour calcul interne)"
 
 #. module: prisme_timesheet_activity
 #: model:ir.model.fields,field_description:prisme_timesheet_activity.field_hr_timesheet_sheet_sheet__state
@@ -753,9 +763,12 @@ msgstr "hr.timesheet.current.open"
 #: model_terms:ir.ui.view,arch_db:prisme_timesheet_activity.hr_timesheet_sheet_form
 msgid "to"
 msgstr "au"
+<<<<<<< HEAD
 
 #. module: prisme_timesheet_activity
-#: model:ir.model.fields,field_description:prisme_timesheet_activity.field_hr_employee__product_id
-#: model_terms:ir.ui.view,arch_db:prisme_timesheet_activity.hr_timesheet_line_form_view
-msgid "Product"
-msgstr "Produit"
+#: code:addons/prisme_timesheet_activity/models/account_analytic_line.py:0
+#, python-format
+msgid "Time quantity must be equal to End - Beginning"
+msgstr "La quantité de temps doit être égale à Fin - Début"
+=======
+>>>>>>> branch 'prisme_timesheet_activity' of https://github.com/Prisme-Solutions-Informatique-SA/odoo13.git

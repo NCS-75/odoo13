@@ -263,11 +263,6 @@ msgstr ""
 "                facturation."
 
 #. module: prisme_invoicing_timesheet
-#: model:ir.model.fields,field_description:prisme_invoicing_timesheet.field_account_analytic_line__account_partner
-msgid "Partner Id"
-msgstr "Partenaire"
-
-#. module: prisme_invoicing_timesheet
 #: code:addons/prisme_invoicing_timesheet/models/account_analytic_line.py:0
 #, python-format
 msgid "Please define Unit of Measure!"
@@ -428,3 +423,8 @@ msgstr "Restant"
 #: model_terms:ir.ui.view,arch_db:prisme_invoicing_timesheet.account_analytic_account_form_form
 msgid "Invoice On Timesheets"
 msgstr "Facturation des feuilles de temps"
+
+#. module: sale_timesheet
+#: model:ir.model.fields,field_description:sale_timesheet.field_account_analytic_line__timesheet_invoice_id
+msgid "Invoice"
+msgstr "Facture SO"
