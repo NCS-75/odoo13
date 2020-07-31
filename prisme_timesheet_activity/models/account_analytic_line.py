@@ -71,15 +71,6 @@ class prisme_account_analytic_line(models.Model):
             if not (beginning <= end or end == 0):
                 raise ValidationError(_("End time must not be before beginning time"))
 
-    @api.constrains('time_beginning', 'time_end', 'unit_amount')
-    def _check_beginning_end_delta(self):
-        for hr_line in self:
-            beginning = hr_line.time_beginning
-            end = hr_line.time_end
-            unit_amount = hr_line.unit_amount
-            if ((beginning > 0 or end > 0) and unit_amount != (end - beginning)):
-                raise ValidationError(_("Time quantity must be equal to End - Beginning"))
-
     @api.depends('date', 'user_id', 'project_id', 'sheet_id_computed.date_to', 'sheet_id_computed.date_from', 'sheet_id_computed.employee_id')
     def _compute_sheet(self):
         """Links the timesheet line to the corresponding sheet
@@ -116,8 +107,13 @@ class prisme_account_analytic_line(models.Model):
 
     def write(self, values):
         self._check_state()
+        self._check_beginning_end_delta(values)
         self._check_if_one_task_in_project(values)
         return super(prisme_account_analytic_line, self).write(values)
+    
+    def create(self, values):
+        self._check_beginning_end_delta(values)
+        return super(prisme_account_analytic_line, self).create(values)
 
     def unlink(self):
         self._check_state()
@@ -128,7 +124,24 @@ class prisme_account_analytic_line(models.Model):
             if line.sheet_id and line.sheet_id.state not in ('draft', 'new'):
                 raise UserError(_('You cannot modify an entry in a confirmed timesheet.'))
         return True
-    
+
+    def _check_beginning_end_delta(self, values):
+        for line in self:
+            if 'time_beginning' in values:
+                beginning = values['time_beginning']
+            else:
+                beginning = line.time_beginning
+            if 'time_end' in values:
+                end = values['time_end']
+            else:
+                end = line.time_end
+            if 'unit_amount' in values:
+                unit_amount = values['unit_amount']
+            else:
+                unit_amount = line.unit_amount
+            if ((beginning > 0 or end > 0) and unit_amount != (end - beginning)):
+                raise ValidationError(_("Time quantity must be equal to End - Beginning"))
+
     def _check_if_one_task_in_project(self, values):
         for line in self:
             if 'project_id' in values:

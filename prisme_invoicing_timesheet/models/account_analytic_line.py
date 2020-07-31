@@ -247,7 +247,7 @@ class prisme_account_analytic_line(models.Model):
                 # date_due = pterm_list[-1]
                 date_due = max(line[0] for line in pterm_list_compute[0])
         return {
-            'name': "%s - %s" % (time.strftime('%d/%m/%Y'), invoice_name),
+            #'name': "%s - %s" % (time.strftime('%d/%m/%Y'), invoice_name),
             'partner_id': partner.id,
             'company_id': company_id,
             'type': 'out_invoice',
