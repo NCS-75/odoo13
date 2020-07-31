@@ -105,12 +105,14 @@ class prisme_account_analytic_line(models.Model):
         else:
             return []
 
+    @api.model
     def write(self, values):
         self._check_state()
         self._check_beginning_end_delta(values)
         self._check_if_one_task_in_project(values)
         return super(prisme_account_analytic_line, self).write(values)
     
+    @api.model
     def create(self, values):
         self._check_beginning_end_delta(values)
         return super(prisme_account_analytic_line, self).create(values)
