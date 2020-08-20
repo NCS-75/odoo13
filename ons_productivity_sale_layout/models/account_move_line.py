@@ -39,7 +39,7 @@ class account_move_line(models.Model):
     def create(self, vals_list):    
         for vals in vals_list:
             layout_type = vals.get('layout_type')
-            if not vals.get('name'):
+            if not vals.get('exclude_from_invoice_tab') and not vals.get('name'):
                 vals['name'] = layout.layout_val_2_text(layout_type)                
         return super(account_move_line, self).create(vals_list)
   
