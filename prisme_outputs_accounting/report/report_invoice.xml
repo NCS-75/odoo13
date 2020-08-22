@@ -183,7 +183,7 @@
                                     </t>
                                 </tr>
 
-                                <t t-if="current_section and (line_last or lines[line_index+1].display_type == 'line_section') and o.company_id.totals_below_sections">
+                                <t t-if="current_section and (line_last or lines[line_index+1].display_type == 'line_section' or lines[line_index+1].layout_type=='break') and o.company_id.totals_below_sections">
                                     <tr class="is-subtotal text-right">
                                         <td colspan="99">
                                             <strong class="mr16">Subtotal</strong>
