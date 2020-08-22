@@ -139,7 +139,7 @@
 						</table>
 						<t t-set="current_subtotal" t-value="0"/>
                             <t t-set="lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
-
+							<t t-set="subtotal_done" t-value="False"/>
                             <t t-foreach="lines" t-as="line">
                                 <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
                                 <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
@@ -174,6 +174,7 @@
                                             <span t-field="line.name" t-options="{'widget': 'text'}"/>
                                         </td>
                                         <t t-set="current_section" t-value="line"/>
+              							<t t-set="subtotal_done" t-value="False"/>
                                         <t t-set="current_subtotal" t-value="0"/>
                                     </t>
                                     <t t-if="line.display_type == 'line_note'">
@@ -183,7 +184,8 @@
                                     </t>
                                 </tr>
 
-                                <t t-if="current_section and (line_last or lines[line_index+1].display_type == 'line_section' or lines[line_index+1].layout_type=='break') and o.company_id.totals_below_sections">
+                                <t t-if="(not subtotal_done) and current_section and (line_last or lines[line_index+1].display_type == 'line_section' or lines[line_index+1].layout_type=='break') and o.company_id.totals_below_sections">
+           							<t t-set="subtotal_done" t-value="True"/>
                                     <tr class="is-subtotal text-right">
                                         <td colspan="99">
                                             <strong class="mr16">Subtotal</strong>
