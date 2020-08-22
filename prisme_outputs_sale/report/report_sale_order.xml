@@ -41,7 +41,7 @@
 									<t t-if="o.partner_shipping_id.is_company">
 										<t t-esc="o.partner_shipping_id.name"/><br/>
 									</t>
-									<t t-else>
+									<t t-else="">
 										<t t-if="o.partner_shipping_id.parent_id"><t t-esc="o.partner_shipping_id.parent_id.name"/><br></t>
 										<t t-if="o.partner_shipping_id.title"><t t-esc="o.partner_shipping_id.title"/>&#160;</t><t t-esc="o.partner_shipping_id.name"/><br/>
 									</t>
@@ -256,8 +256,8 @@
 										</td>
 										<td style="width:10%"
 											t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
-											<span class="text-nowrap"
-												t-esc="o._get_line_discount(line)" />
+											<!--<span class="text-nowrap"
+												t-esc="o._get_line_discount(line)" />-->
 										</td>
 										<td class="text-right o_price_total" style="width:10%">
 											<span class="text-nowrap" t-field="line.price_subtotal"
