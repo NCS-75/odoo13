@@ -184,6 +184,14 @@
                                     </t>
                                 </tr>
 
+								<t t-if="line.layout_type=='line'">
+									<tr>
+										<td class="border-bottom border-dark" colspan="99">
+											<font color="white"></font>
+										</td>
+									</tr>
+								</t>
+
                                 <t t-if="(not subtotal_done) and current_section and (line_last or lines[line_index+1].display_type == 'line_section' or lines[line_index+1].layout_type=='break') and o.company_id.totals_below_sections">
            							<t t-set="subtotal_done" t-value="True"/>
                                     <tr class="is-subtotal text-right">
@@ -196,15 +204,7 @@
                                         </td>
                                     </tr>
                                 </t>
-                            
-							
-							<t t-if="line.layout_type=='line'">
-									<tr>
-										<td class="border-bottom border-dark" colspan="99">
-											<font color="white"></font>
-										</td>
-									</tr>
-								</t>
+
                         </tbody>
                     </table>
 					<t t-if="line.layout_type=='break'">
