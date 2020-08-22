@@ -52,4 +52,3 @@ class account_move(models.Model):
                 address_values.append(partner.country_id.name)
                 
         return address_values
-        

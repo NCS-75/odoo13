@@ -199,8 +199,7 @@
 							<t t-if="line.layout_type=='line'">
 									<tr>
 										<td class="border-bottom border-dark" colspan="99">
-											<font color="white">
-											</font>
+											<font color="white"></font>
 										</td>
 									</tr>
 								</t>
