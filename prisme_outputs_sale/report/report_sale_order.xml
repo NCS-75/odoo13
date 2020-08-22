@@ -42,7 +42,7 @@
 										<t t-esc="o.partner_shipping_id.name"/><br/>
 									</t>
 									<t t-else="">
-										<t t-if="o.partner_shipping_id.parent_id"><t t-esc="o.partner_shipping_id.parent_id.name"/><br></t>
+										<t t-if="o.partner_shipping_id.parent_id"><t t-esc="o.partner_shipping_id.parent_id.name"/><br/></t>
 										<t t-if="o.partner_shipping_id.title"><t t-esc="o.partner_shipping_id.title"/>&#160;</t><t t-esc="o.partner_shipping_id.name"/><br/>
 									</t>
 								</span>
