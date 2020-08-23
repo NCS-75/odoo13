@@ -36,14 +36,14 @@
 						<tr>
 
 							<th style="width: 60%;">
-								<strong class="mr16">Shipping address :</strong><br/>
+								<strong class="mr16">Shipping address :</strong><span style="display: block; margin-bottom: 0em;"></span>
 								<span class="text-nowrap small">
 									<t t-if="o.partner_shipping_id.is_company">
-										<t t-esc="o.partner_shipping_id.name"/><br/>
+										<t t-esc="o.partner_shipping_id.name"/><span style="display: block; margin-bottom: 0em;"></span>
 									</t>
 									<t t-else="">
-										<t t-if="o.partner_shipping_id.parent_id"><t t-esc="o.partner_shipping_id.parent_id.name"/><br/></t>
-										<t t-if="o.partner_shipping_id.title"><t t-esc="o.partner_shipping_id.title"/>&#160;</t><t t-esc="o.partner_shipping_id.name"/><br/>
+										<t t-if="o.partner_shipping_id.parent_id"><t t-esc="o.partner_shipping_id.parent_id.name"/><span style="display: block; margin-bottom: 0em;"></span></t>
+										<t t-if="o.partner_shipping_id.title"><t t-esc="o.partner_shipping_id.title"/>&#160;</t><t t-esc="o.partner_shipping_id.name"/><span style="display: block; margin-bottom: 0em;"></span>
 									</t>
 								</span>
 								<strong class="mr16">Invoice address :</strong>
