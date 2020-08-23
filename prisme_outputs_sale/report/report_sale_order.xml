@@ -36,8 +36,8 @@
 						<tr>
 
 							<th style="width: 60%;">
-								<strong class="mr16">Shipping address :</strong>
-								<span class="text-nowrap">
+								<strong class="mr16">Shipping address :</strong><br/>
+								<span class="text-nowrap small">
 									<t t-if="o.partner_shipping_id.is_company">
 										<t t-esc="o.partner_shipping_id.name"/><br/>
 									</t>
