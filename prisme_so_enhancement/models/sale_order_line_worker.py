@@ -190,7 +190,7 @@ class sale_order_line(models.Model):
 
     
     def _get_line_discount(self):
-        discount = 0
+        discount = 0.0
         for line in self:
             price = line.price_unit
             if (line.discount_amount):
