@@ -37,7 +37,7 @@
 
 							<th style="width: 60%;">
 								<strong class="mr16">Shipping address :</strong>
-								<span style="line-height: normal;" class="text-nowrap small">
+								<span style="line-height: 90%;" class="text-nowrap small">
 									<br/>
 									<t t-if="o.partner_shipping_id.is_company">
 										<span t-esc="o.partner_shipping_id.name"/>
