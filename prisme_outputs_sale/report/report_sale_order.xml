@@ -39,11 +39,11 @@
 								<strong class="mr16" style="line-height: normal;">Shipping address :<br/></strong>
 								<span class="text-nowrap small">
 									<t t-if="o.partner_shipping_id.is_company">
-										<div style="line-height: normal;" t-esc="o.partner_shipping_id.name"></div>
+										<div t-esc="o.partner_shipping_id.name"></div>
 									</t>
 									<t t-else="">
-										<t t-if="o.partner_shipping_id.parent_id"><div style="line-height: normal;" t-esc="o.partner_shipping_id.parent_id.name"></div></t>
-										<div style="line-height: normal;"><t t-if="o.partner_shipping_id.title"><t t-esc="o.partner_shipping_id.title.name"/>&#160;</t><t t-esc="o.partner_shipping_id.name"/><br/></div>
+										<t t-if="o.partner_shipping_id.parent_id"><div t-esc="o.partner_shipping_id.parent_id.name"></div></t>
+										<div><t t-if="o.partner_shipping_id.title"><t t-esc="o.partner_shipping_id.title.name"/>&#160;</t><t t-esc="o.partner_shipping_id.name"/><br/></div>
 									</t>
 									<span t-field="o.partner_shipping_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
 									<br/>
@@ -51,11 +51,11 @@
 								<strong class="mr16" style="line-height: normal;">Invoice address :<br/></strong>
 								<span class="text-nowrap small">
 									<t t-if="o.partner_invoice_id.is_company">
-										<div style="line-height: normal;" t-esc="o.partner_invoice_id.name"></div>
+										<div t-esc="o.partner_invoice_id.name"></div>
 									</t>
 									<t t-else="">
-										<t t-if="o.partner_invoice_id.parent_id"><div style="line-height: normal;" t-esc="o.partner_invoice_id.parent_id.name"></div></t>
-										<div style="line-height: normal;"><t t-if="o.partner_invoice_id.title"><t t-esc="o.partner_invoice_id.title.name"/>&#160;</t><t t-esc="o.partner_invoice_id.name"/><br/></div>
+										<t t-if="o.partner_invoice_id.parent_id"><div t-esc="o.partner_invoice_id.parent_id.name"></div></t>
+										<div><t t-if="o.partner_invoice_id.title"><t t-esc="o.partner_invoice_id.title.name"/>&#160;</t><t t-esc="o.partner_invoice_id.name"/><br/></div>
 									</t>
 									<span t-field="o.partner_invoice_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
 								</span>
@@ -65,11 +65,11 @@
 							<th style="width: 40%;">
 								<span class="text-nowrap small">
 									<t t-if="o.partner_id.is_company">
-										<div style="line-height: normal;" t-esc="o.partner_id.name"></div>
+										<div t-esc="o.partner_id.name"></div>
 									</t>
 									<t t-else="">
-										<t t-if="o.partner_id.parent_id"><div style="line-height: normal;" t-esc="o.partner_id.parent_id.name"></div></t>
-										<div style="line-height: normal;"><t t-if="o.partner_id.title"><t t-esc="o.partner_id.title.name"/>&#160;</t><t t-esc="o.partner_id.name"/><br/></div>
+										<t t-if="o.partner_id.parent_id"><div t-esc="o.partner_id.parent_id.name"></div></t>
+										<div><t t-if="o.partner_id.title"><t t-esc="o.partner_id.title.name"/>&#160;</t><t t-esc="o.partner_id.name"/><br/></div>
 									</t>
 									<span t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
 								</span>
