@@ -49,7 +49,7 @@
 									<br/>
 								</span>
 								<strong class="mr16" style="line-height: normal;">Invoice address :<br/></strong>
-								<span class="text-nowrap">
+								<span class="text-nowrap small">
 									<t t-if="o.partner_invoice_id.is_company">
 										<div style="line-height: normal;" t-esc="o.partner_invoice_id.name"></div>
 									</t>
@@ -63,7 +63,7 @@
 
 							</th>
 							<th style="width: 40%;">
-								<span class="text-nowrap">
+								<span class="text-nowrap small">
 									<t t-if="o.partner_id.is_company">
 										<div style="line-height: normal;" t-esc="o.partner_id.name"></div>
 									</t>
