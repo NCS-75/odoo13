@@ -189,6 +189,17 @@ class sale_order_line(models.Model):
         }
 
     
+    def _get_line_discount(self):
+        discount = 0
+        for line in self:
+            price = line.price_unit
+            if (line.discount_amount):
+                price = price - line.discount_amount
+                discount += line.discount_amount
+            if (line.discount):
+                discount += (price * (line.discount / 100.0))
+        return -discount
+        
     @api.depends('product_uom_qty', 'discount', 'price_unit', 'tax_id', 'discount_amount','order_id.rounding_on_subtotal')
     def _compute_amount_prisme(self):
         """
