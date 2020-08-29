@@ -179,7 +179,7 @@
                                     </t>
                                     <t t-if="line.display_type == 'line_note'">
                                         <td colspan="99">
-                                            <span style="font-size: 12pt;" t-field="line.name" t-options="{'widget': 'text'}"/>
+                                            <span style="font-size: 10pt;" t-field="line.name" t-options="{'widget': 'text'}"/>
                                         </td>
                                     </t>
                                 </tr>
