@@ -36,17 +36,16 @@
 						<tr>
 
 							<th style="width: 60%;">
-								<strong class="mr16">Shipping address :</strong>
-								<span style="line-height: 90%;" class="text-nowrap small">
+								<strong class="mr16" style="line-height: normal;">Shipping address :<br/></strong>
+								<span class="text-nowrap small">
 									<br/>
 									<t t-if="o.partner_shipping_id.is_company">
-										<span t-esc="o.partner_shipping_id.name"/>
+										<span style="line-height: normal;" t-esc="o.partner_shipping_id.name"><br/></span>
 									</t>
 									<t t-else="">
-										<t t-if="o.partner_shipping_id.parent_id"><span t-esc="o.partner_shipping_id.parent_id.name"/></t>
-										<span><t t-if="o.partner_shipping_id.title"><t t-esc="o.partner_shipping_id.title.name"/>&#160;</t><t t-esc="o.partner_shipping_id.name"/></span>
+										<t t-if="o.partner_shipping_id.parent_id"><span style="line-height: normal;" t-esc="o.partner_shipping_id.parent_id.name"><br/></span></t>
+										<span style="line-height: normal;"><t t-if="o.partner_shipping_id.title"><t t-esc="o.partner_shipping_id.title.name"/>&#160;</t><t t-esc="o.partner_shipping_id.name"/><br/></span>
 									</t>
-									<br/>
 									<span t-field="o.partner_shipping_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/><br/>
 								</span>
 								<strong class="mr16">Invoice address :</strong>
