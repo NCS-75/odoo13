@@ -72,6 +72,7 @@
 										<div style="line-height: normal;"><t t-if="o.partner_id.title"><t t-esc="o.partner_id.title.name"/>&#160;</t><t t-esc="o.partner_id.name"/><br/></div>
 									</t>
 									<span t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
+								</span>
 							</th>
 						</tr>
 					</table>
