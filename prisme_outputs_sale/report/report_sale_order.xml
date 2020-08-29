@@ -37,7 +37,8 @@
 
 							<th style="width: 60%;">
 								<strong class="mr16">Shipping address :</strong>
-								<span class="text-nowrap small">
+								<span style="line-height: normal;" class="text-nowrap small">
+									<br/>
 									<t t-if="o.partner_shipping_id.is_company">
 										<span t-esc="o.partner_shipping_id.name"/>
 									</t>
@@ -45,6 +46,7 @@
 										<t t-if="o.partner_shipping_id.parent_id"><span t-esc="o.partner_shipping_id.parent_id.name"/></t>
 										<span><t t-if="o.partner_shipping_id.title"><t t-esc="o.partner_shipping_id.title.name"/>&#160;</t><t t-esc="o.partner_shipping_id.name"/></span>
 									</t>
+									<br/>
 									<span t-field="o.partner_shipping_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/><br/>
 								</span>
 								<strong class="mr16">Invoice address :</strong>
