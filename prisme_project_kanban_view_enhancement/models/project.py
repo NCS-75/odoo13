@@ -21,7 +21,7 @@
 from odoo import models, api, fields
 
 class Project(models.Model):
-    _inherit = 'project.project'
+    _inherit = ['project.project', 'mail.activity.mixin']
     prisme_sequence = fields.Char('Prisme Analytic Account Sequence', related='analytic_account_id.prisme_sequence')
 
 

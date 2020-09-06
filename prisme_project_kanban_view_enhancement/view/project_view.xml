@@ -56,6 +56,18 @@
 				</xpath>
 			</field>
 		</record>
+		
+		<record id="view_project_kanban_activity" model="ir.ui.view">
+			<field name="name">view.project.kanban.activity</field>
+			<field name="model">project.project</field>
+			<field name="inherit_id"
+				ref="project.view_project_kanban" />
+			<field name="arch" type="xml">
+				<xpath expr="//a[@class='o_project_kanban_box']" position="inside">
+					<field name="activity_ids" widget="kanban_activity"/>
+				</xpath>
+			</field>
+		</record>
 	</data>
 
 
