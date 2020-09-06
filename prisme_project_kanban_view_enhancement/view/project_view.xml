@@ -68,6 +68,18 @@
 				</xpath>
 			</field>
 		</record>
+		
+		<record id="view_project_form_activity" model="ir.ui.view">
+			<field name="name">view.project.form.activity</field>
+			<field name="model">project.project</field>
+			<field name="inherit_id"
+				ref="project.project.form" />
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='message_follower_ids']" position="after">
+                        <field name="activity_ids" widget="mail_activity"/>
+				</xpath>
+			</field>
+		</record>
 	</data>
 
 
