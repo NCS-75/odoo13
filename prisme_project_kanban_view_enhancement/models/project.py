@@ -48,7 +48,7 @@ class Project(models.Model):
                 act_type_id = self.env['mail.activity.type'].search(
                     [('name', 'ilike', 'Record Has Problems')], limit=1).id
                 self.env['mail.activity'].create({
-                    'res_model_id': self.env.ref( < my_model_id > ).id,
+                    'res_model_id': self.env.ref('project.project').id,
                     'res_id': rec.id,
                     'user_id': rec.user_id.id,
                     'activity_type_id': act_type_id,
