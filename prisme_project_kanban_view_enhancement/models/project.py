@@ -21,6 +21,7 @@
 from odoo import models, api, fields
 
 class Project(models.Model):
+    _name = 'project.project'
     _inherit = ['project.project', 'mail.activity.mixin']
     prisme_sequence = fields.Char('Prisme Analytic Account Sequence', related='analytic_account_id.prisme_sequence')
 
@@ -38,3 +39,19 @@ class Project(models.Model):
             analytic_account= self.env['account.analytic.account']
             vals['analytic_account_id'] = analytic_account.create(vals_account).id
         return super(Project, self).create(vals)
+        
+    @api.multi
+    def write(self, vals):
+        for rec in self:
+            vals = self._prepare_params_for_update(vals, rec)
+            if vals['has_problem']:
+                act_type_id = self.env['mail.activity.type'].search(
+                    [('name', 'ilike', 'Record Has Problems')], limit=1).id
+                self.env['mail.activity'].create({
+                    'res_model_id': self.env.ref( < my_model_id > ).id,
+                    'res_id': rec.id,
+                    'user_id': rec.user_id.id,
+                    'activity_type_id': act_type_id,
+                    'date_deadline': vals['date_submitted'],
+                })
+        return super(Project, self).write(vals)
