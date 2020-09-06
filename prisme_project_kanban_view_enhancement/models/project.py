@@ -40,7 +40,6 @@ class Project(models.Model):
             vals['analytic_account_id'] = analytic_account.create(vals_account).id
         return super(Project, self).create(vals)
         
-    @api.multi
     def write(self, vals):
         for rec in self:
             vals = self._prepare_params_for_update(vals, rec)
