@@ -63,7 +63,7 @@
 			<field name="inherit_id"
 				ref="project.view_project_kanban" />
 			<field name="arch" type="xml">
-				<xpath expr="//a[@class='o_project_kanban_box']" position="inside">
+				<xpath expr="//a[@class='o_project_kanban_box']" position="after">
 					<field name="activity_ids" widget="kanban_activity"/>
 				</xpath>
 			</field>
