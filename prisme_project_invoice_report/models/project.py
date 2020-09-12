@@ -209,7 +209,7 @@ class prisme_project_financial_view_report(models.AbstractModel):
                                     if not timesheet.invoice_id:
                                         if timesheet.product_id.id == product_id:
                                             #Do not take in account the free lines and timesheets later than specified in wizard
-                                            if (timesheet.to_invoice.code == "G") or (datetime.strptime(timesheet.date, "%Y-%m-%d") > datetime.strptime(docs.print_lines_not_invoiced_up_to, "%Y-%m-%d")):
+                                            if (timesheet.to_invoice.code == "G") or (timesheet.date > docs.print_lines_not_invoiced_up_to):
                                                 continue
                                             else:
                                                 #Add this timesheet to the valid ones
@@ -217,7 +217,7 @@ class prisme_project_financial_view_report(models.AbstractModel):
                                             #Sum the quantity
                                             quantity += abs(timesheet.unit_amount)
                                             #Compute start and end date by checking latest and earliest date
-                                            timesheet_date = datetime.strptime(timesheet.date, "%Y-%m-%d")
+                                            timesheet_date = timesheet.date
                                             if invoice_line_date_min is not None:
                                                 if timesheet_date < invoice_line_date_min:
                                                     invoice_line_date_min = timesheet_date
