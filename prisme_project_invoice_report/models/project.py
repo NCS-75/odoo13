@@ -25,7 +25,6 @@ class prisme_project_print_financial_view_wizard(models.TransientModel):
     print_lines_not_invoiced_up_to = fields.Date(string='Print lines not invoiced up to')
 
     #Called when the "Print financial view button is clicked on the project"
-    @api.multi
     def print_financial_view(self):
         project_id = self.env['project.project'].browse(self.env.context.get('record_id'))
         return project_id.print_project_financial_view(self.print_lines_not_invoiced, self.print_lines_not_invoiced_up_to)
