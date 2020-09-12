@@ -39,5 +39,3 @@ class Project(models.Model):
             analytic_account= self.env['account.analytic.account']
             vals['analytic_account_id'] = analytic_account.create(vals_account).id
         return super(Project, self).create(vals)
-        
- 
