@@ -187,6 +187,7 @@ class prisme_project_financial_view_report(models.AbstractModel):
                                 if timesheet.product_id.id not in timesheet_lines_articles_not_invoiced:
                                         timesheet_lines_articles_not_invoiced.append(timesheet.product_id.id)
                         #Then a line is outputted for each product
+                        _logger.info(timesheet_lines_articles_not_invoiced)
                         for product_id in timesheet_lines_articles_not_invoiced:
                                 quantity = 0
                                 #If the product has a default code, this means that the name is the employee name and the default code is the designation
