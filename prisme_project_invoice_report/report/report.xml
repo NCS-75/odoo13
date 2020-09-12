@@ -33,7 +33,7 @@
 		<template id="template_project_invoice">
 		    <t t-call="report.html_container">
 		        <t t-foreach="docs" t-as="o">
-		                <div class="page" style="font-size: 80%;">
+		                <div class="page" style="font-size: 70%;">
  							<p style="text-align: left; width:49%; display: inline-block;">
 								<t t-esc='o.partner_id.display_name' />
 							</p>
@@ -43,14 +43,14 @@
 								Prestations de <t t-esc='datas["start_date"].strftime("%m.%Y")' /> à <t t-esc='datas["end_date"].strftime("%m.%Y")' />
 								</p>
 							</t>
-							<h3 style="font-size: 130%;">
+							<h3 style="font-size: 120%;">
 								<t t-esc='datas["project_name"]' />
 								 - Décompte au
 								<t t-esc='datas["date_report"].strftime("%d.%m.%Y")' />
 							</h3>
 							<t t-foreach="datas['tasks']" t-as="task">
 								<table
-									style="border: 3px double black; margin-bottom: 25px; width: 100%; table-layout: fixed; page-break-inside: avoid; break-inside: avoid; font-size: 90%;">
+									style="border: 3px double black; margin-bottom: 25px; width: 100%; table-layout: fixed; page-break-inside: avoid; break-inside: avoid; font-size: 80%;">
 									<tr>
 										<th width="10%" style="text-align: left;">Facture</th>
 										<th width="13%" style="text-align: left;">Date</th>
@@ -175,7 +175,7 @@
 									</tr>
 								</table>
 							</t>
-							<table style="width: 100%; table-layout: fixed; font-size: 90%; page-break-inside: avoid; break-inside: avoid;">
+							<table style="width: 100%; table-layout: fixed; font-size: 80%; page-break-inside: avoid; break-inside: avoid;">
 								<tr>
 									<th width="10%" style="text-align: left;"></th>
 									<th width="10%" style="text-align: left;"></th>
