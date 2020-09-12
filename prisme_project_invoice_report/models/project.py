@@ -233,7 +233,10 @@ class prisme_project_financial_view_report(models.AbstractModel):
                                     continue
                                 #Compute price depending on invoicing type
                                 pl = docs.analytic_account_id.pricelist_id
-                                price = pl.price_get(product_id, quantity)#, partner=docs.analytic_account_id.partner_id)#[pl.id]   
+                                _logger.info(product_id)
+                                _logger.info(quantity)
+                                _logger.info(pl)
+                                price = pl.price_get(product_id, quantity, partner=docs.analytic_account_id.partner_id)[pl.id]   
                                 #Compute advance
                                 advance = price*quantity
                                 #Compute balance and use
