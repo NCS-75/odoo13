@@ -31,7 +31,7 @@
 		    name="prisme_project_invoice_report.template_project_invoice"
 		/>
 		<template id="template_project_invoice">
-		    <t t-call="report.html_container">
+		    <t t-call="web.html_container">
 		        <t t-foreach="docs" t-as="o">
 		                <div class="page" style="font-size: 70%;">
  							<p style="text-align: left; width:49%; display: inline-block;">
