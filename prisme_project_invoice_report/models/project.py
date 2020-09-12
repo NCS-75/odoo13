@@ -554,4 +554,4 @@ class prisme_project_financial_view_report(models.AbstractModel):
         #Add data to docargs
         docargs['datas'] = data
         #Send report render order
-        return report_obj.render('prisme_project_invoice_report.template_project_invoice', docargs)
+        return docargs
