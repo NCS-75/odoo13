@@ -86,7 +86,7 @@ class prisme_project_financial_view_report(models.AbstractModel):
             project_tasks = self.env['project.task'].search([['project_id','=',docs.id],['active','=',False]])
         #Maximum date
         if docs.print_lines_not_invoiced_up_to:
-            date_report = datetime.strptime(docs.print_lines_not_invoiced_up_to, "%Y-%m-%d")
+            date_report = docs.print_lines_not_invoiced_up_to
         else:
             date_report = datetime.today()
         if not docs.group_by_financial_account:
