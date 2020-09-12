@@ -1,0 +1,228 @@
+<!--
+#######################################
+# Prisme Solutions Informatique SA    #
+#######################################
+# Author: Hugo Buchs                  #
+# Email:  hugo.buchs@prisme.ch        #
+# Web:    www.prisme.ch               #
+# Date:   11.04.2019                  #
+#######################################
+-->
+<odoo>
+	<data>
+		<record id="paperformat_project_invoice" model="report.paperformat">
+		    <field name="name">Project invoice A4</field>
+		    <field name="orientation">Portrait</field>
+		    <field name="margin_top">7</field>
+		    <field name="margin_bottom">7</field>
+		    <field name="margin_left">7</field>
+		    <field name="margin_right">7</field>
+		    <field name="header_line" eval="False"/>
+		    <field name="header_spacing">0</field>
+		    <field name="dpi">96</field>
+		</record>
+		<!-- Report -->
+		<report
+		    id="report_project_invoice"
+		    model="project.project"
+		    string="Project invoice"
+		    report_type="qweb-pdf"
+		    paperformat="prisme_project_invoice_report.paperformat_project_invoice"
+		    name="prisme_project_invoice_report.template_project_invoice"
+		/>
+		<template id="template_project_invoice">
+		    <t t-call="report.html_container">
+		        <t t-foreach="docs" t-as="o">
+		                <div class="page" style="font-size: 80%;">
+ 							<p style="text-align: left; width:49%; display: inline-block;">
+								<t t-esc='o.partner_id.display_name' />
+							</p>
+							<p style="text-align: right; width:50%;  display: inline-block;">Prisme Solutions Informatique SA</p>
+  							<t t-if="datas['start_date'] and datas['end_date']">
+  								<p style="text-align: center;">
+								Prestations de <t t-esc='datas["start_date"].strftime("%m.%Y")' /> à <t t-esc='datas["end_date"].strftime("%m.%Y")' />
+								</p>
+							</t>
+							<h3 style="font-size: 130%;">
+								<t t-esc='datas["project_name"]' />
+								 - Décompte au
+								<t t-esc='datas["date_report"].strftime("%d.%m.%Y")' />
+							</h3>
+							<t t-foreach="datas['tasks']" t-as="task">
+								<table
+									style="border: 3px double black; margin-bottom: 25px; width: 100%; table-layout: fixed; page-break-inside: avoid; break-inside: avoid; font-size: 90%;">
+									<tr>
+										<th width="10%" style="text-align: left;">Facture</th>
+										<th width="13%" style="text-align: left;">Date</th>
+										<th width="37%" style="text-align: left;">Désignations</th>
+										<th width="10%" style="text-align: right;">Qté</th>
+										<th width="10%" style="text-align: right;">Taux</th>
+										<th width="15%" style="text-align: right;">Avance</th>
+										<th width="5%" style="text-align: right;">&#160;</th>
+									</tr>
+									<tr>
+										<td>&#160;</td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<t t-if='task["balance_previous_command"] != 0'>
+										<tr>
+											<td></td>
+											<td></td>
+											<td>
+												<b>Solde commande précédente</b>
+											</td>
+											<td style="text-align: right;"></td>
+											<td style="text-align: right;"></td>
+											<td style="text-align: right;">
+												<b>
+													<t t-esc='task["balance_previous_command"]' t-options='{"widget": "float", "precision": 2}'/>
+												</b>
+											</td>
+											<td style="text-align: right;"></td>
+										</tr>
+									</t>
+									<tr>
+										<td></td>
+										<td></td>
+										<td>
+											<b>
+												<t t-esc='task["designation"]' />
+											</b>
+										</td>
+										<td style="text-align: right;"></td>
+										<td style="text-align: right;"></td>
+										<td style="text-align: right;">
+											<b>
+												<t t-esc='task["advance"]' t-options='{"widget": "float", "precision": 2}'/>
+											</b>
+										</td>
+										<td style="text-align: right;"></td>
+									</tr>
+									<tr>
+										<td>&#160;</td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<t t-foreach="task['invoice_lines']" t-as="invoice_line">
+										<tr style="page-break-after: auto;">
+											<td style="padding-left: 0.5%;">
+												<b><t t-esc='invoice_line["invoice"]' /></b>
+											</td>
+											<td style="text-align: right; padding-right: 0.5%;">
+												<t t-esc='invoice_line["date"]' />
+											</td>
+											<td>
+												<t t-esc='invoice_line["designation"]' />
+											</td>
+											<td style="text-align: right;">
+												<t t-esc='invoice_line["quantity"]' t-options='{"widget": "float", "precision": 2}'/>
+											</td>
+											<td style="text-align: right;">
+												<t t-esc='invoice_line["rate"]' t-options='{"widget": "float", "precision": 2}'/>
+											</td>
+											<td style="text-align: right;">
+												<t t-esc='invoice_line["advance"]' t-options='{"widget": "float", "precision": 2}'/>
+											</td>
+											<td style="text-align: center;">
+												<t t-esc='invoice_line["employee"]' />
+											</td>
+										</tr>
+									</t>
+									<tr>
+										<td>&#160;</td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+									<tr>
+										<td></td>
+										<td></td>
+										<td>
+											<b>
+												Solde
+												<t t-esc='task["designation"]' />
+											</b>
+										</td>
+										<td style="text-align: right;"></td>
+										<td style="text-align: right;"></td>
+										<td style="text-align: right;">
+											<b>
+												<t t-esc='task["balance"]' t-options='{"widget": "float", "precision": 2}'/>
+											</b>
+										</td>
+										<td style="text-align: right;"></td>
+									</tr>
+									<tr>
+										<td>&#160;</td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+										<td></td>
+									</tr>
+								</table>
+							</t>
+							<table style="width: 100%; table-layout: fixed; font-size: 90%; page-break-inside: avoid; break-inside: avoid;">
+								<tr>
+									<th width="10%" style="text-align: left;"></th>
+									<th width="10%" style="text-align: left;"></th>
+									<th width="40%" style="text-align: left;">Total commande</th>
+									<th width="10%" style="text-align: right;"></th>
+									<th width="10%" style="text-align: right;"></th>
+									<th width="15%" style="text-align: right;">
+										<t t-esc='datas["total_project"]' t-options='{"widget": "float", "precision": 2}'/>
+									</th>
+									<th width="5%" style="text-align: right;"></th>
+								</tr>
+								<t t-foreach='datas["tasks"]' t-as='task'>
+									<tr style="page-break-after: auto">
+										<td></td>
+										<td></td>
+										<td>
+											Total
+											<t t-esc='task["designation"]' />
+										</td>
+										<td></td>
+										<td></td>
+										<td style="text-align: right;">
+											<t t-esc='task["use"]' t-options='{"widget": "float", "precision": 2}'/>
+										</td>
+										<td></td>
+									</tr>
+								</t>
+								<tr>
+									<td></td>
+									<td></td>
+									<td>
+										<b>
+											Solde à consommer au
+											<t t-esc='datas["date_report"].strftime("%d.%m.%Y")' />
+										</b>
+									</td>
+									<td></td>
+									<td></td>
+									<td style="text-align: right; border-bottom: 3px double black; border-top: 1px solid black">
+										<b><t t-esc='datas["balance_project"]' t-options='{"widget": "float", "precision": 2}'/></b>
+									</td>
+									<td></td>
+								</tr>
+							</table>
+		                </div>
+		        </t>
+		    </t>
+		</template>
+	</data>
+</odoo>

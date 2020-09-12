@@ -1,0 +1,51 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* prisme_project_invoice_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0+e-20180612\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-09-14 16:12+0000\n"
+"PO-Revision-Date: 2019-09-14 16:12+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: prisme_project_invoice_report
+#: model:ir.ui.view,arch_db:prisme_project_invoice_report.wizard_project_print_financial_view
+msgid "Cancel"
+msgstr "Annuler"
+
+#. module: prisme_project_invoice_report
+#: model:ir.ui.view,arch_db:prisme_project_invoice_report.wizard_project_print_financial_view
+msgid "Print"
+msgstr "Imprimer"
+
+#. module: prisme_project_invoice_report
+#: model:ir.actions.act_window,name:prisme_project_invoice_report.wizard_project_print_financial_view_action
+#: model:ir.ui.view,arch_db:prisme_project_invoice_report.view_project_kanban_add_financial_view_print_button
+#: model:ir.ui.view,arch_db:prisme_project_invoice_report.wizard_project_print_financial_view
+msgid "Print financial view"
+msgstr "Imprimer la vue financière"
+
+#. module: prisme_project_invoice_report
+#: model:ir.model.fields,field_description:prisme_project_invoice_report.field_project_project_print_lines_not_invoiced
+#: model:ir.model.fields,field_description:prisme_project_invoice_report.field_wizard_project_print_financial_view_print_lines_not_invoiced
+msgid "Print lines not invoiced"
+msgstr "Imprimer les lignes non facturées"
+
+#. module: prisme_project_invoice_report
+#: model:ir.model.fields,field_description:prisme_project_invoice_report.field_project_project_print_lines_not_invoiced_up_to
+#: model:ir.model.fields,field_description:prisme_project_invoice_report.field_wizard_project_print_financial_view_print_lines_not_invoiced_up_to
+msgid "Print lines not invoiced up to"
+msgstr "Imprimer les lignes non facturées jusqu'à"
+
+#. module: prisme_project_invoice_report
+#: model:ir.model.fields,field_description:prisme_project_invoice_report.field_project_project_group_by_financial_account
+#: model:ir.model.fields,field_description:prisme_project_invoice_report.field_wizard_project_print_financial_view_group_by_financial_account
+msgid "Group by financial account"
+msgstr "Grouper par compte financier"

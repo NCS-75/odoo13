@@ -1,0 +1,75 @@
+<!--
+#######################################
+# Prisme Solutions Informatique SA    #
+#######################################
+# Author: Hugo Buchs                  #
+# Email:  hugo.buchs@prisme.ch        #
+# Web:    www.prisme.ch               #
+# Date:   11.04.2019                  #
+#######################################
+-->
+<odoo>
+	<data>
+		<!--Wizard to select options for printing the financial view-->
+ 		<record id="wizard_project_print_financial_view" model="ir.ui.view">
+            <field name="name">view.wizard.project.print.financial.view</field>
+            <field name="model">wizard.project.print.financial.view</field>
+            <field name="arch" type="xml">
+                <form string="Print financial view">
+                    <group col="4">
+                        <field name="print_lines_not_invoiced"/>
+                        <field name="print_lines_not_invoiced_up_to" attrs="{'required':[('print_lines_not_invoiced','!=',False)]}"/>
+                        <field name="group_by_financial_account"/>
+                    </group>
+                    <footer>
+                        <button name="print_financial_view" 
+                            string="Print" type="object" 
+                            class="btn-primary"/>
+                        <button string="Cancel" 
+                            class="btn-default" 
+                            special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+        
+        <record id="wizard_project_print_financial_view_action" model="ir.actions.act_window">
+               <field name="name">Print financial view</field>
+               <field name="type">ir.actions.act_window</field>
+               <field name="res_model">wizard.project.print.financial.view</field>
+               <field name="view_mode">form</field>
+               <field name="context">{'record_id' : active_id}</field>
+               <field name="target">new</field>
+        </record>
+	
+		<!-- Add a button to print the invoice -->
+		<record id="view_project_kanban_add_financial_view_print_button"
+			model="ir.ui.view">
+			<field name="name">view.project.kanban.add.financial.view.print.button</field>
+			<field name="model">project.project</field>
+			<field name="inherit_id" ref="project.view_project_kanban" />
+			<field name="arch" type="xml">
+				<xpath expr="//div[@groups='project.group_project_manager']" position="after">
+					<div>
+						<a name="%(wizard_project_print_financial_view_action)d" type="action">Print financial view</a>
+					</div>
+				</xpath>
+			</field>
+		</record>
+		
+		<!-- Add the code field to the  -->
+		<record id="view_project_kanban_add_financial_view_print_button"
+			model="ir.ui.view">
+			<field name="name">view.project.kanban.add.financial.view.print.button</field>
+			<field name="model">project.project</field>
+			<field name="inherit_id" ref="project.view_project_kanban" />
+			<field name="arch" type="xml">
+				<xpath expr="//div[@groups='project.group_project_manager']" position="after">
+					<div>
+						<a name="%(wizard_project_print_financial_view_action)d" type="action">Print financial view</a>
+					</div>
+				</xpath>
+			</field>
+		</record>
+	</data>
+</odoo>
