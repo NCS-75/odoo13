@@ -48,9 +48,7 @@ class prisme_project_print_financial_view(models.Model):
         #Save the value from the wizard
         self.write({'print_lines_not_invoiced': print_lines_not_invoiced, 'print_lines_not_invoiced_up_to': print_lines_not_invoiced_up_to, 'group_by_financial_account':group_by_financial_account})
         #Print the report, cheap hack so that the wizard closes after printing finished, also gives a better rendering
-        action_dict = self.env['report'].get_action(self, 'prisme_project_invoice_report.template_project_invoice')
-        del action_dict['report_type']
-        return action_dict
+        return self.env.ref('prisme_project_invoice_report.report_project_invoice').report_action(self)
 
 #A new model is created to handle the invoice report printing
 class prisme_project_financial_view_report(models.AbstractModel):
