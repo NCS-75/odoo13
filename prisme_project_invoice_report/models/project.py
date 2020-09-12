@@ -55,8 +55,8 @@ class prisme_project_financial_view_report(models.AbstractModel):
     _name = 'report.prisme_project_invoice_report.template_project_invoice'
     #Called in self.env['report'].get_action
     @api.model
-    def render_html(self, docids, data=None):
-        report_obj = self.env['report']
+    def _get_report_values(self, docids, data=None):
+        report_obj = self.env['ir.actions.report']
         report = report_obj._get_report_from_name('prisme_project_invoice_report.template_project_invoice')
         #This is the project
         docs = self.env[report.model].browse(docids)
