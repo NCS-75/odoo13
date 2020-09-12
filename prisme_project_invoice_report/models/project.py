@@ -184,7 +184,7 @@ class prisme_project_financial_view_report(models.AbstractModel):
                         #First timesheets are aggregated by product
                         for timesheet in task.timesheet_ids:
                             if not timesheet.invoice_id:
-                                if timesheet.product_id.id not in timesheet_lines_articles_not_invoiced:
+                                if timesheet.product_id.id and (timesheet.product_id.id not in timesheet_lines_articles_not_invoiced):
                                         timesheet_lines_articles_not_invoiced.append(timesheet.product_id.id)
                         #Then a line is outputted for each product
                         _logger.info(timesheet_lines_articles_not_invoiced)
