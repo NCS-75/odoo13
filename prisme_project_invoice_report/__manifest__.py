@@ -13,7 +13,8 @@
       'project',
       'contacts',
       'account',
-      'prisme_project_enhancement'
+      'prisme_project_enhancement',
+	  'prisme_invoicing_timesheet'
     ],
     'qweb': [
       
