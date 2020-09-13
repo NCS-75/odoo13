@@ -106,6 +106,10 @@ class prisme_project_financial_view_report(models.AbstractModel):
                     for timesheet in task.timesheet_ids:
                         if (timesheet.to_invoice.code != "G"):
                             for invoice_line in timesheet.invoice_id.invoice_line_ids:
+                                _logger.info(invoice_line.product_id)
+                                _logger.info(timesheet.product_id)
+                                _logger.info(invoice_line.account_id)
+                                _logger.info(task.account_id)
                                 if (invoice_line.product_id == timesheet.product_id) and (invoice_line.account_id == task.account_id):
                                     if invoice_line in invoice_lines_done:
                                         invoice_lines_done[invoice_line][1].append(timesheet.id)
