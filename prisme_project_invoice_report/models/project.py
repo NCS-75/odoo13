@@ -128,7 +128,7 @@ class prisme_project_financial_view_report(models.AbstractModel):
                         for timesheet_id in invoice_lines_done[invoice_line][1]:
                             timesheet = self.env['account.analytic.line'].browse(timesheet_id)
                             quantity += abs(timesheet.unit_amount)
-                            timesheet_date = datetime.strptime(timesheet.date, "%Y-%m-%d")
+                            timesheet_date = timesheet.date
                             if invoice_line_date_min is not None:
                                 if timesheet_date < invoice_line_date_min:
                                     invoice_line_date_min = timesheet_date
