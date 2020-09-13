@@ -173,7 +173,7 @@ class prisme_project_financial_view_report(models.AbstractModel):
                         else:
                             invoice_line_date = invoice_line_date_min.strftime("%d.%m")+"-"+invoice_line_date_max.strftime("%d.%m.%Y")
                         #Add the invoice lines to the data
-                        invoice_lines_final.append({'invoice':'FA'+str(invoice_line.move_id.ref),
+                        invoice_lines_final.append({'invoice':invoice_line.move_id.name,
                                                     'date':invoice_line_date,
                                                     'designation':designation,
                                                     'quantity':quantity,
