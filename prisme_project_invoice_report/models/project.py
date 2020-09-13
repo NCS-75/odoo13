@@ -106,7 +106,7 @@ class prisme_project_financial_view_report(models.AbstractModel):
                     for timesheet in task.timesheet_ids:
                         if (timesheet.to_invoice.code != "G"):
                             for invoice_line in timesheet.invoice_id.invoice_line_ids:
-                                if (invoice_line.account_analytic_id == timesheet.account_id) and (invoice_line.product_id == timesheet.product_id) and (invoice_line.account_id == task.account_id):
+                                if (invoice_line.product_id == timesheet.product_id) and (invoice_line.account_id == task.account_id):
                                     if invoice_line in invoice_lines_done:
                                         invoice_lines_done[invoice_line][1].append(timesheet.id)
                                     else:
@@ -179,6 +179,7 @@ class prisme_project_financial_view_report(models.AbstractModel):
                         })
                     #This part is to print timesheet lines that are not invoiced
                     if docs.print_lines_not_invoiced:
+                        pl = docs.analytic_account_id.pricelist_id
                         #Add lines without invoices
                         timesheet_lines_articles_not_invoiced = []
                         #First timesheets are aggregated by product
@@ -187,7 +188,6 @@ class prisme_project_financial_view_report(models.AbstractModel):
                                 if timesheet.product_id.id and (timesheet.product_id.id not in timesheet_lines_articles_not_invoiced):
                                         timesheet_lines_articles_not_invoiced.append(timesheet.product_id.id)
                         #Then a line is outputted for each product
-                        _logger.info(timesheet_lines_articles_not_invoiced)
                         for product_id in timesheet_lines_articles_not_invoiced:
                                 quantity = 0
                                 #If the product has a default code, this means that the name is the employee name and the default code is the designation
@@ -233,10 +233,6 @@ class prisme_project_financial_view_report(models.AbstractModel):
                                 if valid_timesheet_count == 0:
                                     continue
                                 #Compute price depending on invoicing type
-                                pl = docs.analytic_account_id.pricelist_id
-                                _logger.info(product_id)
-                                _logger.info(quantity)
-                                _logger.info(pl)
                                 price = pl.price_get(product_id, quantity, partner=docs.analytic_account_id.partner_id)[pl.id]   
                                 #Compute advance
                                 advance = price*quantity
