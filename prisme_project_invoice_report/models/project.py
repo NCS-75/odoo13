@@ -157,9 +157,9 @@ class prisme_project_financial_view_report(models.AbstractModel):
                             designation = invoice_line.product_id.name
                             employee = ''
                         #Recompute start and end date using the minimum and maximum dates of the invoice line
-                        if invoice_line_date_max.date() > end_date:
+                        if invoice_line_date_max > end_date:
                             end_date = invoice_line_date_max
-                        if invoice_line_date_min.date() < start_date:
+                        if invoice_line_date_min < start_date:
                             start_date = invoice_line_date_min
                         #Format the final date for the invoice line
                         if invoice_line_date_min == invoice_line_date_max:
@@ -244,9 +244,9 @@ class prisme_project_financial_view_report(models.AbstractModel):
                                 balance -= advance
                                 use -= advance
                                 #Compute start and end dates for the task
-                                if invoice_line_date_max.date() > end_date:
+                                if invoice_line_date_max > end_date.date():
                                     end_date = invoice_line_date_max
-                                if invoice_line_date_min.date() < start_date:
+                                if invoice_line_date_min < start_date.date():
                                     start_date = invoice_line_date_min
                                 #Formatting the start and end dates
                                 if invoice_line_date_min == invoice_line_date_max:
