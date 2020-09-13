@@ -76,9 +76,9 @@ class prisme_project_financial_view_report(models.AbstractModel):
         #Total project balance
         balance_project = 0.0
         #Project start date
-        start_date = datetime.max.date()
+        start_date = datetime.max
         #Project end date
-        end_date = datetime.min.date()
+        end_date = datetime.min
         #Hack to allow printing report for archived projects
         if docs.active == True:
             project_tasks = docs.tasks
@@ -218,7 +218,7 @@ class prisme_project_financial_view_report(models.AbstractModel):
                                             #Sum the quantity
                                             quantity += abs(timesheet.unit_amount)
                                             #Compute start and end date by checking latest and earliest date
-                                            timesheet_date = timesheet.date
+                                            timesheet_date = datetime.combine(timesheet.date, datetime.min.time())
                                             if invoice_line_date_min is not None:
                                                 if timesheet_date < invoice_line_date_min:
                                                     invoice_line_date_min = timesheet_date
