@@ -179,7 +179,6 @@ class prisme_project_financial_view_report(models.AbstractModel):
                         })
                     #This part is to print timesheet lines that are not invoiced
                     if docs.print_lines_not_invoiced:
-                        pl = docs.analytic_account_id.pricelist_id
                         #Add lines without invoices
                         timesheet_lines_articles_not_invoiced = []
                         #First timesheets are aggregated by product
@@ -233,6 +232,7 @@ class prisme_project_financial_view_report(models.AbstractModel):
                                 if valid_timesheet_count == 0:
                                     continue
                                 #Compute price depending on invoicing type
+                                pl = docs.analytic_account_id.pricelist_id
                                 price = pl.price_get(product_id, quantity, partner=docs.analytic_account_id.partner_id)[pl.id]   
                                 #Compute advance
                                 advance = price*quantity
