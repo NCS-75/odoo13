@@ -244,9 +244,9 @@ class prisme_project_financial_view_report(models.AbstractModel):
                                 balance -= advance
                                 use -= advance
                                 #Compute start and end dates for the task
-                                if invoice_line_date_max > end_date:
+                                if invoice_line_date_max.date() > end_date:
                                     end_date = invoice_line_date_max
-                                if invoice_line_date_min < start_date:
+                                if invoice_line_date_min.date() < start_date:
                                     start_date = invoice_line_date_min
                                 #Formatting the start and end dates
                                 if invoice_line_date_min == invoice_line_date_max:
