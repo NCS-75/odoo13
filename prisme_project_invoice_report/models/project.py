@@ -76,9 +76,9 @@ class prisme_project_financial_view_report(models.AbstractModel):
         #Total project balance
         balance_project = 0.0
         #Project start date
-        start_date = datetime.max
+        start_date = datetime.max.date()
         #Project end date
-        end_date = datetime.min
+        end_date = datetime.min.date()
         #Hack to allow printing report for archived projects
         if docs.active == True:
             project_tasks = docs.tasks
@@ -244,9 +244,9 @@ class prisme_project_financial_view_report(models.AbstractModel):
                                 balance -= advance
                                 use -= advance
                                 #Compute start and end dates for the task
-                                if invoice_line_date_max > end_date.date():
+                                if invoice_line_date_max > end_date:
                                     end_date = invoice_line_date_max
-                                if invoice_line_date_min < start_date.date():
+                                if invoice_line_date_min < start_date:
                                     start_date = invoice_line_date_min
                                 #Formatting the start and end dates
                                 if invoice_line_date_min == invoice_line_date_max:
