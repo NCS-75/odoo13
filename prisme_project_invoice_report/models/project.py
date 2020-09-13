@@ -118,7 +118,7 @@ class prisme_project_financial_view_report(models.AbstractModel):
                                         invoice_lines_done[invoice_line] = [timesheet.to_invoice, [timesheet.id]]
                                     break
                     #Loop over invoice lines sorted by date
-                    for invoice_line in sorted(invoice_lines_done.keys(), key=lambda r: datetime.strptime(r.move_id.date_invoice, "%Y-%m-%d")):                    
+                    for invoice_line in sorted(invoice_lines_done.keys(), key=lambda r: r.move_id.invoice_date):                    
                         #Invoice line start date
                         invoice_line_date_min = None
                         #Invoice line end date
