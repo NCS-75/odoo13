@@ -28,8 +28,9 @@ class account_move(models.Model):
         total_discount = 0.0
         
         if line.layout_type == 'article':
-            total_price = line.quantity * line.price_unit
-            total_discount = (total_price - (line.discount_amount + (line.discount / 100 * (total_price - line.discount_amount)))) / line.quantity
+            #total_price = line.quantity * line.price_unit
+            #total_discount = (total_price - (line.discount_amount + (line.discount / 100 * (total_price - line.discount_amount)))) / line.quantity
+            total_discount = 0
             
         if total_discount:
             str_total_discount = '{:.2f}'.format(total_discount * -1)
