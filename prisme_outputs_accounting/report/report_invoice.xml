@@ -64,7 +64,7 @@
                 			</td>
                 		</tr>
                 	</table>
-                    <h2 class="mt-5">
+                    <h2 style="font-size: 80%">
                         <span t-if="o.type == 'out_invoice' and o.state == 'posted'">Invoice</span>
                         <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
                         <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
@@ -309,6 +309,7 @@
 			model="account.move"
 			string="Prisme Invoice"
 			report_type="qweb-pdf"
+			margin_top
 			name="prisme_outputs_accounting.report_prisme_invoice_base"
 			file="prisme_outputs_accounting.report_prisme_invoice_base"
 			/>
