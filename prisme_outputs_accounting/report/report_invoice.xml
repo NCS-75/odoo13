@@ -65,6 +65,7 @@
                 			</td>
                 		</tr>
                 	</table>
+					<br/><br/>
                     <h2 style="font-family: 'DejaVu Sans'; font-size: 13pt; font-weight: bold; color: black;">
                         <span t-if="o.type == 'out_invoice' and o.state == 'posted'">Invoice</span>
                         <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
