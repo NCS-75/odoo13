@@ -30,7 +30,7 @@
                 <!-- <t t-set="address">
                     <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
                 </t> -->
-                <div class="page">
+                <div class="page" style= "font-family:'Bitstream Vera Sans';">
                 	<!-- company's VAT and partner's address -->
                 	<table class="w-100">
                 		<tr>
@@ -75,7 +75,7 @@
                     </h2>
 
                     <div id="informations" class="mt-3 mb-3">
-						<table style="border: 3px solid black; margin-bottom: 25px; width: 100%; table-layout: fixed; page-break-inside: avoid; break-inside: avoid; font-size: 80%; margin-bottom: 2em;">
+						<table style="border: 1px solid lightgray; margin-bottom: 25px; width: 100%; table-layout: fixed; page-break-inside: avoid; break-inside: avoid; font-size: 80%; margin-bottom: 2em;">
 							<!-- Header -->
 							<tr class="align-middle small font-weight-bold">
 								<th>Document</th>
