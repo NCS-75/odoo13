@@ -85,7 +85,7 @@
 								<th>Partner Ref.</th>
 								<th>Payment Term</th>
 							</tr>
-							<tr style="font-family: 'DejaVu Sans'; font-size: 9pt; color: black; text-align: center;">
+							<tr style="font-family: 'DejaVu Sans'; font-size: 9.5pt; color: black; text-align: center;">
 								<!-- Document -->
 								<td>
 									<t t-if="'ref' in o.fields_get()">
@@ -120,7 +120,7 @@
                     <t t-set="display_discount" t-value="any([l.discount or l.discount_amount for l in o.invoice_line_ids])"/>
 
                     <table class="w-100 table-sm" name="invoice_line_table">
-                        <thead style="font-family: 'DejaVu Sans'; font-weight: bold; font-size: 9pt; color: black; border-bottom: 1px solid black;">
+                        <thead style="font-family: 'DejaVu Sans'; font-weight: bold; font-size: 9.5pt; color: black; border-bottom: 1px solid black;">
                             <tr>
                                 <th name="th_description" style="width:40%"><span>Description</span></th>
                                 <th name="th_taxes"  style="width:10%"><span>Taxes</span></th>
@@ -148,7 +148,7 @@
                         <tbody>
                             
 
-                                <tr style="font-family: 'DejaVu Sans'; font-size: 9pt; color: black; border-bottom: 1px solid lightgray;">
+                                <tr style="font-family: 'DejaVu Sans'; font-size: 9.5pt; color: black; border-bottom: 1px solid lightgray;">
                                     <t t-if="not line.display_type and line.layout_type=='article'" name="account_invoice_line_accountable">
                                         <td name="account_invoice_line_name" style="width:40%"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
                                         <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:10%">
@@ -196,7 +196,7 @@
                                 <t t-if="(not subtotal_done) and current_section and (line_last or lines[line_index+1].display_type == 'line_section' or lines[line_index+1].layout_type=='break') and o.company_id.totals_below_sections">
            							<t t-set="subtotal_done" t-value="True"/>
                                     <tr class="is-subtotal text-right">
-                                        <td colspan="99" style="font-family: 'DejaVu Sans'; font-size: 9pt; color: black;">
+                                        <td colspan="99" style="font-family: 'DejaVu Sans'; font-size: 9.5pt; color: black;">
                                             <strong class="mr16">Subtotal</strong>
                                             <span
                                                 t-esc="current_subtotal"
@@ -214,7 +214,7 @@
 									<p style="page-break-after:always;" />
 									<br />
 									 <table class="w-100 table-sm" name="invoice_line_table">
-										<thead class="border-bottom border-dark" style="font-family: 'DejaVu Sans'; font-size: 9pt; font-weight: bold; color: black;">
+										<thead class="border-bottom border-dark" style="font-family: 'DejaVu Sans'; font-size: 9.5pt; font-weight: bold; color: black;">
 											<tr>
 												<th name="th_description" class="text-left" style="width:30%"><span>Description</span></th>
 												<th name="th_taxes"  style="width:10%" t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th>
@@ -240,7 +240,7 @@
                     <div class="clearfix">
                         <div id="total" class="row">
                             <div t-attf-class="col-4 ml-auto">
-                                <table style="page-break-inside: avoid; font-family: 'DejaVu Sans'; font-size: 9pt; font-weight: bold; color: black; margin-right: 0px; margin-left: auto;">
+                                <table style="page-break-inside: avoid; font-family: 'DejaVu Sans'; font-size: 9.5pt; font-weight: bold; color: black; margin-right: 0px; margin-left: auto;">
 						    	
 						    		<!-- Amount without taxes -->
 								    <tr class="border-black o_subtotal" style="">
@@ -256,7 +256,7 @@
 								    	</td>
 								    </tr>
 								    <tr class="border-black o_total">
-								        <td><strong style="color: black;">Total with VAT</strong></td>
+								        <td><strong style="color: black; font-weight: normal;">Total with VAT</strong></td>
 								        <td class="text-right">
 								            <span class="text-nowrap" t-field="o.amount_total"/>
 								        </td>
@@ -267,7 +267,7 @@
                     </div>
                     
                     <div name="taxes_table_container" class="mt-5" style="width: 55%; margin-bottom: 6em;">
-                    	<table class="table-sm w-100" name="taxes_table" style="page-break-inside: avoid; font-family: 'DejaVu Sans'; font-size: 9pt; color: black;">
+                    	<table class="table-sm w-100" name="taxes_table" style="page-break-inside: avoid; font-family: 'DejaVu Sans'; font-size: 9.5pt; color: black;">
 		    				<tr class="border-bottom border-dark">
 						        <th style="width: 60%">Tax</th>
 						        <th style="width: 20%" class="text-right">Base</th>
