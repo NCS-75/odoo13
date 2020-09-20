@@ -32,7 +32,7 @@
                 </t> -->
                 <div class="page">
                 	<!-- company's VAT and partner's address -->
-                	<table class="w-100">
+                	<table style="margin-top: 50px;" class="w-100">
                 		<tr>
                 			<td style="width: 60%; font-family: 'DejaVu Sans'; font-size: 10pt;">
                 				<div t-if="o.company_id.partner_id.vat">
