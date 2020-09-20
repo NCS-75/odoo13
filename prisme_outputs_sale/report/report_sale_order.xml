@@ -36,8 +36,8 @@
 						<tr>
 
 							<th style="width: 60%;">
-								<strong class="mr16" style="line-height: normal;">Shipping address :<br/></strong>
-								<span class="text-nowrap small">
+								<strong style="width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; font-weight: bold; line-height: normal;">Shipping address :<br/></strong>
+								<span style="width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt;">
 									<t t-if="o.partner_shipping_id.is_company">
 										<div t-esc="o.partner_shipping_id.name"></div>
 									</t>
@@ -48,8 +48,8 @@
 									<span t-field="o.partner_shipping_id" t-options='{"widget": "contact", "fields": ["address"], "no_marker": True}'/>
 									<br/>
 								</span>
-								<strong class="mr16" style="line-height: normal;">Invoice address :<br/></strong>
-								<span class="text-nowrap small">
+								<strong style="width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; font-weight: bold; line-height: normal;">Invoice address :<br/></strong>
+								<span style="width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt;">
 									<t t-if="o.partner_invoice_id.is_company">
 										<div t-esc="o.partner_invoice_id.name"></div>
 									</t>
@@ -63,7 +63,7 @@
 
 							</th>
 							<th style="width: 40%;">
-								<span class="text-nowrap small">
+								<span style="width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt;">
 									<t t-if="o.partner_id.is_company">
 										<div t-esc="o.partner_id.name"></div>
 									</t>
@@ -77,7 +77,7 @@
 						</tr>
 					</table>
 					<span t-field="o.header_comment" />
-					<h2 class="o_bold" style="margin-top:16px">
+					<h2 style="font-family: 'DejaVu Sans'; font-size: 13pt; font-weight: bold; color: black; margin-top:16px;">
 						<t t-if="is_order">Order N°</t>
 						<t t-else="">Quotation N°</t>
 						<span t-field="o.name" />
@@ -86,7 +86,7 @@
 						<t t-if="is_order">
 							<table class="table table-bordered table-sm text-center"
 								style="margin-bottom: 2em;">
-								<tr class="align-middle small font-weight-bold">
+								<tr style="font-family: 'DejaVu Sans'; font-weight: bold; color: black; text-align: center;">
 									<th>
 										<strong class="mr16">
 											<font style="font-size: 12px;">Your Reference</font>
@@ -109,7 +109,7 @@
 										</strong>
 									</th>
 								</tr>
-								<tr>
+								<tr style="font-family: 'DejaVu Sans'; font-weight: normal; font-size: 12px; color: black; text-align: center;">
 									<td>
 										<span class="text-nowrap small"
 											t-field="o.client_order_ref" />
@@ -133,7 +133,7 @@
 						<t t-else="">
 							<table class="table table-bordered table-sm text-center"
 								style="margin-bottom: 2em;">
-								<tr class="align-middle small font-weight-bold">
+								<tr style="font-family: 'DejaVu Sans'; font-weight: bold; color: black; text-align: center;">
 									<th class="align-middle small font-weight-bold">
 										<strong class="mr16">
 											<font style="font-size: 12px;">Your Reference</font>
@@ -150,7 +150,7 @@
 										</strong>
 									</th>
 								</tr>
-								<tr>
+								<tr style="font-family: 'DejaVu Sans'; font-weight: normal; font-size: 12px; color: black; text-align: center;">
 									<td>
 										<span class="text-nowrap small"
 											t-field="o.client_order_ref" />
@@ -163,7 +163,7 @@
 										<span class="text-nowrap small" t-field="o.validity_date" />
 									</td>
 								</tr>
-								<tr class="align-middle small font-weight-bold">
+								<tr style="font-family: 'DejaVu Sans'; font-weight: bold; color: black; text-align: center;">
 									<th>
 										<strong class="mr16">
 											<font style="font-size: 12px;">Our Reference</font>
@@ -180,7 +180,7 @@
 										</strong>
 									</th>
 								</tr>
-								<tr>
+								<tr style="font-family: 'DejaVu Sans'; font-weight: normal; font-size: 12px; color: black; text-align: center;">
 									<td>
 										<span class="text-nowrap small" t-field="o.user_id" />
 									</td>
@@ -202,7 +202,7 @@
 
 
 					<table class="w-100 table-sm">
-						<thead class="border-bottom border-dark">
+						<thead class="border-bottom border-dark" style="font-family: 'DejaVu Sans'; font-weight: bold; font-size: 10pt; color: black; border-bottom: 1px solid black;">
 							<tr>
 								<th name="th_description" class="text-left"
 									style="width:30%">
