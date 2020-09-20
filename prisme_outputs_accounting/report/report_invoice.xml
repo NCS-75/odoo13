@@ -79,13 +79,13 @@
 						<table class="table table-bordered table-sm text-center"
 							style="margin-bottom: 2em;">
 							<!-- Header -->
-							<tr class="align-middle small font-weight-bold">
+							<tr style="font-family: 'DejaVu Sans'; font-size: 9pt; font-weight: bold; color: black; text-align: center;">
 								<th>Document</th>
 								<th>Invoice Date</th>
 								<th>Partner Ref.</th>
 								<th>Payment Term</th>
 							</tr>
-							<tr>
+							<tr style="font-family: 'DejaVu Sans'; font-size: 10pt color: black; text-align: center;">
 								<!-- Document -->
 								<td>
 									<t t-if="'ref' in o.fields_get()">
