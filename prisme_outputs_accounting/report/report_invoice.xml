@@ -40,7 +40,7 @@
 								</div>
                 			</td>
                 			
-                			<td style="width: 40%;">
+                			<td style="width: 40%; font-family: 'DejaVu Sans';">
                 				<t t-if="o.partner_id">
 									<t t-set="partner" t-value="o.partner_id"/>
 								</t>
@@ -64,7 +64,7 @@
                 			</td>
                 		</tr>
                 	</table>
-                    <h2 style="font-size: 80%">
+                    <h2 style="font-family: 'DejaVu Sans'; font-size: 12pt;">
                         <span t-if="o.type == 'out_invoice' and o.state == 'posted'">Invoice</span>
                         <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
                         <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
