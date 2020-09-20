@@ -309,7 +309,6 @@
 			model="account.move"
 			string="Prisme Invoice"
 			report_type="qweb-pdf"
-			margin_top
 			name="prisme_outputs_accounting.report_prisme_invoice_base"
 			file="prisme_outputs_accounting.report_prisme_invoice_base"
 			/>
