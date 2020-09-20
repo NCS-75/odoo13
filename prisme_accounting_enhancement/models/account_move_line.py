@@ -95,6 +95,8 @@ class account_move_line(models.Model):
 
         
         ### PSI modification : also subtracting the discount amount to the price unit
+        price_unit_wo_discount = 0
+        
         if not discount_amount:
             discount_amount = self['discount_amount']
             
