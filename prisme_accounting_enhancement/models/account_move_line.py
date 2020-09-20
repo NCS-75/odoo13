@@ -93,19 +93,20 @@ class account_move_line(models.Model):
         '''
         res = {}
 
-        # Compute 'price_subtotal'.
-        price_unit_wo_discount = price_unit * (1 - (discount / 100.0))
         
         ### PSI modification : also subtracting the discount amount to the price unit
         if not discount_amount:
             discount_amount = self['discount_amount']
             
         if discount_amount:
-            price_unit_wo_discount -= discount_amount
+            price_unit_wo_discount = (price_unit * quantity) - discount_amount
             
-        ### End of PSI modification    
+        ### End of PSI modification
+        
+        # Compute 'price_subtotal'.
+        price_unit_wo_discount -= price_unit_wo_discount * (1 - (discount / 100.0))
             
-        subtotal = quantity * price_unit_wo_discount
+        subtotal = price_unit_wo_discount
 
         # Compute 'price_total'.
         if taxes:
@@ -193,9 +194,9 @@ class account_move_line(models.Model):
             discount_amount = self['discount_amount']
         
         if discount_amount:
-            balance -= (quantity * discount_amount) * sign
+            balance -= discount_amount * sign
             vals['discount_amount'] = discount_amount
-            
+        
         discount_factor = 1 - (discount / 100.0)
         if balance and discount_factor:
             # discount != 100%
