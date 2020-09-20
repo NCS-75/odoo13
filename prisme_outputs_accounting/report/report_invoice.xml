@@ -256,7 +256,7 @@
 								    	</td>
 								    </tr>
 								    <tr class="border-black o_total">
-								        <td><strong>Total with VAT</strong></td>
+								        <td><strong style="color: black;">Total with VAT</strong></td>
 								        <td class="text-right">
 								            <span class="text-nowrap" t-field="o.amount_total"/>
 								        </td>
