@@ -75,9 +75,9 @@
                     </h2>
 
                     <div id="informations" class="mt-3 mb-3">
-						<table style="border: 1px solid lightgray; border-collapse: collapse; margin-bottom: 25px; width: 100%; table-layout: fixed; page-break-inside: avoid; break-inside: avoid; font-size: 80%; margin-bottom: 2em;">
+						<table style="border: 1px solid lightgray; border-collapse: collapse; margin-bottom: 25px; width: 100%; table-layout: fixed; page-break-inside: avoid; break-inside: avoid; font-size: 80%; margin-bottom: 2em; text-align: left;">
 							<!-- Header -->
-							<tr style="border: 1px solid lightgray;" class="align-middle small font-weight-bold">
+							<tr style="border: 1px solid lightgray; font-weight: bold;">
 								<th style="border: 1px solid lightgray;">Document</th>
 								<th style="border: 1px solid lightgray;">Invoice Date</th>
 								<th style="border: 1px solid lightgray;">Partner Ref.</th>
