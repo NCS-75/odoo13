@@ -119,7 +119,7 @@
 
                     <t t-set="display_discount" t-value="any([l.discount or l.discount_amount for l in o.invoice_line_ids])"/>
 
-                    <table class="w-100 table-sm" name="invoice_line_table">
+                    <table class="table-sm" name="invoice_line_table">
                         <thead style="font-family: 'DejaVu Sans'; font-weight: bold; font-size: 9pt color: black; border-bottom: 1px solid black;">
                             <tr>
                                 <th name="th_description" style="width:40%"><span>Description</span></th>
