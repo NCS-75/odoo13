@@ -120,8 +120,8 @@
                     <t t-set="display_discount" t-value="any([l.discount or l.discount_amount for l in o.invoice_line_ids])"/>
 
                     <table class="w-100 table-sm" name="invoice_line_table">
-                        <thead class="border-bottom border-dark" style="font-family: 'DejaVu Sans'; font-size: 9pt color: black;">
-                            <tr>
+                        <thead class="border-bottom border-dark">
+                            <tr style="font-family: 'DejaVu Sans'; font-size: 9pt color: black;">
                                 <th name="th_description" class="text-left" style="width:40%"><span>Description</span></th>
                                 <th name="th_taxes"  style="width:10%" t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th>
                                 <!-- TODO: remove in master -->
@@ -145,10 +145,10 @@
                                 <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
                                 <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
 						<table class="w-100 table-sm" name="invoice_line_table">
-                        <tbody style="font-family: 'DejaVu Sans'; font-size: 9pt color: black;">
+                        <tbody>
                             
 
-                                <tr class="border-bottom">
+                                <tr class="border-bottom" style="font-family: 'DejaVu Sans'; font-size: 9pt color: black;">
                                     <t t-if="not line.display_type and line.layout_type=='article'" name="account_invoice_line_accountable">
                                         <td name="account_invoice_line_name" style="width:40%"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
                                         <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:10%">
@@ -196,7 +196,7 @@
                                 <t t-if="(not subtotal_done) and current_section and (line_last or lines[line_index+1].display_type == 'line_section' or lines[line_index+1].layout_type=='break') and o.company_id.totals_below_sections">
            							<t t-set="subtotal_done" t-value="True"/>
                                     <tr class="is-subtotal text-right">
-                                        <td colspan="99">
+                                        <td colspan="99" style="font-family: 'DejaVu Sans'; font-size: 9pt color: black;">
                                             <strong class="mr16">Subtotal</strong>
                                             <span
                                                 t-esc="current_subtotal"
