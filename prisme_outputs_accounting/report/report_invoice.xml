@@ -25,12 +25,12 @@
 	<data>
 		<!-- Create the custom new template ('primary="True"') from the original -->
 		<template id="report_prisme_invoice_content">
-			<t t-call="web.html_container">
+			<t t-call="web.external_layout">
                 <t t-set="o" t-value="o.with_context(lang=lang)" />
                 <!-- <t t-set="address">
                     <address t-field="o.partner_id" t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
                 </t> -->
-                <div class="page" style= "font-family:'Bitstream Vera Sans';">
+                <div class="page">
                 	<!-- company's VAT and partner's address -->
                 	<table class="w-100">
                 		<tr>
@@ -40,7 +40,7 @@
 								</div>
                 			</td>
                 			
-                			<td style="width: 40%; text-align: right;">
+                			<td style="width: 40%;">
                 				<t t-if="o.partner_id">
 									<t t-set="partner" t-value="o.partner_id"/>
 								</t>
@@ -75,38 +75,39 @@
                     </h2>
 
                     <div id="informations" class="mt-3 mb-3">
-						<table style="border: 1px solid lightgray; border-collapse: collapse; margin-bottom: 25px; width: 100%; table-layout: fixed; page-break-inside: avoid; break-inside: avoid; font-size: 80%; margin-bottom: 2em; text-align: center;">
+						<table class="table table-bordered table-sm text-center"
+							style="margin-bottom: 2em;">
 							<!-- Header -->
-							<tr style="border: 1px solid lightgray; font-weight: bold;">
-								<th style="border: 1px solid lightgray;">Document</th>
-								<th style="border: 1px solid lightgray;">Invoice Date</th>
-								<th style="border: 1px solid lightgray;">Partner Ref.</th>
-								<th style="border: 1px solid lightgray;">Payment Term</th>
+							<tr class="align-middle small font-weight-bold">
+								<th>Document</th>
+								<th>Invoice Date</th>
+								<th>Partner Ref.</th>
+								<th>Payment Term</th>
 							</tr>
-							<tr style="border: 1px solid lightgray;">
+							<tr>
 								<!-- Document -->
-								<td style="border: 1px solid lightgray;">
+								<td>
 									<t t-if="'ref' in o.fields_get()">
 										<span t-field="o.ref" />
 									</t>
 								</td>
 								
 								<!-- Invoice Date -->
-								<td style="border: 1px solid lightgray;">
+								<td>
 									<t t-if="'invoice_date' in o.fields_get()">
 										<span t-field="o.invoice_date" />
 									</t>
 								</td>
 								
 								<!-- Partner Ref. -->
-								<td style="border: 1px solid lightgray;">
+								<td>
 									<t t-if="'partner_id' in o.fields_get()">
 										<span t-field="o.partner_id.ref" />
 									</t>
 								</td>
 								
 								<!-- Payment Term -->
-								<td style="border: 1px solid lightgray;">
+								<td>
 									<t t-if="'invoice_payment_term_id' in o.fields_get()">
 										<span t-field="o.invoice_payment_term_id.name" />
 									</t>
@@ -118,18 +119,18 @@
                     <t t-set="display_discount" t-value="any([l.discount or l.discount_amount for l in o.invoice_line_ids])"/>
 
                     <table class="w-100 table-sm" name="invoice_line_table">
-                        <thead style="border-bottom: 1px solid black;">
+                        <thead class="border-bottom border-dark">
                             <tr>
-                                <th name="th_description" style="text-align: left; width:30%;"><span>Description</span></th>
-                                <th name="th_taxes"  style="width:10%; text-align: left;"><span>Taxes</span></th>
+                                <th name="th_description" class="text-left" style="width:30%"><span>Description</span></th>
+                                <th name="th_taxes"  style="width:10%" t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th>
                                 <!-- TODO: remove in master -->
-                                <th name="th_source"  style="text-align: left;" t-if="0"><span>Source Document</span></th>
-                                <th name="th_quantity"  style="text-align: right; width:20%;"><span>Quantity</span></th>
-                                <th name="th_priceunit" style="text-align: right; width:20%;"><span>Unit Price</span></th>
-                                <th name="th_price_unit" style="text-align: right; width:10%;" t-if="display_discount">
+                                <th name="th_source"  class="d-none text-left" t-if="0"><span>Source Document</span></th>
+                                <th name="th_quantity"  style="width:20%" class="text-right"><span>Quantity</span></th>
+                                <th name="th_priceunit" style="width:20%" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Unit Price</span></th>
+                                <th name="th_price_unit" style="width:10%" t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
                                     <span>Disc.</span>
                                 </th>
-                                <th name="th_subtotal" style="width:10%; text-align: right;">
+                                <th name="th_subtotal" style="width:10%" class="text-right">
                                     <span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>
                                     <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
                                 </th>
@@ -146,24 +147,24 @@
                         <tbody>
                             
 
-                                <tr style="border-bottom: 1px solid black;">
+                                <tr class="border-bottom">
                                     <t t-if="not line.display_type and line.layout_type=='article'" name="account_invoice_line_accountable">
                                         <td name="account_invoice_line_name" style="width:30%"><span t-field="line.name" t-options="{'widget': 'text'}"/></td>
-                                        <td style="width:10%; text-align: left;">
+                                        <td t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:10%">
                                             <span t-esc="', '.join(map(lambda x: (x.description or x.name), line.tax_ids))" id="line_tax_ids"/>
                                         </td>
-                                        <td style="width:20%; text-align: right;">
+                                        <td class="text-right" style="width:20%">
                                             <span t-field="line.quantity"/>
                                             <span t-field="line.product_uom_id"  groups="uom.group_uom"/>
                                         </td>
-                                        <td style="width:20%; text-align: right;">
+                                        <td t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:20%">
                                             <span class="text-nowrap" t-field="line.price_unit"/>
                                         </td>
-                                        <td style="width:10%; text-align: right;">
-                                            <span t-if="display_discount" class="text-nowrap" t-esc="o._get_line_discount(line)" />
+                                        <td t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:10%">
+                                            <span class="text-nowrap" t-esc="o._get_line_discount(line)" />
 											<div> </div>
                                         </td>
-                                        <td style="width:10%; text-align: right;">
+                                        <td class="text-right o_price_total" style="width:10%">
                                             <span class="text-nowrap" t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
                                             <span class="text-nowrap" t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
                                         </td>
@@ -185,7 +186,7 @@
 
 								<t t-if="line.layout_type=='line'">
 									<tr>
-										<td style="border-bottom: 1px solid black;" colspan="99">
+										<td class="border-bottom border-dark" colspan="99">
 											<font color="white"></font>
 										</td>
 									</tr>
@@ -193,7 +194,7 @@
 
                                 <t t-if="(not subtotal_done) and current_section and (line_last or lines[line_index+1].display_type == 'line_section' or lines[line_index+1].layout_type=='break') and o.company_id.totals_below_sections">
            							<t t-set="subtotal_done" t-value="True"/>
-                                    <tr style="text-align: right;">
+                                    <tr class="is-subtotal text-right">
                                         <td colspan="99">
                                             <strong class="mr16">Subtotal</strong>
                                             <span
@@ -212,18 +213,18 @@
 									<p style="page-break-after:always;" />
 									<br />
 									 <table class="w-100 table-sm" name="invoice_line_table">
-										<thead style="border-bottom: 1px solid black;">
+										<thead class="border-bottom border-dark">
 											<tr>
-												<th name="th_description" style="width:30%; text-align: left;"><span>Description</span></th>
-												<th name="th_taxes"  style="width:10%; text-align: left;"><span>Taxes</span></th>
+												<th name="th_description" class="text-left" style="width:30%"><span>Description</span></th>
+												<th name="th_taxes"  style="width:10%" t-attf-class="text-left {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Taxes</span></th>
 												<!-- TODO: remove in master -->
-												<th name="th_source"   style="text-align: left;" t-if="0"><span>Source Document</span></th>
-												<th name="th_quantity"  style="width:20%; text-align: right;"><span>Quantity</span></th>
-												<th name="th_priceunit" style="width:20%; text-align: right;"><span>Unit Price</span></th>
-												<th name="th_price_unit" style="width:10%; text-align: right;" t-if="display_discount">
+												<th name="th_source"  class="d-none text-left" t-if="0"><span>Source Document</span></th>
+												<th name="th_quantity"  style="width:20%" class="text-right"><span>Quantity</span></th>
+												<th name="th_priceunit" style="width:20%" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}"><span>Unit Price</span></th>
+												<th name="th_price_unit" style="width:10%" t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}">
 													<span>Disc.</span>
 												</th>
-												<th name="th_subtotal" style="width:10%; text-align: right;">
+												<th name="th_subtotal" style="width:10%" class="text-right">
 													<span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>
 													<span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
 												</th>
@@ -243,19 +244,19 @@
 						    		<!-- Amount without taxes -->
 								    <tr class="border-black o_subtotal" style="">
 								        <td>Total w/out VAT</td>
-								        <td style="text-align: right;">
+								        <td class="text-right">
 								            <span t-field="o.amount_untaxed"/>
 								        </td>
 								    </tr>
 								    <tr>
 								    	<td>Taxes</td>
-								    	<td style="text-align: right;">
+								    	<td class="text-right">
 								    		<span t-field="o.amount_tax"/>
 								    	</td>
 								    </tr>
 								    <tr class="border-black o_total">
 								        <td><strong>Total with VAT</strong></td>
-								        <td style="text-align: right;">
+								        <td class="text-right">
 								            <span class="text-nowrap" t-field="o.amount_total"/>
 								        </td>
 								    </tr>
@@ -266,16 +267,16 @@
                     
                     <div name="taxes_table_container" class="mt-5" style="width: 55%; margin-bottom: 6em;">
                     	<table class="table-sm w-100" name="taxes_table">
-		    				<tr style="border-bottom: 1px solid black;">
+		    				<tr class="border-bottom border-dark">
 						        <th style="width: 60%">Tax</th>
-						        <th style="width: 20%; text-align: right;">Base</th>
-						        <th style="width: 20%; text-align: right;">Amount</th>
+						        <th style="width: 20%" class="text-right">Base</th>
+						        <th style="width: 20%" class="text-right">Amount</th>
 						    </tr>
 			    			<t t-foreach="o.amount_by_group" t-as="amount_by_group">
-			    				<tr style="border-bottom: 1px solid black;">
+			    				<tr class="border-bottom small">
 			    					<td><span t-esc="amount_by_group[0]"/></td>
-			    					<td style="text-align: right;"><span t-esc="amount_by_group[2]" t-options="{'widget':'float', 'precision':2}"/></td>
-			    					<td style="text-align: right;"><span t-esc="amount_by_group[1]" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+			    					<td class="text-right"><span t-esc="amount_by_group[2]" t-options="{'widget':'float', 'precision':2}"/></td>
+			    					<td class="text-right"><span t-esc="amount_by_group[1]" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
 			    				</tr>
 							</t>
 			    		</table>
