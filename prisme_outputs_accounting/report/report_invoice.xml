@@ -32,16 +32,16 @@
                 </t> -->
                 <div class="page">
 					<!-- company's VAT and partner's address -->
-                	<br/><br/><br/><br/>
+                	<br/><br/><br/>
 					<table class="w-100">
                 		<tr>
-                			<td style="width: 60%; font-family: 'DejaVu Sans'; font-size: 10pt;">
+                			<td style="width: 60%; font-family: 'DejaVu Sans'; font-size: 11pt;">
                 				<div t-if="o.company_id.partner_id.vat">
 									<span>VAT : <span t-esc="o.company_id.partner_id.vat"/></span>
 								</div>
                 			</td>
                 			
-                			<td style="width: 40%; font-family: 'DejaVu Sans'; font-size: 9pt;">
+                			<td style="width: 40%; font-family: 'DejaVu Sans'; font-size: 10pt;">
                 				<t t-if="o.partner_id">
 									<t t-set="partner" t-value="o.partner_id"/>
 								</t>
@@ -65,7 +65,7 @@
                 			</td>
                 		</tr>
                 	</table>
-                    <h2 style="font-family: 'DejaVu Sans'; font-size: 12pt; font-weight: bold; color: black;">
+                    <h2 style="font-family: 'DejaVu Sans'; font-size: 13pt; font-weight: bold; color: black;">
                         <span t-if="o.type == 'out_invoice' and o.state == 'posted'">Invoice</span>
                         <span t-if="o.type == 'out_invoice' and o.state == 'draft'">Draft Invoice</span>
                         <span t-if="o.type == 'out_invoice' and o.state == 'cancel'">Cancelled Invoice</span>
