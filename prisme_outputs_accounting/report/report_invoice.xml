@@ -240,7 +240,7 @@
                     <div class="clearfix">
                         <div id="total" class="row">
                             <div t-attf-class="col-4 ml-auto">
-                                <table style="page-break-inside: avoid; font-family: 'DejaVu Sans'; font-size: 9pt; font-weight: bold; color: black;">
+                                <table style="page-break-inside: avoid; font-family: 'DejaVu Sans'; font-size: 9pt; font-weight: bold; color: black; margin-right: 0px; margin-left: auto;">
 						    	
 						    		<!-- Amount without taxes -->
 								    <tr class="border-black o_subtotal" style="">
