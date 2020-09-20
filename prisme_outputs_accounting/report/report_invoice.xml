@@ -240,7 +240,7 @@
                     <div class="clearfix">
                         <div id="total" class="row">
                             <div t-attf-class="col-4 ml-auto">
-                                <table style="page-break-inside: avoid; font-family: 'DejaVu Sans'; font-size: 9.5pt; font-weight: bold; color: black; margin-right: 0px; margin-left: auto;">
+                                <table style="page-break-inside: avoid; font-family: 'DejaVu Sans'; font-size: 9.5pt; color: black; margin-right: 0px; margin-left: auto;">
 						    	
 						    		<!-- Amount without taxes -->
 								    <tr class="border-black o_subtotal" style="">
@@ -256,9 +256,9 @@
 								    	</td>
 								    </tr>
 								    <tr class="border-black o_total">
-								        <td><strong style="color: black; font-weight: normal;">Total with VAT</strong></td>
+								        <td><strong style="color: black; font-weight: bold;">Total with VAT</strong></td>
 								        <td class="text-right">
-								            <span class="text-nowrap" t-field="o.amount_total"/>
+								            <span class="text-nowrap" style="font-weight: bold;" t-field="o.amount_total"/>
 								        </td>
 								    </tr>
 								</table>
