@@ -70,8 +70,8 @@ msgstr "<strong class=\"mr16\">Sous-total</strong>"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
-msgid "<strong style=\"color: black; font-weight: bold;\">Total with VAT</strong>"
-msgstr "<strong style=\"color: black; font-weight: bold;\">Total TTC</strong>"
+msgid "Total with VAT"
+msgstr "Total TTC"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content

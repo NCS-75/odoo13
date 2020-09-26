@@ -244,7 +244,7 @@
                                 <table style="page-break-inside: avoid; font-family: 'DejaVu Sans'; font-size: 10pt; color: black; margin-right: 0px; margin-left: auto;">
 						    	
 						    		<!-- Amount without taxes -->
-								    <tr class="border-black o_subtotal" style="">
+								    <tr class="border-black o_subtotal">
 								        <td>Total w/out VAT</td>
 								        <td class="text-right">
 								            <span t-field="o.amount_untaxed"/>
@@ -257,7 +257,7 @@
 								    	</td>
 								    </tr>
 								    <tr class="border-black o_total">
-								        <td><strong style="color: black; font-weight: bold;">Total with VAT</strong></td>
+								        <td style="color: black; font-weight: bold;">Total with VAT</td>
 								        <td class="text-right">
 								            <span class="text-nowrap" style="font-weight: bold;" t-field="o.amount_total"/>
 								        </td>
@@ -277,7 +277,7 @@
 			    			<t t-foreach="o.amount_by_group" t-as="amount_by_group">
 			    				<tr class="border-bottom small">
 			    					<td><span t-esc="amount_by_group[0]"/></td>
-			    					<td class="text-right"><span t-esc="amount_by_group[2]" t-options="{'widget':'float', 'precision':2}"/></td>
+			    					<td class="text-right"><span t-if="amount_by_group[2]" t-esc="amount_by_group[2].description or amount_by_group[2].name"/></td>
 			    					<td class="text-right"><span t-esc="amount_by_group[1]" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
 			    				</tr>
 							</t>

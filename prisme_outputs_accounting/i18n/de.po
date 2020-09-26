@@ -70,8 +70,8 @@ msgstr "<strong class=\"mr16\">Zwischensumme</strong>"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
-msgid "<strong style=\"color: black; font-weight: bold;\">Total with VAT</strong>"
-msgstr "<strong style=\"color: black; font-weight: bold;\">Gesamtbetrag mit Mwst.</strong>"
+msgid "Total with VAT"
+msgstr "Gesamtbetrag mit Mwst."
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
