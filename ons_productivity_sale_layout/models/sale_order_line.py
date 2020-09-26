@@ -25,13 +25,7 @@ class sale_order_line(models.Model):
     _inherit = 'sale.order.line'
     
     layout_type = fields.Selection(layout.LAYOUTS_LIST, 'Layout type', required=True, index=True, default=lambda *a: 'article')
-    _sql_constraints = [
-        ('accountable_required_fields',
-            "CHECK(display_type IS NOT NULL OR (layout_type <> 'article' OR (product_id IS NOT NULL AND product_uom IS NOT NULL)))",
-            "Missing required fields on accountable sale order line."),
-    ]
-
-
+    rel_subtotal = fields.Float(compute='_sub_total', string='Rel. Sub-total', digits='Account')
 
     # ------------------------- Fields management
     def _is_number(self,s):
@@ -41,6 +35,21 @@ class sale_order_line(models.Model):
         except:
             return False
         
+    
+    def _sub_total(self):
+        for sol in self:
+
+            sub_total = 0.0
+            if sol.layout_type == 'subtotal' and self._is_number(sol.order_id.id) and self._is_number(sol.id):
+                sub_sols = self.env['sale.order.line'].search([('order_id','=',sol.order_id.id),('sequence','<=',sol.sequence),('id','!=',sol.id)], order='sequence desc,id desc')
+                for sub_sol in sub_sols:
+                    if sol.sequence > sub_sol.sequence or (sol.sequence == sub_sol.sequence and sol.id > sub_sol.id ):
+                        if sub_sol.layout_type == 'subtotal': break
+                        if sub_sol.sequence == sol.sequence and sub_sol.id > sol.id: break
+                        if sub_sol.layout_type == 'article':
+                            sub_total += sub_sol.price_subtotal
+            
+            sol.rel_subtotal = sub_total
 
     # ------------------------- Instance management
     @api.model
@@ -67,6 +76,8 @@ class sale_order_line(models.Model):
                 record.discount = 0.0
                 record.move_line_tax_ids = False
                 record.name = layout.layout_val_2_text(record.layout_type)
+                
+            record._sub_total()
     
     
     def layout_type_change(self, layout_type):
@@ -75,6 +86,7 @@ class sale_order_line(models.Model):
 
         vals = {
             'name': '',
+            
             'uos_id': False,
             'account_id': False,
             'price_unit': 0.0,

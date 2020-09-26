@@ -22,16 +22,13 @@ from odoo import _
 
 LAYOUTS_LIST = [
     ('article', 'Product'),
-    ('line', 'Separator Line'),
-    ('break', 'Page Break'),
+    ('subtotal', 'Sub Total'),
 ]
 
 def layout_val_2_text(layout_type):
     val = _( 'Product' )
-    if layout_type == 'line':
-        val = _( 'Separator Line' )
-    elif layout_type == 'break':
-        val = _( 'Page Break' )
+    if layout_type == 'subtotal':
+        val = _( 'Sub Total' )
 
     return val
 

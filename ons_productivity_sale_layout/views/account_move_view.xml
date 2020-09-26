@@ -51,6 +51,18 @@
 						<field name="layout_type"
 							invisible="1" />
 					</xpath>
+					<xpath
+						expr="//field[@name='invoice_line_ids']/tree/field[@name='price_subtotal']"
+						position="after">
+						<field name="rel_subtotal"
+							attrs="{'invisible':[('layout_type', '!=', 'subtotal')]}" />
+					</xpath>
+					<xpath
+						expr="//field[@name='line_ids']/tree/field[@name='price_subtotal']"
+						position="after">
+						<field name="rel_subtotal"
+							invisible="1"  />
+					</xpath>
 				</data>
 			</field>
 		</record>

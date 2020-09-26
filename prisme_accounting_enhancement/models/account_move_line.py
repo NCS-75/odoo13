@@ -35,13 +35,18 @@ class account_move_line(models.Model):
             discount_value = record['discount']
             discount_amount_value = record['discount_amount']
             price_unit_value = record['price_unit']
-
-            if discount_amount_value and price_unit_value:
+            
+            price_unit_processed = price_unit_value
+            
+            if discount_value:
+                price_unit_processed = price_unit_value * (1 - (discount_value / 100))
+            
+            if discount_amount_value and price_unit_processed:
                 error = ''
         
                 if (discount_amount_value < 0.0):
                     error = _("A discount in amount cannot be negative !")
-                elif (discount_amount_value > price_unit_value and discount_amount_value > 0):
+                elif (discount_amount_value > price_unit_processed and discount_amount_value > 0):
                     error = _("A discount in amount cannot be bigger than the price !")
                 if error:
                     self._display_error(error)
@@ -88,22 +93,19 @@ class account_move_line(models.Model):
         '''
         res = {}
 
+        # Compute 'price_subtotal'.
+        price_unit_wo_discount = price_unit * (1 - (discount / 100.0))
         
         ### PSI modification : also subtracting the discount amount to the price unit
-        price_unit_wo_discount = 0
-        
         if not discount_amount:
             discount_amount = self['discount_amount']
             
         if discount_amount:
-            price_unit_wo_discount = (price_unit * quantity) - discount_amount
+            price_unit_wo_discount -= discount_amount
             
-        ### End of PSI modification
-        
-        # Compute 'price_subtotal'.
-        price_unit_wo_discount = price_unit_wo_discount * (1 - (discount / 100.0))
+        ### End of PSI modification    
             
-        subtotal = price_unit_wo_discount
+        subtotal = quantity * price_unit_wo_discount
 
         # Compute 'price_total'.
         if taxes:
@@ -191,9 +193,9 @@ class account_move_line(models.Model):
             discount_amount = self['discount_amount']
         
         if discount_amount:
-            balance -= discount_amount * sign
+            balance -= (quantity * discount_amount) * sign
             vals['discount_amount'] = discount_amount
-        
+            
         discount_factor = 1 - (discount / 100.0)
         if balance and discount_factor:
             # discount != 100%
