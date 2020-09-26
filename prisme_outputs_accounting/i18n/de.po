@@ -70,11 +70,6 @@ msgstr "<strong class=\"mr16\">Zwischensumme</strong>"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
-msgid "Total with VAT"
-msgstr "Gesamtbetrag mit Mwst."
-
-#. module: prisme_outputs_accounting
-#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Amount"
 msgstr "Betrag"
 
@@ -147,6 +142,11 @@ msgstr "Abgabe"
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Total w/out VAT"
 msgstr "Gesamtbetrag ohne Mwst."
+
+#. module: prisme_outputs_accounting
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
+msgid "Total with VAT"
+msgstr "Gesamtbetrag mit Mwst."
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
