@@ -163,7 +163,7 @@
                                             <span class="text-nowrap" t-field="line.price_unit"/>
                                         </td>
                                         <td t-if="display_discount" t-attf-class="text-right {{ 'd-none d-md-table-cell' if report_type == 'html' else '' }}" style="width:10%">
-                                            <span class="text-nowrap" t-esc="-o._get_line_discount(line)" />
+                                            <span class="text-nowrap" t-esc="'-'+o._get_line_discount(line)" />
 											<div> </div>
                                         </td>
                                         <td class="text-right o_price_total" style="width:10%">
