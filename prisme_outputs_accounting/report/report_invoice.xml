@@ -32,7 +32,7 @@
                 </t> -->
                 <div class="page">
 					<!-- company's VAT and partner's address -->
-                	<br/><br/><br/>
+                	<br/><br/>
 					<table class="w-100">
                 		<tr>
                 			<td style="width: 60%; font-family: 'DejaVu Sans'; font-size: 11pt;">
@@ -284,10 +284,10 @@
 			    		</table>
 			    	</div>
                     <p t-if="o.narration" name="comment" class="mt-5">
-                        <span t-field="o.narration"/>
+                        <span style="font-family: 'DejaVu Sans'; font-size: 10pt; color: black;" t-field="o.narration"/>
                     </p>
                     <p t-if="o.fiscal_position_id.note" name="note" class="mt-5">
-                        <span t-field="o.fiscal_position_id.note"/>
+                        <span style="font-family: 'DejaVu Sans'; font-size: 10pt; color: black;" t-field="o.fiscal_position_id.note"/>
                     </p>
                 </div>
             </t>
