@@ -46,7 +46,7 @@ msgstr "<span>Rab.</span>"
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "<span>Quantity</span>"
-msgstr "<span>QuantitÃ©</span>"
+msgstr "<span>Quantité</span>"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
@@ -86,12 +86,12 @@ msgstr "Base"
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Cancelled Invoice"
-msgstr "Facture annulÃ©e"
+msgstr "Facture annulée"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Credit Note"
-msgstr "Note de crÃ©dit"
+msgstr "Note de crédit"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
@@ -116,12 +116,12 @@ msgstr "Date de facture"
 #. module: prisme_outputs_accounting
 #: model:ir.model,name:prisme_outputs_accounting.model_account_move
 msgid "Journal Entries"
-msgstr "EntrÃ©es du journal"
+msgstr "Entrées du journal"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Partner Ref."
-msgstr "RÃ©f. partenaire"
+msgstr "Réf. partenaire"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
@@ -161,4 +161,4 @@ msgstr "Facture vendeur"
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Vendor Credit Note"
-msgstr "Note de crÃ©dit du vendeur"
+msgstr "Note de crédit du vendeur"
