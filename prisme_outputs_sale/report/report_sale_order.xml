@@ -119,7 +119,7 @@
 
 
 									<td style="width: 25%;">
-										<span style="font-size: 12px;" t-field="o.date_order.date()" />
+										<span style="font-size: 12px;" t-field="o.date_order" widget="date"/>
 									</td>
 
 									<td style="width: 25%;">
