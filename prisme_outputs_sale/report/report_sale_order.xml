@@ -120,7 +120,7 @@
 
 
 									<td style="width: 25%;">
-										<span style="font-size: 12px;" t-field="o.date_order" t-field-options='{"widget": "date"}'/>
+										<span style="font-size: 12px;" t-esc="o.date_order" t-options='{"widget": "date"}'/>
 									</td>
 
 									<td style="width: 25%;">
@@ -159,7 +159,7 @@
 											t-field="o.client_order_ref" />
 									</td>
 									<td style="width: 33.333333%;">
-										<span style="font-size: 12px;" t-field="o.date_order" t-field-options='{"widget": "date"}'/>
+										<span style="font-size: 12px;" t-esc="o.date_order" t-options='{"widget": "date"}'/>
 									</td>
 
 									<td style="width: 33.333333%;">
