@@ -392,9 +392,7 @@
 										</td>
 									</tr>
 									<tr t-if="o.print_vat" class="border-black o_total">
-										<td>
-											<strong style="color: black; font-weight: bold;">Total with VAT</strong>
-										</td>
+										<td style="color: black; font-weight: bold;">Total with VAT</td>
 										<td class="text-right">
 											<span class="text-nowrap" style="color: black; font-weight: bold;" t-field="o.amount_total" />
 										</td>
