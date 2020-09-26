@@ -32,7 +32,7 @@ class account_move(models.Model):
             total_discount = -(line.discount_amount + (line.discount / 100 * (total_price - line.discount_amount)))
             
         if total_discount:
-            str_total_discount = '{:.2f}'.format(total_discount * -1)
+            str_total_discount = '{:.2f}'.format(total_discount)
         else:
             str_total_discount = ''        
         
