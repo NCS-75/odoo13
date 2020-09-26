@@ -21,8 +21,8 @@ msgid ""
 "<span groups=\"account.group_show_line_subtotals_tax_excluded\">Amount</span>\n"
 "\t\t\t\t\t\t\t\t\t\t\t\t\t<span groups=\"account.group_show_line_subtotals_tax_included\">Total Price</span>"
 msgstr ""
-"<span groups=\"account.group_show_line_subtotals_tax_excluded\">Montant</span>\n"
-"\t\t\t\t\t\t\t\t\t\t\t\t\t<span groups=\"account.group_show_line_subtotals_tax_included\">Prix total</span>"
+"<span groups=\"account.group_show_line_subtotals_tax_excluded\">Betrag</span>\n"
+"\t\t\t\t\t\t\t\t\t\t\t\t\t<span groups=\"account.group_show_line_subtotals_tax_included\">Gesamtbetrag</span>"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
@@ -30,13 +30,13 @@ msgid ""
 "<span groups=\"account.group_show_line_subtotals_tax_excluded\">Amount</span>\n"
 "                                    <span groups=\"account.group_show_line_subtotals_tax_included\">Total Price</span>"
 msgstr ""
-"<span groups=\"account.group_show_line_subtotals_tax_excluded\">Montant</span>\n"
-"                                    <span groups=\"account.group_show_line_subtotals_tax_included\">Prix total</span>"
+"<span groups=\"account.group_show_line_subtotals_tax_excluded\">Betrag</span>\n"
+"                                    <span groups=\"account.group_show_line_subtotals_tax_included\">Gesamtbetrag</span>"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "<span>Description</span>"
-msgstr "<span>Description</span>"
+msgstr "<span>Beschreibung</span>"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
@@ -46,119 +46,119 @@ msgstr "<span>Rab.</span>"
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "<span>Quantity</span>"
-msgstr "<span>Quantité</span>"
+msgstr "<span>Anzahl</span>"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "<span>Source Document</span>"
-msgstr "<span>Document source</span>"
+msgstr "<span>Quelldokument</span>"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "<span>Taxes</span>"
-msgstr "<span>Taxes</span>"
+msgstr "<span>Abgabe</span>"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "<span>Unit Price</span>"
-msgstr "<span>Prix unitaire</span>"
+msgstr "<span>Stückpreis</span>"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "<strong class=\"mr16\">Subtotal</strong>"
-msgstr "<strong class=\"mr16\">Sous-total</strong>"
+msgstr "<strong class=\"mr16\">Zwischensumme</strong>"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "<strong style=\"color: black; font-weight: bold;\">Total with VAT</strong>"
-msgstr "<strong style=\"color: black; font-weight: bold;\">Total TTC</strong>"
+msgstr "<strong style=\"color: black; font-weight: bold;\">Gesamtbetrag mit Mwst.</strong>"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Amount"
-msgstr "Montant"
+msgstr "Betrag"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Base"
-msgstr "Base"
+msgstr "Grundlage"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Cancelled Invoice"
-msgstr "Facture annulée"
+msgstr "Stornierte Rechnung"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Credit Note"
-msgstr "Note de crédit"
+msgstr "Gutschrift"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Document"
-msgstr "Document"
+msgstr "Dokument"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Draft Invoice"
-msgstr "Brouillon de facture"
+msgstr "Rechnungsentwurf"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Invoice"
-msgstr "Facture"
+msgstr "Rechnung"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Invoice Date"
-msgstr "Date de facture"
+msgstr "Rechnungsdatum"
 
 #. module: prisme_outputs_accounting
 #: model:ir.model,name:prisme_outputs_accounting.model_account_move
 msgid "Journal Entries"
-msgstr "Entrées du journal"
+msgstr "Journaleinträge"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Partner Ref."
-msgstr "Réf. partenaire"
+msgstr "Partner-Ref."
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Payment Term"
-msgstr "Conditions de paiement"
+msgstr "Zahlungsfrist"
 
 #. module: prisme_outputs_accounting
 #: model:ir.actions.report,name:prisme_outputs_accounting.print_report_prisme_invoice
 msgid "Prisme Invoice"
-msgstr "Prisme facture"
+msgstr "Prisme Rechnung"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Tax"
-msgstr "Taxe"
+msgstr "Abgabe"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Taxes"
-msgstr "Taxes"
+msgstr "Abgabe"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Total w/out VAT"
-msgstr "Total HT"
+msgstr "Gesamtbetrag ohne Mwst."
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "VAT :"
-msgstr "TVA :"
+msgstr "Mwst. :"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Vendor Bill"
-msgstr "Facture vendeur"
+msgstr "Kreditorenrechnung"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "Vendor Credit Note"
-msgstr "Note de crédit du vendeur"
+msgstr "Kreditorengutschrift"

@@ -151,7 +151,7 @@ msgstr "Total HT"
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
 msgid "VAT :"
-msgstr "TVA"
+msgstr "TVA :"
 
 #. module: prisme_outputs_accounting
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_accounting.report_prisme_invoice_content
