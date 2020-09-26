@@ -22,4 +22,3 @@
 ##########################################################################
 from . import sale_order_line_worker
 from . import sale_order_worker
-#from . import sale_report_worker

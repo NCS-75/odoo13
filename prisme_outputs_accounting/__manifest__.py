@@ -21,7 +21,7 @@
 ##########################################################################
 {
 'name': 'Prisme Reporting for Accounting',
-'version': '2020-07-08 10:30',
+'version': '2020-07-07 14:30',
 'category': 'Finance',
 'summary': 'invoice reports',
 'author': 'Prisme Solutions Informatique SA',
@@ -29,7 +29,6 @@
 'depends': [
             'prisme_accounting_enhancement',
 ],
-'init_xml': [],
 'data': [
                'report/report_invoice.xml',
                ],
