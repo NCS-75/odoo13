@@ -214,4 +214,27 @@ msgstr ""
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
 msgid "Total w/out VAT"
-msgstr "Total sans TVA"
+msgstr "Total HT"
+
+#. module: prisme_outputs_sale
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
+msgid "Total with VAT"
+msgstr "Total TTC"
+
+#. module: prisme_outputs_sale
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
+msgid ""
+"<strong style=\"width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; "
+"font-weight: bold; line-height: normal;\">Invoice address :<br/></strong>"
+msgstr ""
+"<strong style=\"width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; "
+"font-weight: bold; line-height: normal;\">Adresse de facturation :<br/></strong>"
+
+#. module: prisme_outputs_sale
+#: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
+msgid ""
+"<strong style=\"width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; "
+"font-weight: bold; line-height: normal;\">Shipping address :<br/></strong>"
+msgstr ""
+"<strong style=\"width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; "
+"font-weight: bold; line-height: normal;\">Adresse de livraison :<br/></strong>"
