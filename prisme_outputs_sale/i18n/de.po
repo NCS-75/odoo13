@@ -18,7 +18,7 @@ msgstr ""
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
 msgid "<span>Description</span>"
-msgstr ""
+msgstr "<span>Beschreibung</span>"
 
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
@@ -203,7 +203,7 @@ msgstr "Zwischensumme"
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
 msgid "Taxes"
-msgstr ""
+msgstr "Abgabe"
 
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
