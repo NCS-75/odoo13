@@ -28,17 +28,17 @@ msgstr "<span>Rab.</span>"
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
 msgid "<span>Quantity</span>"
-msgstr "<span>Quantité</span>"
+msgstr "<span>Anzahl</span>"
 
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
 msgid "<span>Unit Price</span>"
-msgstr "<span>Prix unitaire</span>"
+msgstr "<span>Stückpreis</span>"
 
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
 msgid "<span>VAT</span>"
-msgstr "<span>TVA</span>"
+msgstr "<span>Mwst.</span>"
 
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
@@ -48,7 +48,7 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 msgstr ""
 "<strong class=\"mr16\">\n"
-"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Date de devis</font>\n"
+"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Angebotsdatum</font>\n"
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 
 #. module: prisme_outputs_sale
@@ -59,7 +59,7 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 msgstr ""
 "<strong class=\"mr16\">\n"
-"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Notre Référence</font>\n"
+"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Unsere Referenz</font>\n"
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 
 #. module: prisme_outputs_sale
@@ -70,7 +70,7 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 msgstr ""
 "<strong class=\"mr16\">\n"
-"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Conditions de paiement</font>\n"
+"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Zahlungsfrist</font>\n"
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 
 #. module: prisme_outputs_sale
@@ -81,7 +81,7 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 msgstr ""
 "<strong class=\"mr16\">\n"
-"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Commentaire</font>\n"
+"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Kommentar</font>\n"
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 
 #. module: prisme_outputs_sale
@@ -92,7 +92,7 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 msgstr ""
 "<strong class=\"mr16\">\n"
-"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Date de commande</font>\n"
+"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Bestelldatum</font>\n"
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 
 #. module: prisme_outputs_sale
@@ -103,7 +103,7 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 msgstr ""
 "<strong class=\"mr16\">\n"
-"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Validité de la commande</font>\n"
+"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Bestellgültigkeit</font>\n"
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 
 #. module: prisme_outputs_sale
@@ -114,23 +114,23 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 msgstr ""
 "<strong class=\"mr16\">\n"
-"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Votre Référence</font>\n"
+"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Ihre Referenz</font>\n"
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
 msgid "<strong>Total with VAT</strong>"
-msgstr "<strong>Total avec TVA</strong>"
+msgstr "<strong>Total mit Mwst.</strong>"
 
 #. module: prisme_outputs_sale
 #: model:ir.model.fields,field_description:prisme_outputs_sale.field_sale_order__footer_comment
 msgid "Footer comment"
-msgstr "Commentaire de pied de page"
+msgstr "Fusszeilen-Kommentar"
 
 #. module: prisme_outputs_sale
 #: model:ir.model.fields,field_description:prisme_outputs_sale.field_sale_order__header_comment
 msgid "Header comment"
-msgstr "Commentaire d'en-tête"
+msgstr "Schlagzeilen-Kommentar"
 
 #. module: prisme_outputs_sale
 #: model:ir.model.fields,field_description:prisme_outputs_sale.field_sale_order_line__notes
@@ -140,42 +140,42 @@ msgstr ""
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
 msgid "Order N°"
-msgstr "N° devis"
+msgstr "Angebot N°"
 
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
 msgid "Price"
-msgstr "Prix"
+msgstr "Preis"
 
 #. module: prisme_outputs_sale
 #: model:ir.model.fields,field_description:prisme_outputs_sale.field_sale_order__print_totals
 msgid "Print Totals"
-msgstr "Imprimer le total"
+msgstr "Gesamtzahl drucken"
 
 #. module: prisme_outputs_sale
 #: model:ir.model.fields,field_description:prisme_outputs_sale.field_sale_order__print_vat
 msgid "Print VAT"
-msgstr "Imprimer la TVA"
+msgstr "Mwst. drucken"
 
 #. module: prisme_outputs_sale
 #: model:ir.actions.report,name:prisme_outputs_sale.prisme_report_so
 msgid "Prisme Quotation/SO"
-msgstr "Prisme Commande/Devis"
+msgstr "Prisme Bestellung/Angebot"
 
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
 msgid "Quotation N°"
-msgstr "N° commande"
+msgstr "Bestellung N°"
 
 #. module: prisme_outputs_sale
 #: model:ir.model,name:prisme_outputs_sale.model_sale_order
 msgid "Sales Order"
-msgstr "Bon de commande"
+msgstr "Verkaufsbestellung"
 
 #. module: prisme_outputs_sale
 #: model:ir.model,name:prisme_outputs_sale.model_sale_order_line
 msgid "Sales Order Line"
-msgstr "Ligne de bons de commande"
+msgstr "Verkaufsbestellungszeile"
 
 #. module: prisme_outputs_sale
 #: model:ir.model.fields,help:prisme_outputs_sale.field_sale_order__print_vat
@@ -183,6 +183,8 @@ msgid ""
 "Show the VAT on the bottom  on the Quotation/SO. Warning: you cannot print "
 "VAT if you don't print the totals."
 msgstr ""
+"Zeigt die MwSt. unten auf dem Angebot/Bestellung an."
+"Warnung: Sie können die MwSt. nicht drucken, wenn Sie die Gesamtzahlen nicht ausdrucken."
 
 #. module: prisme_outputs_sale
 #: model:ir.model.fields,help:prisme_outputs_sale.field_sale_order__print_totals
@@ -190,11 +192,13 @@ msgid ""
 "Show the totals on the botom of the quotation/SO. Used, for example, to "
 "offer 2 choices to a customer and  don't show a useless total."
 msgstr ""
+"Zeigt die Gesamtzahlen unten auf dem Angebot/Bestellung an."
+"Wird z.B. verwendet, um einem Kunden 2 Wahlmöglichkeiten anzubieten und nicht eine nutzlose Gesamtzahl zu zeigen."
 
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
 msgid "Subtotal"
-msgstr "Sous-total"
+msgstr "Zwischensumme"
 
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
@@ -204,12 +208,12 @@ msgstr ""
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
 msgid "Total w/out VAT"
-msgstr "Total HT"
+msgstr "Gesamtzahl ohne Mwst."
 
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
 msgid "Total with VAT"
-msgstr "Total TTC"
+msgstr "Gesamtzahl mit Mwst."
 
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
@@ -218,7 +222,7 @@ msgid ""
 "font-weight: bold; line-height: normal;\">Invoice address :<br/></strong>"
 msgstr ""
 "\t\t\t\t\t\t\t\t<strong style=\"width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; "
-"font-weight: bold; line-height: normal;\">Adresse de facturation :<br/></strong>"
+"font-weight: bold; line-height: normal;\">Rechnungsadresse :<br/></strong>"
 
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
@@ -227,4 +231,4 @@ msgid ""
 "font-weight: bold; line-height: normal;\">Shipping address :<br/></strong>"
 msgstr ""
 "\t\t\t\t\t\t\t\t<strong style=\"width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; "
-"font-weight: bold; line-height: normal;\">Adresse de livraison :<br/></strong>"
+"font-weight: bold; line-height: normal;\">Lieferadresse :<br/></strong>"
