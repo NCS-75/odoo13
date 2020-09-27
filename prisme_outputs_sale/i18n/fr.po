@@ -59,7 +59,7 @@ msgid ""
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 msgstr ""
 "<strong class=\"mr16\">\n"
-"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Votre Référence</font>\n"
+"\t\t\t\t\t\t\t\t\t\t\t<font style=\"font-size: 12px;\">Notre Référence</font>\n"
 "\t\t\t\t\t\t\t\t\t\t</strong>"
 
 #. module: prisme_outputs_sale
@@ -224,17 +224,17 @@ msgstr "Total TTC"
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
 msgid ""
-"<strong style=\"width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; "
+"\t\t\t\t\t\t\t\t<strong style=\"width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; "
 "font-weight: bold; line-height: normal;\">Invoice address :<br/></strong>"
 msgstr ""
-"<strong style=\"width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; "
+"\t\t\t\t\t\t\t\t<strong style=\"width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; "
 "font-weight: bold; line-height: normal;\">Adresse de facturation :<br/></strong>"
 
 #. module: prisme_outputs_sale
 #: model_terms:ir.ui.view,arch_db:prisme_outputs_sale.report_so_view
 msgid ""
-"<strong style=\"width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; "
+"\t\t\t\t\t\t\t\t<strong style=\"width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; "
 "font-weight: bold; line-height: normal;\">Shipping address :<br/></strong>"
 msgstr ""
-"<strong style=\"width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; "
+"\t\t\t\t\t\t\t\t<strong style=\"width: 40%; font-family: 'DejaVu Sans'; font-size: 10.5pt; "
 "font-weight: bold; line-height: normal;\">Adresse de livraison :<br/></strong>"
