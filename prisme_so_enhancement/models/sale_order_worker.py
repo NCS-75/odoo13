@@ -69,7 +69,7 @@ class sale_order_prisme(models.Model):
         # But:                  Have a price rightly calculated
         unit_price = line.price_unit
         if (line.discount_amount):
-            unit_price = unit_price - line.discount_amount
+            unit_price = unit_price - (line.discount_amount / line.product_uom_qty)
             
         if (line.discount):
             unit_price = unit_price * (1 - (line.discount / 100.0))
@@ -106,7 +106,7 @@ class sale_order_prisme(models.Model):
                     # Prisme modification start
                     price = line.price_unit
                     if (line.discount_amount):
-                        price = price - line.discount_amount
+                        price = price - (line.discount_amount / line.product_uom_qty)
                     if (line.discount):
                         price = price * (1 - (line.discount / 100.0))
                     

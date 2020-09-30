@@ -192,7 +192,7 @@ class sale_order_line(models.Model):
     def _get_line_discount(self):
         discount = 0.0
         for line in self:
-            price = line.price_unit
+            price = line.price_unit * line.product_uom_qty
             if (line.discount_amount):
                 price = price - line.discount_amount
                 discount += line.discount_amount
@@ -209,7 +209,7 @@ class sale_order_line(models.Model):
             # Prisme modification start
             price = line.price_unit
             if (line.discount_amount):
-                price = price - line.discount_amount
+                price = price - (line.discount_amount / line.product_uom_qty)
                 
             if (line.discount):
                 price = price * (1 - (line.discount / 100.0))
@@ -248,7 +248,7 @@ class sale_order_line(models.Model):
             
             price = line.price_unit
             if (line.discount_amount):
-                price = price - line.discount_amount
+                price = price - (line.discount_amount / line.product_uom_qty)
                 
             if (line.discount):
                 price = price * (1 - (line.discount / 100.0))
