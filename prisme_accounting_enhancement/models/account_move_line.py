@@ -39,7 +39,7 @@ class account_move_line(models.Model):
             price_unit_processed = price_unit_value
             
             if discount_value:
-                price_unit_processed = price_unit_value * (1 - (discount_value / 100))
+                price_unit_processed = price_unit_value
             
             if discount_amount_value and price_unit_processed:
                 error = ''
@@ -94,15 +94,16 @@ class account_move_line(models.Model):
         res = {}
 
         # Compute 'price_subtotal'.
-        price_unit_wo_discount = price_unit * (1 - (discount / 100.0))
+        price_unit_wo_discount = price_unit
         
         ### PSI modification : also subtracting the discount amount to the price unit
         if not discount_amount:
             discount_amount = self['discount_amount']
             
         if discount_amount:
-            price_unit_wo_discount -= discount_amount
+            price_unit_wo_discount -= (discount_amount / quantity)
             
+        price_unit_wo_discount = price_unit_wo_discount  * (1 - (discount / 100.0))
         ### End of PSI modification    
             
         subtotal = quantity * price_unit_wo_discount
@@ -200,8 +201,9 @@ class account_move_line(models.Model):
         if balance and discount_factor:
             # discount != 100%
             vals['quantity'] = quantity or 1.0
-            vals['price_unit'] = balance / discount_factor / (quantity or 1.0)
-            
+            if discount_amount:
+                vals['price_unit'] = balance / discount_factor / (quantity or 1.0)
+                
         elif balance and not discount_factor:
             # discount == 100%
             vals['quantity'] = quantity or 1.0

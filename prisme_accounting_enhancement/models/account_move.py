@@ -39,11 +39,11 @@ class account_move(models.Model):
                 sign = -1 if move.is_inbound() else 1
                 quantity = base_line.quantity
                 if base_line.currency_id:
-                    price_unit_foreign_curr = sign * (base_line.price_unit * (1 - (base_line.discount / 100.0)) - base_line.discount_amount) ### PSI modification : added_discount amount in calculation
+                    price_unit_foreign_curr = sign * ((base_line.price_unit - (base_line.discount_amount / quantity)) * (1 - (base_line.discount / 100.0))) ### PSI modification : added_discount amount in calculation
                     price_unit_comp_curr = base_line.currency_id._convert(price_unit_foreign_curr, move.company_id.currency_id, move.company_id, move.date)
                 else:
                     price_unit_foreign_curr = 0.0
-                    price_unit_comp_curr = sign * (base_line.price_unit * (1 - (base_line.discount / 100.0)) - base_line.discount_amount) ### PSI modification : added_discount amount in calculation
+                    price_unit_comp_curr = sign * ((base_line.price_unit - (base_line.discount_amount / quantity)) * (1 - (base_line.discount / 100.0))) ### PSI modification : added_discount amount in calculation
             else:
                 quantity = 1.0
                 price_unit_foreign_curr = base_line.amount_currency
